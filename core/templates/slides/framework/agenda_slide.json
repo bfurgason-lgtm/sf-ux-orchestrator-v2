@@ -1,0 +1,46 @@
+{
+  "template_id": "agenda_slide",
+  "template_name": "Structured Agenda",
+  "description": "Multi-section agenda with numbered topics and sub-items",
+  "layout": {
+    "background": {
+      "type": "solid_color", 
+      "color": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "type": "text_box",
+        "id": "agenda_title",
+        "position": {"x": 72, "y": 50},
+        "size": {"width": 576, "height": 50},
+        "style": {
+          "font_size": 28,
+          "font_weight": "bold",
+          "color": "#1B4B66",
+          "alignment": "left"
+        },
+        "content": "Agenda"
+      },
+      {
+        "type": "list",
+        "id": "agenda_sections",
+        "position": {"x": 72, "y": 120},
+        "size": {"width": 576, "height": 350},
+        "style": {
+          "font_size": 16,
+          "color": "#2D3E50",
+          "line_height": 28,
+          "bullet_style": "numbered"
+        },
+        "content": [
+          "Persona Examples & Brand Variations",
+          "{{flows.0.topic}} - Overview Flow",
+          "{{flows.0.topic}} - Edge Cases & Exceptions", 
+          "Channel Implementation (Web, Email, SMS)",
+          "Technical Requirements & Architecture",
+          "Appendix: Detailed Specifications"
+        ]
+      }
+    ]
+  }
+}

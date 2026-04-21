@@ -1,0 +1,180 @@
+{
+  "template": {
+    "name": "SLDS Data Display Patterns", 
+    "version": "1.0",
+    "description": "Structured data presentation patterns for order details, customer info, and record displays",
+    "framework": "slds_v2",
+    "accessibility": "WCAG_AA",
+    "layout": {
+      "container": {
+        "type": "frame",
+        "width": 1200,
+        "height": 800,
+        "background": "#FAFAFA",
+        "padding": {"top": 50, "right": 200, "bottom": 50, "left": 200}
+      }
+    },
+    "patterns": {
+      "record_detail": {
+        "layout": "card",
+        "structure": "label_value_pairs",
+        "usage": "Order details, customer records, product information"
+      },
+      "summary_card": {
+        "layout": "highlighted_card", 
+        "structure": "header_with_details",
+        "usage": "Order summaries, account overviews"
+      },
+      "data_table": {
+        "layout": "structured_table",
+        "structure": "columnar_data", 
+        "usage": "Transaction history, item lists"
+      }
+    },
+    "layouts": {
+      "record_detail_card": {
+        "type": "frame",
+        "width": "auto",
+        "height": "auto",
+        "background": "#FFFFFF",
+        "border": {"color": "#D8DDE6", "width": 1},
+        "border_radius": 8,
+        "padding": {"top": 24, "right": 24, "bottom": 24, "left": 24},
+        "layout_mode": "vertical",
+        "item_spacing": 16,
+        "elements": [
+          {
+            "type": "header",
+            "content": "{record_title}",
+            "font_family": "Salesforce Sans",
+            "font_weight": "Bold",
+            "font_size": 20,
+            "color": "#181818",
+            "margin_bottom": 8
+          },
+          {
+            "type": "detail_rows",
+            "layout": "two_column",
+            "column_gap": 32,
+            "row_spacing": 12,
+            "fields": [
+              {
+                "label": "{field_label}",
+                "value": "{field_value}",
+                "label_width": 120,
+                "label_styling": {
+                  "font_family": "Salesforce Sans",
+                  "font_weight": "Regular", 
+                  "font_size": 14,
+                  "color": "#706E6B"
+                },
+                "value_styling": {
+                  "font_family": "Salesforce Sans",
+                  "font_weight": "Regular",
+                  "font_size": 14, 
+                  "color": "#181818"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "summary_card_highlighted": {
+        "type": "frame",
+        "width": "auto",
+        "height": "auto",
+        "background": "#F3F2F2",
+        "border": {"color": "#0176D3", "width": 2},
+        "border_radius": 8,
+        "padding": {"top": 20, "right": 20, "bottom": 20, "left": 20},
+        "elements": [
+          {
+            "type": "status_indicator",
+            "position": "top_right",
+            "background": "#45C65A",
+            "color": "#FFFFFF",
+            "text": "{status}",
+            "font_size": 12,
+            "padding": {"top": 4, "right": 8, "bottom": 4, "left": 8},
+            "border_radius": 12
+          },
+          {
+            "type": "content",
+            "layout": "header_details",
+            "header": {
+              "font_family": "Salesforce Sans",
+              "font_weight": "Bold",
+              "font_size": 18,
+              "color": "#181818"
+            },
+            "details": {
+              "font_family": "Salesforce Sans", 
+              "font_weight": "Regular",
+              "font_size": 14,
+              "color": "#706E6B"
+            }
+          }
+        ]
+      },
+      "data_table_responsive": {
+        "type": "table",
+        "width": "100%",
+        "background": "#FFFFFF",
+        "border": {"color": "#D8DDE6", "width": 1},
+        "border_radius": 8,
+        "header": {
+          "background": "#F3F2F2",
+          "height": 44,
+          "font_family": "Salesforce Sans",
+          "font_weight": "Bold",
+          "font_size": 12,
+          "color": "#706E6B",
+          "text_transform": "uppercase",
+          "padding": {"top": 0, "right": 16, "bottom": 0, "left": 16}
+        },
+        "rows": {
+          "height": 44,
+          "padding": {"top": 0, "right": 16, "bottom": 0, "left": 16},
+          "border_bottom": {"color": "#D8DDE6", "width": 1},
+          "hover_state": {"background": "#FAFAFA"},
+          "font_family": "Salesforce Sans",
+          "font_weight": "Regular", 
+          "font_size": 14,
+          "color": "#181818"
+        }
+      }
+    },
+    "slds_tokens": {
+      "colors": {
+        "background_card": "#FFFFFF",
+        "background_highlight": "#F3F2F2", 
+        "background_page": "#FAFAFA",
+        "border_default": "#D8DDE6",
+        "border_highlight": "#0176D3",
+        "text_primary": "#181818",
+        "text_secondary": "#706E6B",
+        "status_success": "#45C65A"
+      },
+      "typography": {
+        "font_family": "Salesforce Sans",
+        "header": {"size": 20, "weight": "Bold"},
+        "subheader": {"size": 18, "weight": "Bold"},
+        "body": {"size": 14, "weight": "Regular"},
+        "label": {"size": 14, "weight": "Regular"},
+        "table_header": {"size": 12, "weight": "Bold", "transform": "uppercase"}
+      },
+      "spacing": {
+        "card_padding": 24,
+        "row_spacing": 12,
+        "column_gap": 32,
+        "table_padding": 16
+      }
+    },
+    "accessibility": {
+      "semantic_markup": true,
+      "table_headers": "properly_associated",
+      "color_contrast": "WCAG_AA_compliant",
+      "keyboard_navigation": true
+    }
+  }
+}

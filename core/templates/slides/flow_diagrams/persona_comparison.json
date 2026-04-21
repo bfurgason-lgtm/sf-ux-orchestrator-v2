@@ -1,0 +1,83 @@
+{
+  "template_id": "persona_comparison", 
+  "template_name": "Persona Implementation Examples",
+  "description": "Side-by-side comparison showing brand personality variations",
+  "layout": {
+    "background": {
+      "type": "solid_color",
+      "color": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "type": "text_box",
+        "id": "persona_title",
+        "position": {"x": 72, "y": 30},
+        "size": {"width": 576, "height": 40},
+        "style": {
+          "font_size": 20,
+          "font_weight": "bold",
+          "color": "#1B4B66", 
+          "alignment": "center"
+        },
+        "content": "{{flows.topic}} - Persona Implementation Examples"
+      },
+      {
+        "type": "flow_diagram",
+        "id": "persona_comparison_diagram", 
+        "position": {"x": 72, "y": 100},
+        "size": {"width": 576, "height": 300},
+        "flow_config": {
+          "diagram_type": "persona_comparison",
+          "personas": ["professional", "friendly", "technical"],
+          "show_tone_differences": true,
+          "style": "brand_showcase"
+        },
+        "data_source": "{{flows}}"
+      },
+      {
+        "type": "text_box",
+        "id": "brand_notes",
+        "position": {"x": 72, "y": 420},
+        "size": {"width": 576, "height": 50},
+        "style": {
+          "font_size": 12,
+          "color": "#5D6D7E",
+          "alignment": "left",
+          "background_color": "#F8F9FA",
+          "padding": 10
+        },
+        "content": "Brand Context: {{initiative_metadata.brand_context.primary_brand}} | Tone variations demonstrate adaptability across customer segments"
+      },
+      {
+        "type": "text_box", 
+        "id": "purpose_note",
+        "position": {"x": 72, "y": 480},
+        "size": {"width": 576, "height": 30},
+        "style": {
+          "font_size": 12,
+          "color": "#7F8C8D",
+          "alignment": "center",
+          "style": "italic"
+        },
+        "content": "Purpose: Stakeholder buy-in and brand differentiation showcase"
+      }
+    ]
+  },
+  "persona_definitions": {
+    "professional": {
+      "tone": "Formal, precise, business-focused",
+      "color_scheme": "#2C3E50",
+      "messaging_style": "Direct and informative"
+    },
+    "friendly": {
+      "tone": "Warm, conversational, approachable", 
+      "color_scheme": "#27AE60",
+      "messaging_style": "Supportive and encouraging"
+    },
+    "technical": {
+      "tone": "Detailed, systematic, solution-oriented",
+      "color_scheme": "#8E44AD", 
+      "messaging_style": "Comprehensive and methodical"
+    }
+  }
+}

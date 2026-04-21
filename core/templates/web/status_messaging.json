@@ -1,0 +1,86 @@
+{
+  "template": {
+    "name": "SLDS Status Messaging System",
+    "version": "1.0",
+    "description": "Comprehensive status messaging patterns for success, error, warning, and info states",
+    "framework": "slds_v2",
+    "accessibility": "WCAG_AA",
+    "variants": {
+      "success": {
+        "background": "#45C65A",
+        "icon": "checkmark",
+        "text_color": "#FFFFFF",
+        "usage": "Order confirmations, successful actions"
+      },
+      "error": {
+        "background": "#C23934", 
+        "icon": "error",
+        "text_color": "#FFFFFF",
+        "usage": "Failed validations, system errors"
+      },
+      "warning": {
+        "background": "#FFB75D",
+        "icon": "warning", 
+        "text_color": "#181818",
+        "usage": "Attention needed, partial issues"
+      },
+      "info": {
+        "background": "#0176D3",
+        "icon": "info",
+        "text_color": "#FFFFFF", 
+        "usage": "General information, tips"
+      }
+    },
+    "layout": {
+      "banner": {
+        "type": "frame",
+        "width": "100%",
+        "height": 56,
+        "border_radius": 8,
+        "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
+        "layout_mode": "horizontal",
+        "item_spacing": 12,
+        "alignment": "center_left",
+        "elements": [
+          {
+            "type": "icon",
+            "size": 20,
+            "color": "{variant.text_color}"
+          },
+          {
+            "type": "text",
+            "content": "{message_text}",
+            "font_family": "Salesforce Sans",
+            "font_weight": "Medium",
+            "font_size": 14,
+            "color": "{variant.text_color}",
+            "flex_grow": 1
+          },
+          {
+            "type": "button",
+            "variant": "icon_only",
+            "icon": "close",
+            "size": 16,
+            "color": "{variant.text_color}",
+            "background": "transparent",
+            "optional": true
+          }
+        ]
+      }
+    },
+    "slds_tokens": {
+      "colors": {
+        "success": "#45C65A",
+        "error": "#C23934", 
+        "warning": "#FFB75D",
+        "info": "#0176D3",
+        "text_inverse": "#FFFFFF",
+        "text_default": "#181818"
+      },
+      "typography": {
+        "font_family": "Salesforce Sans",
+        "message": {"size": 14, "weight": "Medium"}
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "template_id": "section_divider",
+  "template_name": "Section Divider Slide",
+  "description": "Numbered section headers with clean design",
+  "layout": {
+    "background": {
+      "type": "gradient",
+      "start_color": "#F8FAFB",
+      "end_color": "#E8F4FD"
+    },
+    "elements": [
+      {
+        "type": "shape",
+        "id": "section_number_circle",
+        "shape_type": "ELLIPSE",
+        "position": {"x": 300, "y": 180},
+        "size": {"width": 120, "height": 120},
+        "style": {
+          "fill_color": "#4A90C2",
+          "border_color": "#3A7CAE",
+          "border_width": 2
+        }
+      },
+      {
+        "type": "text_box",
+        "id": "section_number",
+        "position": {"x": 340, "y": 220},
+        "size": {"width": 40, "height": 40},
+        "style": {
+          "font_size": 32,
+          "font_weight": "bold",
+          "color": "#FFFFFF",
+          "alignment": "center"
+        },
+        "content": "{{section_number}}"
+      },
+      {
+        "type": "text_box",
+        "id": "section_title",
+        "position": {"x": 72, "y": 320},
+        "size": {"width": 576, "height": 60},
+        "style": {
+          "font_size": 24,
+          "font_weight": "bold",
+          "color": "#1B4B66",
+          "alignment": "center"
+        },
+        "content": "{{section_title}}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "template_id": "cover_slide",
+  "template_name": "Initiative Cover Slide",
+  "description": "Main title slide with initiative branding and metadata",
+  "layout": {
+    "background": {
+      "type": "solid_color",
+      "color": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "type": "text_box",
+        "id": "main_title",
+        "position": {"x": 72, "y": 150},
+        "size": {"width": 576, "height": 80},
+        "style": {
+          "font_size": 36,
+          "font_weight": "bold",
+          "color": "#1B4B66",
+          "alignment": "center"
+        },
+        "content": "{{initiative_metadata.name}}"
+      },
+      {
+        "type": "text_box", 
+        "id": "subtitle",
+        "position": {"x": 72, "y": 240},
+        "size": {"width": 576, "height": 40},
+        "style": {
+          "font_size": 18,
+          "color": "#5A6C7D",
+          "alignment": "center"
+        },
+        "content": "Solution Design Readout | Version {{initiative_metadata.version}}"
+      },
+      {
+        "type": "text_box",
+        "id": "brand_context", 
+        "position": {"x": 72, "y": 320},
+        "size": {"width": 576, "height": 30},
+        "style": {
+          "font_size": 14,
+          "color": "#8B9DC3",
+          "alignment": "center"
+        },
+        "content": "{{initiative_metadata.brand_context.primary_brand}}"
+      },
+      {
+        "type": "text_box",
+        "id": "timestamp",
+        "position": {"x": 72, "y": 450},
+        "size": {"width": 576, "height": 25},
+        "style": {
+          "font_size": 12,
+          "color": "#B0B8C1",
+          "alignment": "center"
+        },
+        "content": "{{initiative_metadata.timestamp}}"
+      }
+    ]
+  }
+}

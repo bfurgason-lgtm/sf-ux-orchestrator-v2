@@ -1,0 +1,115 @@
+{
+  "template_id": "overview_slide",
+  "template_name": "Initiative Overview",
+  "description": "Value proposition slide with key benefits and scope",
+  "layout": {
+    "background": {
+      "type": "solid_color",
+      "color": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "type": "text_box",
+        "id": "overview_title",
+        "position": {"x": 72, "y": 40},
+        "size": {"width": 576, "height": 50},
+        "style": {
+          "font_size": 24,
+          "font_weight": "bold",
+          "color": "#1B4B66",
+          "alignment": "center"
+        },
+        "content": "{{initiative_metadata.name}} Overview"
+      },
+      {
+        "type": "shape",
+        "id": "value_prop_box",
+        "shape_type": "RECTANGLE", 
+        "position": {"x": 72, "y": 120},
+        "size": {"width": 576, "height": 100},
+        "style": {
+          "fill_color": "#E8F4FD",
+          "border_color": "#4A90C2",
+          "border_width": 2
+        }
+      },
+      {
+        "type": "text_box",
+        "id": "value_proposition",
+        "position": {"x": 92, "y": 140},
+        "size": {"width": 536, "height": 60},
+        "style": {
+          "font_size": 16,
+          "color": "#1B4B66",
+          "alignment": "center",
+          "font_weight": "medium"
+        },
+        "content": "Unified conversational AI experience across {{flows.length}} key customer journeys, enabling consistent service delivery through Web, Email, SMS, and Voice channels."
+      },
+      {
+        "type": "text_box",
+        "id": "key_benefits_header",
+        "position": {"x": 72, "y": 250},
+        "size": {"width": 280, "height": 30},
+        "style": {
+          "font_size": 18,
+          "font_weight": "bold", 
+          "color": "#2D3E50",
+          "alignment": "left"
+        },
+        "content": "Key Benefits"
+      },
+      {
+        "type": "list",
+        "id": "key_benefits",
+        "position": {"x": 72, "y": 290},
+        "size": {"width": 280, "height": 150},
+        "style": {
+          "font_size": 14,
+          "color": "#34495E",
+          "line_height": 22,
+          "bullet_style": "bullet"
+        },
+        "content": [
+          "Consistent customer experience",
+          "Reduced agent training time", 
+          "Scalable conversation management",
+          "SLDS 2.0 design compliance",
+          "Multi-channel integration ready"
+        ]
+      },
+      {
+        "type": "text_box",
+        "id": "scope_header", 
+        "position": {"x": 368, "y": 250},
+        "size": {"width": 280, "height": 30},
+        "style": {
+          "font_size": 18,
+          "font_weight": "bold",
+          "color": "#2D3E50",
+          "alignment": "left"
+        },
+        "content": "Implementation Scope"
+      },
+      {
+        "type": "list",
+        "id": "scope_items",
+        "position": {"x": 368, "y": 290},
+        "size": {"width": 280, "height": 150},
+        "style": {
+          "font_size": 14,
+          "color": "#34495E",
+          "line_height": 22,
+          "bullet_style": "bullet"
+        },
+        "content": [
+          "{{flows.length}} conversation flows",
+          "{{deployment.target_org}} Salesforce org",
+          "Data Tier {{data_tier}} compliance",
+          "{{design_system.framework}} design system",
+          "Release: {{deployment.release_date}}"
+        ]
+      }
+    ]
+  }
+}

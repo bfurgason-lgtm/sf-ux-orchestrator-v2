@@ -1,0 +1,147 @@
+{
+  "template_id": "technical_requirements",
+  "template_name": "Technical Requirements Slide",
+  "description": "Structured technical specifications and implementation details",
+  "layout": {
+    "background": {
+      "type": "solid_color",
+      "color": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "type": "text_box",
+        "id": "tech_req_title",
+        "position": {"x": 72, "y": 40},
+        "size": {"width": 576, "height": 50},
+        "style": {
+          "font_size": 24,
+          "font_weight": "bold",
+          "color": "#1B4B66",
+          "alignment": "center"
+        },
+        "content": "Technical Requirements & Architecture"
+      },
+      {
+        "type": "text_box",
+        "id": "design_system_header",
+        "position": {"x": 72, "y": 110},
+        "size": {"width": 270, "height": 25},
+        "style": {
+          "font_size": 16,
+          "font_weight": "bold",
+          "color": "#2D3E50",
+          "alignment": "left"
+        },
+        "content": "Design System"
+      },
+      {
+        "type": "shape",
+        "id": "design_system_box",
+        "shape_type": "RECTANGLE",
+        "position": {"x": 72, "y": 140},
+        "size": {"width": 270, "height": 120},
+        "style": {
+          "fill_color": "#F8F9FA",
+          "border_color": "#DEE2E6",
+          "border_width": 1
+        }
+      },
+      {
+        "type": "list",
+        "id": "design_system_specs",
+        "position": {"x": 82, "y": 150},
+        "size": {"width": 250, "height": 100},
+        "style": {
+          "font_size": 12,
+          "color": "#495057",
+          "line_height": 18,
+          "bullet_style": "bullet"
+        },
+        "content": [
+          "Framework: {{design_system.framework}}",
+          "Theme: {{design_system.theme}}",
+          "WCAG Level: {{design_system.accessibility.wcag_level}}",
+          "Contrast Verified: {{design_system.accessibility.color_contrast_verified}}",
+          "Responsive: Mobile/Tablet/Desktop"
+        ]
+      },
+      {
+        "type": "text_box",
+        "id": "integration_header",
+        "position": {"x": 378, "y": 110},
+        "size": {"width": 270, "height": 25},
+        "style": {
+          "font_size": 16,
+          "font_weight": "bold",
+          "color": "#2D3E50",
+          "alignment": "left"
+        },
+        "content": "Platform Integration"
+      },
+      {
+        "type": "shape",
+        "id": "integration_box",
+        "shape_type": "RECTANGLE", 
+        "position": {"x": 378, "y": 140},
+        "size": {"width": 270, "height": 120},
+        "style": {
+          "fill_color": "#F8F9FA",
+          "border_color": "#DEE2E6",
+          "border_width": 1
+        }
+      },
+      {
+        "type": "list",
+        "id": "integration_specs",
+        "position": {"x": 388, "y": 150},
+        "size": {"width": 250, "height": 100},
+        "style": {
+          "font_size": 12,
+          "color": "#495057",
+          "line_height": 18,
+          "bullet_style": "bullet"
+        },
+        "content": [
+          "Target Org: {{deployment.target_org}}",
+          "Figma Library: {{figma.design_system_library}}",
+          "Drive Sync: {{drive.auto_sync}}",
+          "Data Tier: {{data_tier}}",
+          "Auth Context: Multi-user support"
+        ]
+      },
+      {
+        "type": "text_box",
+        "id": "channel_specs_header",
+        "position": {"x": 72, "y": 280},
+        "size": {"width": 576, "height": 25},
+        "style": {
+          "font_size": 16,
+          "font_weight": "bold",
+          "color": "#2D3E50",
+          "alignment": "left"
+        },
+        "content": "Channel Specifications"
+      },
+      {
+        "type": "table",
+        "id": "channel_specs_table",
+        "position": {"x": 72, "y": 310},
+        "size": {"width": 576, "height": 120},
+        "table_config": {
+          "headers": ["Channel", "Template", "Components", "Special Features"],
+          "rows": [
+            ["Web", "SLDS Chatbot", "Input, Button, Card, Modal", "Real-time validation"],
+            ["Email", "Thread Template", "Header, Body, CTA", "Brand customization"],
+            ["SMS", "Mobile Thread", "Message bubble", "Character limits"],
+            ["Voice", "Contact Center", "Speech prompts", "Fallback handling"]
+          ],
+          "styling": {
+            "header_bg": "#E9ECEF", 
+            "row_alternating": true,
+            "font_size": 11
+          }
+        }
+      }
+    ]
+  }
+}

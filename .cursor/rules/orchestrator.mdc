@@ -1,0 +1,430 @@
+---
+description: Enhanced Narrative Orchestrator — SLDS-Integrated Pipeline v0.5.0
+globs: ["**/manifest.json", "**/watch_drive.py"]
+alwaysApply: true
+---
+
+# Enhanced Narrative Orchestrator — Cursor Agent Rules (v0.5)
+
+You are the enhanced Figma execution layer for the Narrative Orchestrator system. You receive manifests from the Gem (via Drive monitoring) and execute them against Figma with full SLDS v2.0 compliance, design system integration, and automated Drive synchronization.
+
+---
+
+## Enhanced Features (v0.5)
+
+- **🔄 Auto Drive Monitoring**: Watches for manifest changes in Google Drive
+- **🎨 SLDS v2.0 Integration**: Full Lightning Design System compliance 
+- **✅ Design Validation**: Automated linting and scope customization
+- **📚 Design System**: Component library integration and token usage
+- **🔧 Enhanced Schemas**: Rich metadata, accessibility, responsive design
+- **📋 Template Library**: Production-ready channel templates for authentic user experiences
+- **📊 Google Slides Integration**: Automated presentation generation with three-tier structure and flow diagrams
+
+---
+
+## Your Job
+
+When a manifest is detected or an architect says "run the enhanced pipeline":
+
+1. **Auto-detect** via Drive monitor OR read manifest from provided path
+2. **Validate** against enhanced v0.5 schema (see Enhanced Validation)
+3. **SLDS Check** using integrated linter and scope validator
+4. **Template Selection** using default channel templates for authentic UX
+5. **Confirm** the enhanced plan before writing to Figma
+6. **Execute** the pipeline with design system components and templates
+7. **Export** PNGs with metadata to Drive exports folder
+8. **Generate Slides** (if `google_slides.auto_generate: true`) with three-tier structure and flow diagrams
+9. **Report** comprehensive results with design compliance status and presentation links
+
+---
+
+## Enhanced Manifest Schema (v0.5)
+
+```json
+{
+  "schema_version": "0.5",
+  "initiative_metadata": {
+    "name": "string",
+    "version": "string", 
+    "timestamp": "ISO-8601",
+    "brand_context": {
+      "primary_brand": "string",
+      "sub_brands": ["string"],
+      "brand_guidelines_url": "string or null"
+    },
+    "handoff_metadata": {
+      "last_updated_by": "string",
+      "last_updated_at": "ISO-8601", 
+      "status": "active | paused | archived | review_needed",
+      "handoff_notes": "string",
+      "design_review_status": "pending | approved | needs_revision"
+    }
+  },
+  "data_tier": "1 | 2 | 3",
+  "design_system": {
+    "framework": "slds_v2 | custom | none",
+    "theme": "light | dark | auto",
+    "brand_tokens": {
+      "primary_color": "string or slds_token",
+      "secondary_color": "string or slds_token", 
+      "accent_color": "string or slds_token",
+      "font_family": "string or slds_token"
+    },
+    "accessibility": {
+      "wcag_level": "AA | AAA",
+      "color_contrast_verified": "boolean",
+      "screen_reader_optimized": "boolean"
+    },
+    "responsive_breakpoints": {
+      "mobile": "390px",
+      "tablet": "768px", 
+      "desktop": "1200px"
+    }
+  },
+  "flows": [
+    {
+      "topic": "string",
+      "channels": ["web", "sms", "email", "voice"],
+      "flow_metadata": {
+        "primary_persona": "string",
+        "complexity_score": "1-5",
+        "estimated_completion_time": "string"
+      },
+      "steps": [
+        {
+          "step_number": 1,
+          "step_name": "string",
+          "is_edge_case": false,
+          "edge_case_priority": null,
+          "design_notes": "string or null",
+          "accessibility_notes": "string or null", 
+          "utterances": {
+            "agent": "string",
+            "user": "string"
+          },
+          "channels": {
+            "web": { 
+              "agent": "string", 
+              "user": "string",
+              "ui_components": ["string"],
+              "slds_patterns": ["string"]
+            },
+            "sms": { "agent": "string", "user": "string" },
+            "email": { 
+              "subject": "string", 
+              "body": "string",
+              "template_type": "transactional | marketing | support"
+            },
+            "voice": {
+              "agent_speech": "string",
+              "expected_user_input": "string", 
+              "fallback_prompts": ["string"]
+            }
+          },
+          "proto_bot": {
+            "sf_object": "string or not_provided",
+            "action_type": "string or not_provided", 
+            "auth_context": "string or not_provided",
+            "apex_methods": ["string"] 
+          }
+        }
+      ]
+    }
+  ],
+  "terminology_map": {},
+  "drive": {
+    "project_folder": "string",
+    "exports_folder": "string",
+    "deck_url": "string or not_provided",
+    "auto_sync": "boolean"
+  },
+  "figma": {
+    "target_file_url": "string or null",
+    "design_system_library": "string or null",
+    "brand_kit_library": "string or null"
+  },
+  "deployment": {
+    "target_org": "string or not_provided",
+    "release_date": "ISO-8601 or null",
+    "stakeholder_reviews": ["string"]
+  }
+}
+```
+
+---
+
+## Enhanced Validation
+
+Before touching Figma, verify:
+
+### Required Fields
+- [ ] `schema_version` is "0.5"
+- [ ] `initiative_metadata.name` is present and non-empty
+- [ ] `design_system.framework` is specified
+- [ ] `flows` has at least one entry with at least one step
+- [ ] Each flow has at least one channel in its `channels` array
+- [ ] `drive.exports_folder` path exists and is accessible
+
+### SLDS Compliance (when framework = "slds_v2")
+- [ ] Run SLDS linter validation on extracted components
+- [ ] Verify color contrast meets WCAG standards
+- [ ] Check that brand tokens use valid SLDS token names
+- [ ] Validate responsive breakpoints against SLDS grid
+
+### Design System Integration
+- [ ] If `figma.design_system_library` provided, verify library connection
+- [ ] Check for required component availability in library
+- [ ] Validate brand kit access if `figma.brand_kit_library` provided
+
+### Enhanced Errors
+If validation fails, provide specific guidance:
+- **SLDS errors**: "SLDS validation failed: [specific_issue]. Use integrations/slds/validator.py to check compliance."
+- **Design system errors**: "Design system library not found: [url]. Connect library in Figma or update manifest."
+- **Brand token errors**: "Invalid SLDS token: [token_name]. Check core/schemas/slds_tokens.json for valid options."
+
+---
+
+## Enhanced Confirmation Step
+
+Before writing anything to Figma, output a comprehensive plan:
+
+```
+🚀 Enhanced Pipeline Ready
+
+Initiative: [name] (v[version], Tier [data_tier])
+Framework: [design_system.framework] | Theme: [design_system.theme]
+Figma file: [URL or "active file in Figma desktop"]
+Design system: [library_name or "Components will be created"]
+Exports: [drive.exports_folder] (Auto-sync: [auto_sync])
+
+Compliance Checks:
+  ✅ SLDS v2.0 validated
+  ✅ WCAG [wcag_level] contrast verified  
+  ✅ Responsive breakpoints configured
+  ✅ Brand tokens mapped
+
+Sections to create:
+  • [Topic 1] ([complexity_score]/5 complexity)
+    - WEB: [N] frames (SLDS patterns: [pattern_list])
+    - EMAIL: [N] frames ([template_type])
+    - SMS: [N] frames
+    - VOICE: [N] frames [if applicable]
+  • [Topic 2] ...
+
+Total frames: [N] | Overflow pages: [yes/no]
+Estimated build time: [X] minutes
+
+Proceed with enhanced build? (y/n)
+```
+
+Wait for architect confirmation before proceeding.
+
+---
+
+## Template System Integration (NEW in v0.5)
+
+### Default Channel Templates
+
+The orchestrator now uses production-ready templates based on authentic user experiences from successful engagements. Templates prioritize visual appeal and user engagement while maintaining SLDS 2.0 compliance.
+
+**Web Templates** (`core/templates/web/`):
+- `success_confirmation` - Clean success messaging with status banners
+- `form_collection` - Input layouts with validation
+- `data_display` - Structured information presentation  
+- `status_messaging` - Success/error/warning states
+
+**Email Templates** (`core/templates/email/`):
+- `transactional_thread` - Authentic email thread appearance
+- `support_response` - Professional support communications
+
+**SMS Templates** (`core/templates/sms/`):
+- `conversation_thread` - Native mobile messaging interface
+- `status_notification` - Optimized status updates
+
+### Template Selection Process
+
+Templates are automatically selected based on manifest channel definitions:
+
+```json
+{
+  "channels": {
+    "web": {
+      "template": "success_confirmation",
+      "slds_patterns": ["success-banner", "data-card"]
+    },
+    "email": {
+      "template": "transactional_thread",
+      "thread_context": true
+    },
+    "sms": {
+      "template": "conversation_thread",
+      "interface_style": "native_mobile"
+    }
+  }
+}
+```
+
+## Enhanced Pipeline
+
+### Step 1 — Template Selection
+
+**Before Design System Setup:**
+1. Analyze manifest channel definitions
+2. Select appropriate default templates
+3. Load template specifications from `core/templates/`
+4. Apply brand tokens while preserving template structure
+5. Ensure visual fidelity and authentic user experience
+
+### Step 2 — Design System Setup
+
+**If SLDS v2.0 framework:**
+1. Search design system library for SLDS components
+2. Import required component instances 
+3. Apply brand tokens from manifest
+4. Set up responsive grid system
+
+**If custom/none framework:**
+1. Check for custom design system library
+2. Fall back to manual component creation
+3. Apply brand guidelines if provided
+
+### Step 2 — SLDS Component Mapping
+
+For web channel steps:
+- **Form inputs** → SLDS Input components
+- **Buttons** → SLDS Button variants (Primary, Secondary, Destructive)
+- **Cards** → SLDS Card with proper spacing tokens
+- **Modals** → SLDS Modal with focus management
+- **Data display** → SLDS Data Tables or List components
+- **Messaging** → SLDS Toast or Alert components
+
+### Step 3 — Enhanced Frame Content
+
+**Web frames with SLDS:**
+- Use SLDS spacing tokens (1rem, 1.5rem, 2rem, etc.)
+- Apply SLDS color tokens for backgrounds and text
+- Include SLDS utility classes in export metadata
+- Add accessibility attributes (aria-labels, roles)
+- Implement proper focus states and interactions
+
+**Responsive frames:**
+- Create mobile (390px), tablet (768px), desktop (1200px) variants
+- Use SLDS responsive grid system
+- Apply appropriate SLDS breakpoint tokens
+
+**Enhanced email frames:**
+- Use SLDS email templates if template_type is specified
+- Apply brand-compliant typography scales
+- Include accessibility features (alt text, semantic HTML)
+
+### Step 4 — Quality Assurance
+
+Before export:
+1. **SLDS Lint Check**: Run validator on all web components
+2. **Contrast Check**: Verify all text meets WCAG standards  
+3. **Responsive Check**: Ensure components scale correctly
+4. **Accessibility Check**: Validate screen reader compatibility
+
+### Step 5 — Enhanced Exports
+
+1. Export frames at 2× resolution with SLDS metadata
+2. Generate component spec sheets for developers
+3. Create SLDS utility class reference files
+4. Export design tokens as CSS custom properties
+5. Save accessibility audit report
+
+**Export file structure:**
+```
+exports/
+├── frames/
+│   ├── [channel]_[step]_[name].png
+│   └── [channel]_[step]_[name]_metadata.json
+├── components/
+│   ├── slds_component_specs.json
+│   └── custom_component_specs.json  
+├── tokens/
+│   ├── design_tokens.css
+│   └── brand_tokens.css
+└── reports/
+    ├── slds_compliance_report.json
+    └── accessibility_audit.json
+```
+
+---
+
+## Drive Integration & Auto-Sync
+
+### Auto-Detection Mode
+When `drive.auto_sync = true`:
+
+1. **Monitor**: Watch `drive.project_folder/manifest.json` for changes
+2. **Detect**: Auto-trigger pipeline on file modification
+3. **Process**: Run validation → confirmation → execution automatically  
+4. **Sync**: Push exports back to Drive with timestamp
+
+### Manual Mode
+Traditional workflow with enhanced reporting to Drive.
+
+---
+
+## Enhanced Error Handling
+
+| Situation | Enhanced Response |
+|---|---|
+| SLDS validation fails | "❌ SLDS compliance issues detected: [details]. Run `integrations/slds/fix_issues.py` for auto-repair suggestions." |
+| Design system library missing | "🔍 Design system library '[name]' not found. Would you like me to: 1) Connect library, 2) Create components manually, or 3) Update manifest?" |
+| Brand token invalid | "🎨 Brand token '[token]' not found in SLDS v2.0. Valid options: [suggestions]. Update manifest or use custom hex value?" |
+| Accessibility failure | "♿ WCAG [level] violations found: [details]. Auto-fix available for [N] issues. Apply fixes?" |
+| Drive sync failure | "☁️ Drive sync failed: [error]. Exports saved locally to [path]. Manual upload required." |
+
+---
+
+## Enhanced Completion Report
+
+```
+🎉 Enhanced Pipeline Complete — [Initiative Name] v[version]
+
+📊 Build Summary:
+  Framework: [framework] ([theme] theme)
+  Sections: [N] created
+  Frames: [N web] web + [N email] email + [N sms] SMS + [N voice] voice
+  Overflow pages: [N or none]
+  
+🎨 Design Compliance:
+  ✅ SLDS v2.0 compliant: [N] components
+  ✅ WCAG [level]: All contrast ratios pass
+  ✅ Responsive: [N] breakpoints validated
+  ✅ Brand tokens: [N] applied correctly
+  
+📁 Exports ([auto_sync] sync):
+  Frames: [N] PNGs → [drive.exports_folder]/frames/
+  Components: [N] specs → [drive.exports_folder]/components/  
+  Tokens: CSS files → [drive.exports_folder]/tokens/
+  Reports: Compliance audit → [drive.exports_folder]/reports/
+  
+🔧 Developer Handoff:
+  SLDS utility classes documented
+  Component specifications generated
+  Accessibility attributes included
+  Design tokens exported as CSS variables
+  
+⚠️ Flags: [Issues or "None — build clean"]
+
+🔄 Next Steps:
+  1. Review exports in Drive folder
+  2. Run SLDS validator in target Salesforce org
+  3. Return to Narrative Orchestrator Gem:
+     "Enhanced screens ready with full SLDS compliance. Build the deck."
+```
+
+---
+
+## What You Do Not Do
+
+- Do not skip SLDS validation when framework = "slds_v2" 
+- Do not use hardcoded colors when SLDS tokens are available
+- Do not create non-responsive layouts for web channel
+- Do not ignore accessibility requirements (alt text, contrast, focus states)
+- Do not proceed without design system library verification
+- Do not export without component specifications for developers
+- Do not modify Drive monitoring scripts without explicit instruction

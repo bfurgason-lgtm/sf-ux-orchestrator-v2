@@ -1,0 +1,234 @@
+{
+  "template": {
+    "name": "Authentic Email Thread - Transactional",
+    "version": "1.0",
+    "description": "Realistic email client appearance with sender details, thread structure, and order information based on Wolverine email design",
+    "framework": "responsive_email",
+    "thread_context": true,
+    "mobile_optimized": true,
+    "layout": {
+      "email_container": {
+        "type": "email_thread",
+        "width": 600,
+        "background": "#FFFFFF",
+        "font_family": "system-ui, -apple-system, sans-serif",
+        "elements": [
+          {
+            "type": "thread_header",
+            "background": "#F8F9FA",
+            "padding": {"top": 12, "right": 16, "bottom": 12, "left": 16},
+            "border_bottom": {"color": "#E1E5E9", "width": 1},
+            "elements": [
+              {
+                "type": "sender_info",
+                "layout": "horizontal",
+                "alignment": "space_between",
+                "elements": [
+                  {
+                    "type": "sender_details",
+                    "elements": [
+                      {
+                        "type": "sender_avatar",
+                        "size": 32,
+                        "background": "#FFA500", 
+                        "border_radius": 16,
+                        "initials": "{sender_initials}",
+                        "font_size": 14,
+                        "font_weight": "Bold",
+                        "color": "#FFFFFF",
+                        "default": "SA"
+                      },
+                      {
+                        "type": "sender_name_email",
+                        "margin_left": 12,
+                        "elements": [
+                          {
+                            "type": "sender_name",
+                            "content": "{sender_name}",
+                            "font_size": 14,
+                            "font_weight": "600",
+                            "color": "#1D1D1F",
+                            "placeholder": "Sarah at Wolverine"
+                          },
+                          {
+                            "type": "sender_email", 
+                            "content": "{sender_email}",
+                            "font_size": 12,
+                            "color": "#8E8E93",
+                            "placeholder": "<sarah@wolverine.com>"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "timestamp",
+                    "content": "{email_timestamp}",
+                    "font_size": 12,
+                    "color": "#8E8E93",
+                    "placeholder": "April 7, 2026 at 6:33 AM"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "message_body",
+            "padding": {"top": 20, "right": 16, "bottom": 20, "left": 16},
+            "elements": [
+              {
+                "type": "greeting",
+                "content": "{greeting_text}",
+                "font_size": 14,
+                "line_height": 1.5,
+                "color": "#1D1D1F",
+                "margin_bottom": 16,
+                "placeholder": "Hi Sarah,\\n\\nI'm the Agent for Wolverine. I'm very sorry to hear that your boots are falling apart! How can I help you today?"
+              },
+              {
+                "type": "order_summary_card",
+                "background": "#F8F9FA",
+                "border": {"color": "#E1E5E9", "width": 1},
+                "border_radius": 8,
+                "padding": {"top": 16, "right": 16, "bottom": 16, "left": 16},
+                "margin": {"top": 16, "bottom": 16},
+                "elements": [
+                  {
+                    "type": "summary_header",
+                    "content": "Order Summary",
+                    "font_size": 16,
+                    "font_weight": "600", 
+                    "color": "#1D1D1F",
+                    "margin_bottom": 12
+                  },
+                  {
+                    "type": "order_details",
+                    "layout": "key_value_list",
+                    "details": [
+                      {"key": "Order Number:", "value": "{order_number}", "placeholder": "10954"},
+                      {"key": "Order Date:", "value": "{order_date}", "placeholder": "March 4th, 2024"}, 
+                      {"key": "Order Summary:", "value": "{order_summary}", "placeholder": "Wolverine Work Boots, Size 9"},
+                      {"key": "Performance Cross Socks:", "value": "{accessory_item}", "placeholder": "White, 7-12"}
+                    ],
+                    "key_styling": {
+                      "font_size": 13,
+                      "color": "#8E8E93",
+                      "font_weight": "400"
+                    },
+                    "value_styling": {
+                      "font_size": 13,
+                      "color": "#1D1D1F", 
+                      "font_weight": "400"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "message_content",
+                "content": "{main_message}",
+                "font_size": 14,
+                "line_height": 1.5,
+                "color": "#1D1D1F",
+                "margin_top": 16,
+                "placeholder": "Good news, I've located your order and the type I see! Boots are still under the eligibility window for a claim. To help our team resolve this claim:\\n\\n1. How would you like to resolve the issue?\\n2. Please provide a brief description of the issue\\n3. Are there any visible defects or damage?\\n4. Clear photo of the defect\\n5. Proof of purchase\\n6. Proof of purchase at if not purchased directly from Brand."
+              }
+            ]
+          },
+          {
+            "type": "thread_reply",
+            "margin_top": 24,
+            "border_top": {"color": "#E1E5E9", "width": 1},
+            "padding_top": 16,
+            "elements": [
+              {
+                "type": "reply_header",
+                "layout": "horizontal",
+                "elements": [
+                  {
+                    "type": "customer_avatar",
+                    "size": 28,
+                    "background": "#34C759",
+                    "border_radius": 14,
+                    "initials": "{customer_initials}",
+                    "font_size": 12,
+                    "color": "#FFFFFF",
+                    "default": "SC"
+                  },
+                  {
+                    "type": "customer_details",
+                    "margin_left": 10,
+                    "elements": [
+                      {
+                        "type": "customer_name",
+                        "content": "{customer_name}",
+                        "font_size": 13,
+                        "font_weight": "600",
+                        "color": "#1D1D1F",
+                        "placeholder": "customer@wolverine.com"
+                      },
+                      {
+                        "type": "reply_timestamp",
+                        "content": "{reply_timestamp}",
+                        "font_size": 11,
+                        "color": "#8E8E93",
+                        "placeholder": "April 7, 2026 at 6:31 AM"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "reply_content",
+                "content": "{reply_message}",
+                "font_size": 14,
+                "line_height": 1.5, 
+                "color": "#1D1D1F",
+                "margin_top": 12,
+                "placeholder": "Thanks, Sarah!"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "responsive_design": {
+      "mobile": {
+        "max_width": "100%",
+        "padding": {"left": 12, "right": 12},
+        "font_adjustments": {
+          "body": {"size": 16},
+          "small": {"size": 14}
+        }
+      },
+      "desktop": {
+        "max_width": 600,
+        "padding": {"left": 16, "right": 16}
+      }
+    },
+    "color_tokens": {
+      "primary_text": "#1D1D1F",
+      "secondary_text": "#8E8E93", 
+      "background_primary": "#FFFFFF",
+      "background_secondary": "#F8F9FA",
+      "border_light": "#E1E5E9",
+      "sender_avatar": "#FFA500",
+      "customer_avatar": "#34C759"
+    },
+    "typography": {
+      "font_family": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "sender_name": {"size": 14, "weight": "600"},
+      "sender_email": {"size": 12, "weight": "400"},
+      "timestamp": {"size": 12, "weight": "400"},
+      "body_text": {"size": 14, "weight": "400", "line_height": 1.5},
+      "summary_header": {"size": 16, "weight": "600"},
+      "detail_key": {"size": 13, "weight": "400"},
+      "detail_value": {"size": 13, "weight": "400"}
+    },
+    "accessibility": {
+      "semantic_html": true,
+      "alt_text_required": true,
+      "color_contrast": "WCAG_AA",
+      "email_client_compatibility": ["Outlook", "Gmail", "Apple Mail", "Thunderbird"]
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "template": {
+    "name": "SLDS Agentforce Form Collection",
+    "version": "1.0", 
+    "description": "Clean input layouts with validation, based on SLDS form patterns for data collection",
+    "framework": "slds_v2",
+    "responsive": true,
+    "accessibility": "WCAG_AA",
+    "layout": {
+      "container": {
+        "type": "frame",
+        "width": 1200,
+        "height": 800,
+        "background": "#FAFAFA",
+        "padding": {"top": 100, "right": 300, "bottom": 100, "left": 300},
+        "layout_mode": "vertical",
+        "item_spacing": 24
+      },
+      "form_card": {
+        "type": "frame",
+        "width": 600,
+        "height": "auto",
+        "background": "#FFFFFF",
+        "border_radius": 8,
+        "box_shadow": {"blur": 4, "color": "#00000010"},
+        "padding": {"top": 32, "right": 32, "bottom": 32, "left": 32},
+        "layout_mode": "vertical",
+        "item_spacing": 24,
+        "elements": [
+          {
+            "type": "text",
+            "content": "{form_heading}",
+            "font_family": "Salesforce Sans",
+            "font_weight": "Bold",
+            "font_size": 24,
+            "color": "#181818",
+            "placeholder": "Enter Order Information"
+          },
+          {
+            "type": "form_field",
+            "field_type": "input",
+            "label": {
+              "text": "{field_label}",
+              "font_family": "Salesforce Sans",
+              "font_weight": "Regular",
+              "font_size": 14,
+              "color": "#181818",
+              "placeholder": "Order Number or Email Address *",
+              "required": true
+            },
+            "input": {
+              "width": 536,
+              "height": 40,
+              "background": "#FFFFFF",
+              "border": {"color": "#A0A6AD", "width": 1},
+              "border_radius": 4,
+              "padding": {"top": 8, "right": 12, "bottom": 8, "left": 12},
+              "placeholder": {
+                "text": "{input_placeholder}",
+                "color": "#A0A6AD",
+                "font_family": "Salesforce Sans",
+                "font_size": 14,
+                "default": "Enter WW-YYYY-###### or email@example.com"
+              },
+              "focus_state": {
+                "border_color": "#0176D3",
+                "border_width": 2
+              }
+            },
+            "helper_text": {
+              "text": "{helper_text}",
+              "font_family": "Salesforce Sans",
+              "font_size": 12,
+              "color": "#706E6B",
+              "placeholder": "Order numbers start with \"WW-\" followed by year and 6 digits"
+            }
+          },
+          {
+            "type": "button_group",
+            "layout": "horizontal",
+            "spacing": 12,
+            "alignment": "left",
+            "buttons": [
+              {
+                "type": "button",
+                "variant": "brand",
+                "content": "{primary_action}",
+                "placeholder": "Find Order",
+                "width": 120,
+                "height": 40,
+                "background": "#0176D3",
+                "color": "#FFFFFF",
+                "border_radius": 4,
+                "font_family": "Salesforce Sans",
+                "font_weight": "Bold",
+                "font_size": 14
+              },
+              {
+                "type": "button",
+                "variant": "neutral",
+                "content": "{secondary_action}",
+                "placeholder": "Clear",
+                "width": 80,
+                "height": 40,
+                "background": "#FFFFFF",
+                "color": "#0176D3",
+                "border": {"color": "#0176D3", "width": 1},
+                "border_radius": 4,
+                "font_family": "Salesforce Sans",
+                "font_weight": "Bold", 
+                "font_size": 14
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "validation_states": {
+      "error": {
+        "input_border": "#C23934",
+        "helper_text_color": "#C23934",
+        "helper_text": "Please enter a valid order number or email address",
+        "icon": "error"
+      },
+      "success": {
+        "input_border": "#45C65A", 
+        "helper_text_color": "#45C65A",
+        "helper_text": "Valid format",
+        "icon": "checkmark"
+      }
+    },
+    "slds_tokens": {
+      "colors": {
+        "brand": "#0176D3",
+        "error": "#C23934",
+        "success": "#45C65A", 
+        "text_primary": "#181818",
+        "text_secondary": "#706E6B",
+        "text_placeholder": "#A0A6AD",
+        "background_primary": "#FFFFFF",
+        "background_page": "#FAFAFA",
+        "border_default": "#A0A6AD",
+        "border_focus": "#0176D3"
+      },
+      "typography": {
+        "font_family": "Salesforce Sans",
+        "heading": {"size": 24, "weight": "Bold"},
+        "label": {"size": 14, "weight": "Regular"},
+        "input": {"size": 14, "weight": "Regular"},
+        "helper": {"size": 12, "weight": "Regular"},
+        "button": {"size": 14, "weight": "Bold"}
+      },
+      "spacing": {
+        "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 20, "xxl": 24, "xxxl": 32
+      },
+      "borders": {
+        "radius_sm": 4, "radius_md": 8, "width_default": 1, "width_focus": 2
+      }
+    },
+    "accessibility": {
+      "labels": "properly_associated",
+      "error_announcements": true,
+      "keyboard_navigation": true,
+      "focus_indicators": "visible", 
+      "color_contrast": {
+        "label_text": "7.2:1",
+        "input_text": "7.2:1",
+        "helper_text": "4.8:1",
+        "button_primary": "4.7:1"
+      }
+    },
+    "responsive_breakpoints": {
+      "mobile": {"width": 390, "form_width": 350, "container_padding": 20},
+      "tablet": {"width": 768, "form_width": 500, "container_padding": 100}, 
+      "desktop": {"width": 1200, "form_width": 600, "container_padding": 300}
+    }
+  }
+}

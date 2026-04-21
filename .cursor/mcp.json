@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "figma": {
+      "url": "http://127.0.0.1:3845/mcp",
+      "description": "Figma desktop MCP server - requires Figma desktop app open with Dev Mode enabled"
+    }
+  }
+}

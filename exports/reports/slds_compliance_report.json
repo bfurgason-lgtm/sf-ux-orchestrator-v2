@@ -1,0 +1,32 @@
+{
+  "slds_compliance_report": {
+    "metadata": {
+      "validator_version": "0.5.0",
+      "slds_version": "2.0",
+      "generated_at": "2026-04-21T15:14:58.201270+00:00",
+      "overall_score": 100.0
+    },
+    "summary": {
+      "total_checks": 6,
+      "passed": true,
+      "errors": 0,
+      "warnings": 0,
+      "info": 1
+    },
+    "issues_by_category": {
+      "color": 1
+    },
+    "detailed_issues": [
+      {
+        "severity": "info",
+        "category": "color",
+        "message": "Brand token 'font_family' uses custom value instead of SLDS token",
+        "suggestion": "Consider using SLDS design tokens for consistency",
+        "slds_reference": null,
+        "auto_fixable": false
+      }
+    ],
+    "auto_fixable_count": 0,
+    "recommendations": []
+  }
+}

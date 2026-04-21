@@ -1,0 +1,306 @@
+{
+  "template": {
+    "name": "Authentic SMS Conversation Thread",
+    "version": "1.0",
+    "description": "Native mobile messaging interface with authentic message bubbles, status indicators, and mobile UI chrome based on Wolverine SMS design",
+    "framework": "native_mobile",
+    "platform": "ios_android_compatible",
+    "interface_style": "native_messaging",
+    "layout": {
+      "mobile_container": {
+        "type": "mobile_screen",
+        "width": 390,
+        "height": 844,
+        "background": "#000000",
+        "safe_area": {"top": 47, "bottom": 34},
+        "elements": [
+          {
+            "type": "status_bar",
+            "height": 47,
+            "background": "#000000",
+            "elements": [
+              {
+                "type": "time",
+                "content": "{current_time}",
+                "font_size": 17,
+                "font_weight": "600",
+                "color": "#FFFFFF",
+                "position": "center",
+                "placeholder": "9:41"
+              },
+              {
+                "type": "battery_indicator", 
+                "position": "right",
+                "elements": [
+                  {"type": "signal_bars", "color": "#FFFFFF"},
+                  {"type": "wifi_icon", "color": "#FFFFFF"},
+                  {"type": "battery_icon", "color": "#FFFFFF", "level": 100}
+                ]
+              }
+            ]
+          },
+          {
+            "type": "message_header",
+            "height": 88,
+            "background": "#1C1C1E",
+            "padding": {"top": 8, "right": 16, "bottom": 8, "left": 16},
+            "elements": [
+              {
+                "type": "navigation_bar",
+                "layout": "horizontal",
+                "alignment": "space_between",
+                "elements": [
+                  {
+                    "type": "back_button",
+                    "icon": "chevron_left",
+                    "color": "#007AFF",
+                    "size": 20
+                  },
+                  {
+                    "type": "contact_info",
+                    "layout": "vertical", 
+                    "alignment": "center",
+                    "elements": [
+                      {
+                        "type": "contact_name",
+                        "content": "{contact_name}",
+                        "font_size": 17,
+                        "font_weight": "600", 
+                        "color": "#FFFFFF",
+                        "placeholder": "Agent"
+                      },
+                      {
+                        "type": "status_text",
+                        "content": "{status_message}",
+                        "font_size": 12,
+                        "color": "#8E8E93",
+                        "placeholder": "Available"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "info_button",
+                    "icon": "info_circle",
+                    "color": "#007AFF",
+                    "size": 20
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "messages_area",
+            "flex": 1,
+            "background": "#000000",
+            "padding": {"top": 16, "right": 16, "bottom": 16, "left": 16},
+            "scroll_behavior": "vertical",
+            "elements": [
+              {
+                "type": "incoming_message",
+                "alignment": "left",
+                "margin_bottom": 12,
+                "elements": [
+                  {
+                    "type": "message_bubble",
+                    "background": "#2C2C2E",
+                    "border_radius": {"top_left": 18, "top_right": 18, "bottom_right": 18, "bottom_left": 4},
+                    "padding": {"top": 8, "right": 12, "bottom": 8, "left": 12},
+                    "max_width": "75%",
+                    "elements": [
+                      {
+                        "type": "message_text",
+                        "content": "{incoming_message}",
+                        "font_size": 17,
+                        "line_height": 1.3,
+                        "color": "#FFFFFF",
+                        "placeholder": "Hi! I'm your Agent. How can I help you today?"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "timestamp", 
+                    "content": "{message_time}",
+                    "font_size": 12,
+                    "color": "#8E8E93",
+                    "margin_top": 4,
+                    "placeholder": "9:32 AM"
+                  }
+                ]
+              },
+              {
+                "type": "outgoing_message",
+                "alignment": "right",
+                "margin_bottom": 12,
+                "elements": [
+                  {
+                    "type": "message_bubble",
+                    "background": "#007AFF",
+                    "border_radius": {"top_left": 18, "top_right": 18, "bottom_right": 4, "bottom_left": 18},
+                    "padding": {"top": 8, "right": 12, "bottom": 8, "left": 12},
+                    "max_width": "75%",
+                    "elements": [
+                      {
+                        "type": "message_text",
+                        "content": "{outgoing_message}",
+                        "font_size": 17,
+                        "line_height": 1.3,
+                        "color": "#FFFFFF",
+                        "placeholder": "Hi, the sole is peeling off my boots. Can I return them?"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "delivery_status",
+                    "layout": "horizontal",
+                    "alignment": "right",
+                    "margin_top": 4,
+                    "elements": [
+                      {
+                        "type": "timestamp",
+                        "content": "{message_time}",
+                        "font_size": 12,
+                        "color": "#8E8E93",
+                        "placeholder": "9:33 AM"
+                      },
+                      {
+                        "type": "read_receipt",
+                        "content": "Read",
+                        "font_size": 12,
+                        "color": "#8E8E93",
+                        "margin_left": 4
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input_area",
+            "height": 83,
+            "background": "#1C1C1E",
+            "border_top": {"color": "#2C2C2E", "width": 0.5},
+            "padding": {"top": 8, "right": 16, "bottom": 8, "left": 16},
+            "safe_area_bottom": true,
+            "elements": [
+              {
+                "type": "message_composer",
+                "layout": "horizontal",
+                "alignment": "center",
+                "spacing": 8,
+                "elements": [
+                  {
+                    "type": "camera_button",
+                    "icon": "camera",
+                    "size": 32,
+                    "color": "#8E8E93"
+                  },
+                  {
+                    "type": "text_input",
+                    "flex": 1,
+                    "height": 36,
+                    "background": "#2C2C2E",
+                    "border_radius": 18,
+                    "padding": {"top": 8, "right": 16, "bottom": 8, "left": 16},
+                    "placeholder": {
+                      "text": "{input_placeholder}",
+                      "color": "#8E8E93",
+                      "font_size": 17,
+                      "default": "Message"
+                    },
+                    "text_color": "#FFFFFF",
+                    "font_size": 17
+                  },
+                  {
+                    "type": "send_button",
+                    "icon": "arrow_up_circle_fill",
+                    "size": 32,
+                    "color": "#007AFF"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "message_types": {
+      "agent_message": {
+        "bubble_color": "#2C2C2E",
+        "text_color": "#FFFFFF",
+        "alignment": "left",
+        "border_radius": {"top_left": 18, "top_right": 18, "bottom_right": 18, "bottom_left": 4}
+      },
+      "user_message": {
+        "bubble_color": "#007AFF", 
+        "text_color": "#FFFFFF",
+        "alignment": "right",
+        "border_radius": {"top_left": 18, "top_right": 18, "bottom_right": 4, "bottom_left": 18}
+      },
+      "system_message": {
+        "bubble_color": "transparent",
+        "text_color": "#8E8E93",
+        "alignment": "center",
+        "font_size": 13,
+        "margin": {"top": 8, "bottom": 8}
+      }
+    },
+    "interaction_states": {
+      "typing_indicator": {
+        "type": "animated_dots",
+        "background": "#2C2C2E",
+        "color": "#8E8E93",
+        "animation": "fade_pulse"
+      },
+      "message_sending": {
+        "opacity": 0.6,
+        "delivery_status": "Sending..."
+      },
+      "message_delivered": {
+        "delivery_status": "Delivered"
+      },
+      "message_read": {
+        "delivery_status": "Read"
+      }
+    },
+    "color_tokens": {
+      "background_primary": "#000000",
+      "background_secondary": "#1C1C1E", 
+      "background_tertiary": "#2C2C2E",
+      "text_primary": "#FFFFFF",
+      "text_secondary": "#8E8E93",
+      "accent_blue": "#007AFF",
+      "bubble_incoming": "#2C2C2E",
+      "bubble_outgoing": "#007AFF",
+      "border_color": "#2C2C2E"
+    },
+    "typography": {
+      "font_family": "SF Pro Display, system-ui, sans-serif",
+      "status_bar": {"size": 17, "weight": "600"},
+      "header": {"size": 17, "weight": "600"}, 
+      "message": {"size": 17, "weight": "400", "line_height": 1.3},
+      "timestamp": {"size": 12, "weight": "400"},
+      "placeholder": {"size": 17, "weight": "400"},
+      "system": {"size": 13, "weight": "400"}
+    },
+    "responsive_behavior": {
+      "text_sizing": "dynamic_type_supported",
+      "orientation": "portrait_primary",
+      "keyboard_handling": "animated_resize",
+      "safe_areas": "respected"
+    },
+    "accessibility": {
+      "voiceover_support": true,
+      "large_text_support": true,
+      "high_contrast_mode": true,
+      "reduce_motion_support": true,
+      "haptic_feedback": "subtle"
+    },
+    "character_limits": {
+      "sms_single": 160,
+      "sms_concatenated": 1530,
+      "optimal_length": 120,
+      "warning_threshold": 140
+    }
+  }
+}

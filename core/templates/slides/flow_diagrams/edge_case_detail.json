@@ -1,0 +1,87 @@
+{
+  "template_id": "edge_case_detail",
+  "template_name": "Edge Case Detail Slide",
+  "description": "Dedicated slides for exception scenarios and technical details",
+  "layout": {
+    "background": {
+      "type": "solid_color",
+      "color": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "type": "text_box",
+        "id": "edge_case_title",
+        "position": {"x": 72, "y": 30},
+        "size": {"width": 576, "height": 40},
+        "style": {
+          "font_size": 20,
+          "font_weight": "bold", 
+          "color": "#C62828",
+          "alignment": "center"
+        },
+        "content": "{{flows.topic}} - Edge Cases & Exceptions"
+      },
+      {
+        "type": "flow_diagram",
+        "id": "edge_case_diagram",
+        "position": {"x": 72, "y": 100},
+        "size": {"width": 350, "height": 280},
+        "flow_config": {
+          "diagram_type": "edge_cases",
+          "show_escalation_paths": true,
+          "style": "technical_detail"
+        },
+        "data_source": "{{flows}}"
+      },
+      {
+        "type": "text_box",
+        "id": "implementation_notes",
+        "position": {"x": 450, "y": 100},
+        "size": {"width": 198, "height": 280},
+        "style": {
+          "font_size": 11,
+          "color": "#2D3E50",
+          "alignment": "left",
+          "background_color": "#F8F9FA",
+          "padding": 10
+        },
+        "content": "Implementation Notes:\n\n• {{edge_case_implementation_notes}}\n• Error handling patterns\n• Escalation triggers\n• Recovery mechanisms"
+      },
+      {
+        "type": "text_box",
+        "id": "purpose_note",
+        "position": {"x": 72, "y": 400},
+        "size": {"width": 576, "height": 30},
+        "style": {
+          "font_size": 12,
+          "color": "#7F8C8D", 
+          "alignment": "center",
+          "style": "italic"
+        },
+        "content": "Purpose: Technical implementation guidance and exception handling"
+      }
+    ]
+  },
+  "flow_styling": {
+    "node_styles": {
+      "escalation": {
+        "shape": "RECTANGLE",
+        "fill_color": "#FFEBEE",
+        "text_color": "#C62828",
+        "border_color": "#E74C3C"
+      },
+      "exception": {
+        "shape": "HEXAGON",
+        "fill_color": "#FFF3E0",
+        "text_color": "#E65100",
+        "border_color": "#FF9800"
+      },
+      "recovery": {
+        "shape": "ROUND_RECTANGLE",
+        "fill_color": "#E8F5E8",
+        "text_color": "#2E7D32",
+        "border_color": "#4CAF50"
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "template_id": "persona_agnostic_flow",
+  "template_name": "Persona-Agnostic Flow Diagram",
+  "description": "Clean, functional flow diagram for requirements gathering",
+  "layout": {
+    "background": {
+      "type": "solid_color",
+      "color": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "type": "text_box",
+        "id": "flow_title", 
+        "position": {"x": 72, "y": 30},
+        "size": {"width": 576, "height": 40},
+        "style": {
+          "font_size": 20,
+          "font_weight": "bold",
+          "color": "#1B4B66",
+          "alignment": "center"
+        },
+        "content": "{{flows.topic}} - Main Flow (Requirements View)"
+      },
+      {
+        "type": "flow_diagram",
+        "id": "main_flow_diagram",
+        "position": {"x": 72, "y": 100},
+        "size": {"width": 576, "height": 360},
+        "flow_config": {
+          "diagram_type": "main",
+          "show_personas": false,
+          "show_edge_cases": false,
+          "style": "clean_requirements"
+        },
+        "data_source": "{{flows}}"
+      },
+      {
+        "type": "text_box",
+        "id": "purpose_note",
+        "position": {"x": 72, "y": 480},
+        "size": {"width": 576, "height": 30},
+        "style": {
+          "font_size": 12,
+          "color": "#7F8C8D",
+          "alignment": "center",
+          "style": "italic"
+        },
+        "content": "Purpose: Technical review and requirements validation"
+      }
+    ]
+  },
+  "flow_styling": {
+    "node_styles": {
+      "start_end": {
+        "shape": "ROUND_RECTANGLE",
+        "fill_color": "#E8F4FD",
+        "text_color": "#1B4B66",
+        "border_color": "#4A90C2"
+      },
+      "process": {
+        "shape": "RECTANGLE",
+        "fill_color": "#F0F8F0", 
+        "text_color": "#2D5016",
+        "border_color": "#5CB85C"
+      },
+      "decision": {
+        "shape": "DIAMOND",
+        "fill_color": "#FFF2CC",
+        "text_color": "#8A6914", 
+        "border_color": "#F1C40F"
+      }
+    },
+    "connector_style": {
+      "line_type": "STRAIGHT_CONNECTOR_1",
+      "color": "#5D6D7E",
+      "width": 2
+    }
+  }
+}

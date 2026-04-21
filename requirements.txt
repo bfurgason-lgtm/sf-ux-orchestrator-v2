@@ -1,0 +1,44 @@
+# Enhanced Narrative Orchestrator v2.0 - Python Dependencies
+# SLDS Integration, Drive Monitoring, and Validation Tools
+
+# Core dependencies
+jsonschema>=4.21.0          # JSON schema validation
+pathlib2>=2.3.7            # Enhanced path operations  
+python-dotenv>=1.0.0       # Environment variable loading
+typing-extensions>=4.9.0   # Type hints support
+
+# Drive monitoring and file operations
+watchdog>=4.0.0            # File system event monitoring
+requests>=2.31.0           # HTTP requests for APIs
+urllib3>=2.0.0             # HTTP client utilities
+
+# SLDS validation and accessibility  
+colorama>=0.4.6           # Colored terminal output
+pillow>=10.2.0            # Image processing for contrast analysis
+webcolors>=1.13           # Color manipulation and conversion
+cssutils>=2.9.0           # CSS parsing for SLDS validation
+
+# Data processing and utilities
+pydantic>=2.5.0           # Data validation and settings
+click>=8.1.0              # Command line interface creation
+rich>=13.7.0              # Rich text and beautiful formatting
+tabulate>=0.9.0           # Pretty table printing
+
+# Date and time handling
+python-dateutil>=2.8.0   # Date/time parsing and manipulation
+pytz>=2023.4              # Timezone handling
+
+# Optional: Enhanced features
+# google-api-python-client>=2.115.0   # Google Drive API (if needed)
+# python-magic>=0.4.27                # File type detection
+# markdown>=3.5.0                     # Markdown processing for docs
+
+# Development and testing (optional)
+pytest>=7.4.0            # Testing framework
+black>=23.12.0           # Code formatting
+flake8>=7.0.0            # Code linting
+mypy>=1.8.0              # Static type checking
+
+# Documentation generation (optional)
+# mkdocs>=1.5.0           # Documentation site generation  
+# mkdocs-material>=9.5.0  # Material Design theme for docs

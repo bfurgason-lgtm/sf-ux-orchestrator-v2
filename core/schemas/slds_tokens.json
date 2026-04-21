@@ -1,0 +1,261 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://narrative-orchestrator.salesforce.com/schemas/slds-tokens/v2.0",
+  "title": "SLDS v2.0 Design Tokens Reference",
+  "description": "Complete reference of Salesforce Lightning Design System v2.0 tokens for enhanced validation",
+  "type": "object",
+  "properties": {
+    "colors": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "description": "Primary brand colors",
+          "type": "object",
+          "properties": {
+            "primary": {"type": "string", "const": "#1589EE", "description": "Primary brand blue"},
+            "primary_dark": {"type": "string", "const": "#0D4F8C", "description": "Dark brand blue"},
+            "primary_light": {"type": "string", "const": "#B6E3FE", "description": "Light brand blue"},
+            "secondary": {"type": "string", "const": "#5C6B73", "description": "Secondary brand gray"},
+            "accessible": {"type": "string", "const": "#0176D3", "description": "Accessible brand blue"}
+          }
+        },
+        "palette": {
+          "description": "Extended color palette",
+          "type": "object",
+          "properties": {
+            "hot_orange": {"type": "string", "const": "#FF6900"},
+            "warm_orange": {"type": "string", "const": "#FE9339"},
+            "yellow": {"type": "string", "const": "#FFD803"},
+            "hot_green": {"type": "string", "const": "#8EDE42"},
+            "green": {"type": "string", "const": "#45C65A"},
+            "forest": {"type": "string", "const": "#0B827C"},
+            "bluish": {"type": "string", "const": "#4BDBF5"},
+            "light_blue": {"type": "string", "const": "#87D3ED"},
+            "sky_blue": {"type": "string", "const": "#1B96FF"},
+            "blue": {"type": "string", "const": "#0176D3"},
+            "dark_blue": {"type": "string", "const": "#032E61"},
+            "indigo": {"type": "string", "const": "#5F6BF7"},
+            "purple": {"type": "string", "const": "#9F41E8"},
+            "pink": {"type": "string", "const": "#E876B7"},
+            "magenta": {"type": "string", "const": "#EC0A8E"},
+            "maroon": {"type": "string", "const": "#BA0517"},
+            "red": {"type": "string", "const": "#EA001E"},
+            "orange_red": {"type": "string", "const": "#FE5000"}
+          }
+        },
+        "text": {
+          "description": "Text colors with accessibility compliance",
+          "type": "object",
+          "properties": {
+            "default": {"type": "string", "const": "#080707", "description": "Default text color"},
+            "weak": {"type": "string", "const": "#514F4D", "description": "Secondary text color"},
+            "weaker": {"type": "string", "const": "#706E6B", "description": "Tertiary text color"},
+            "weakest": {"type": "string", "const": "#9A9892", "description": "Disabled text color"},
+            "inverse": {"type": "string", "const": "#FEFEFE", "description": "Inverse text on dark backgrounds"},
+            "inverse_weak": {"type": "string", "const": "#DDDBDA", "description": "Secondary inverse text"},
+            "link": {"type": "string", "const": "#0176D3", "description": "Default link color"},
+            "link_hover": {"type": "string", "const": "#014486", "description": "Link hover color"},
+            "destructive": {"type": "string", "const": "#EA001E", "description": "Destructive action text"},
+            "success": {"type": "string", "const": "#45C65A", "description": "Success message text"},
+            "warning": {"type": "string", "const": "#FE9339", "description": "Warning message text"}
+          }
+        },
+        "background": {
+          "description": "Background colors for surfaces and layouts",
+          "type": "object", 
+          "properties": {
+            "default": {"type": "string", "const": "#FEFEFE", "description": "Default page background"},
+            "alt": {"type": "string", "const": "#F7F7F7", "description": "Alternate background"},
+            "alt_2": {"type": "string", "const": "#EEEEEE", "description": "Second alternate background"},
+            "shade": {"type": "string", "const": "#ECEBEA", "description": "Subtle shade background"},
+            "shade_dark": {"type": "string", "const": "#DDDBDA", "description": "Darker shade background"},
+            "tint": {"type": "string", "const": "#F7F7F7", "description": "Subtle tint background"},
+            "inverse": {"type": "string", "const": "#16325C", "description": "Inverse dark background"},
+            "brand": {"type": "string", "const": "#1589EE", "description": "Brand color background"},
+            "brand_dark": {"type": "string", "const": "#0D4F8C", "description": "Dark brand background"},
+            "destructive": {"type": "string", "const": "#BA0517", "description": "Destructive action background"},
+            "destructive_hover": {"type": "string", "const": "#EA001E", "description": "Destructive hover background"},
+            "success": {"type": "string", "const": "#45C65A", "description": "Success background"},
+            "warning": {"type": "string", "const": "#FE9339", "description": "Warning background"},
+            "info": {"type": "string", "const": "#0176D3", "description": "Info background"}
+          }
+        },
+        "border": {
+          "description": "Border colors for components and separators", 
+          "type": "object",
+          "properties": {
+            "default": {"type": "string", "const": "#C9C7C5", "description": "Default border color"},
+            "strong": {"type": "string", "const": "#706E6B", "description": "Strong border for emphasis"},
+            "weak": {"type": "string", "const": "#DDDBDA", "description": "Subtle border"},
+            "inverse": {"type": "string", "const": "#5C6B73", "description": "Border on dark backgrounds"},
+            "brand": {"type": "string", "const": "#1589EE", "description": "Brand color border"},
+            "destructive": {"type": "string", "const": "#EA001E", "description": "Destructive border"},
+            "success": {"type": "string", "const": "#45C65A", "description": "Success border"},
+            "warning": {"type": "string", "const": "#FE9339", "description": "Warning border"},
+            "info": {"type": "string", "const": "#0176D3", "description": "Info border"}
+          }
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "properties": {
+        "font_families": {
+          "description": "Font family tokens",
+          "type": "object",
+          "properties": {
+            "default": {"type": "string", "const": "Salesforce Sans", "description": "Primary brand font"},
+            "monospace": {"type": "string", "const": "Consolas, Monaco, 'Liberation Mono', 'Courier New', monospace", "description": "Monospace font for code"}
+          }
+        },
+        "font_sizes": {
+          "description": "Font size scale",
+          "type": "object",
+          "properties": {
+            "heading_large": {"type": "string", "const": "2rem", "description": "32px - Large headings"},
+            "heading_medium": {"type": "string", "const": "1.5rem", "description": "24px - Medium headings"},
+            "heading_small": {"type": "string", "const": "1.25rem", "description": "20px - Small headings"},
+            "body_regular": {"type": "string", "const": "0.875rem", "description": "14px - Regular body text"},
+            "body_small": {"type": "string", "const": "0.75rem", "description": "12px - Small body text"},
+            "caption": {"type": "string", "const": "0.6875rem", "description": "11px - Caption text"},
+            "button": {"type": "string", "const": "0.875rem", "description": "14px - Button text"},
+            "label": {"type": "string", "const": "0.75rem", "description": "12px - Form labels"}
+          }
+        },
+        "font_weights": {
+          "description": "Font weight scale",
+          "type": "object",
+          "properties": {
+            "light": {"type": "integer", "const": 300, "description": "Light font weight"},
+            "regular": {"type": "integer", "const": 400, "description": "Regular font weight"},
+            "bold": {"type": "integer", "const": 700, "description": "Bold font weight"}
+          }
+        },
+        "line_heights": {
+          "description": "Line height ratios",
+          "type": "object",
+          "properties": {
+            "heading": {"type": "number", "const": 1.25, "description": "1.25 - Tight line height for headings"},
+            "body": {"type": "number", "const": 1.5, "description": "1.5 - Regular line height for body text"},
+            "tight": {"type": "number", "const": 1.375, "description": "1.375 - Slightly tighter line height"},
+            "loose": {"type": "number", "const": 1.75, "description": "1.75 - Looser line height for readability"}
+          }
+        }
+      }
+    },
+    "spacing": {
+      "description": "Spacing scale for margins, padding, and gaps",
+      "type": "object",
+      "properties": {
+        "none": {"type": "string", "const": "0", "description": "0px - No spacing"},
+        "xxx_small": {"type": "string", "const": "0.125rem", "description": "2px - Micro spacing"},
+        "xx_small": {"type": "string", "const": "0.25rem", "description": "4px - Tiny spacing"},
+        "x_small": {"type": "string", "const": "0.5rem", "description": "8px - Extra small spacing"},
+        "small": {"type": "string", "const": "0.75rem", "description": "12px - Small spacing"},
+        "medium": {"type": "string", "const": "1rem", "description": "16px - Base spacing unit"},
+        "large": {"type": "string", "const": "1.5rem", "description": "24px - Large spacing"},
+        "x_large": {"type": "string", "const": "2rem", "description": "32px - Extra large spacing"},
+        "xx_large": {"type": "string", "const": "3rem", "description": "48px - Double extra large spacing"},
+        "xxx_large": {"type": "string", "const": "4rem", "description": "64px - Triple extra large spacing"}
+      }
+    },
+    "sizing": {
+      "description": "Size tokens for components and layouts",
+      "type": "object",
+      "properties": {
+        "xx_small": {"type": "string", "const": "1rem", "description": "16px"},
+        "x_small": {"type": "string", "const": "1.5rem", "description": "24px"},
+        "small": {"type": "string", "const": "2rem", "description": "32px"},
+        "medium": {"type": "string", "const": "2.5rem", "description": "40px"},
+        "large": {"type": "string", "const": "3rem", "description": "48px"},
+        "x_large": {"type": "string", "const": "4rem", "description": "64px"},
+        "xx_large": {"type": "string", "const": "6rem", "description": "96px"}
+      }
+    },
+    "border_radius": {
+      "description": "Border radius tokens for rounded corners",
+      "type": "object",
+      "properties": {
+        "none": {"type": "string", "const": "0", "description": "No border radius"},
+        "small": {"type": "string", "const": "0.25rem", "description": "4px - Small radius"},
+        "medium": {"type": "string", "const": "0.5rem", "description": "8px - Medium radius"},
+        "large": {"type": "string", "const": "0.75rem", "description": "12px - Large radius"},
+        "circle": {"type": "string", "const": "50%", "description": "Circular border radius"},
+        "pill": {"type": "string", "const": "15rem", "description": "Pill-shaped border radius"}
+      }
+    },
+    "shadows": {
+      "description": "Drop shadow tokens",
+      "type": "object",
+      "properties": {
+        "drop_small": {"type": "string", "const": "0 1px 2px 0 rgba(0, 0, 0, 0.16)", "description": "Small drop shadow"},
+        "drop_medium": {"type": "string", "const": "0 2px 4px 0 rgba(0, 0, 0, 0.16)", "description": "Medium drop shadow"},
+        "drop_large": {"type": "string", "const": "0 4px 8px 0 rgba(0, 0, 0, 0.16)", "description": "Large drop shadow"},
+        "inset": {"type": "string", "const": "inset 0 1px 2px 0 rgba(0, 0, 0, 0.16)", "description": "Inset shadow"},
+        "focus": {"type": "string", "const": "0 0 0 2px #1589EE", "description": "Focus ring shadow"}
+      }
+    },
+    "z_index": {
+      "description": "Z-index layering tokens",
+      "type": "object", 
+      "properties": {
+        "default": {"type": "integer", "const": 1, "description": "Default z-index"},
+        "sticky": {"type": "integer", "const": 100, "description": "Sticky elements"},
+        "dropdown": {"type": "integer", "const": 7000, "description": "Dropdown menus"},
+        "overlay": {"type": "integer", "const": 8000, "description": "Overlay components"},
+        "modal": {"type": "integer", "const": 9000, "description": "Modal dialogs"},
+        "toast": {"type": "integer", "const": 10000, "description": "Toast notifications"},
+        "tooltip": {"type": "integer", "const": 10001, "description": "Tooltip overlays"}
+      }
+    }
+  },
+  "component_patterns": {
+    "description": "SLDS component pattern specifications",
+    "type": "object",
+    "properties": {
+      "button": {
+        "variants": ["base", "neutral", "brand", "outline-brand", "destructive", "text-destructive"],
+        "sizes": ["xx-small", "x-small", "small", "medium"],
+        "states": ["default", "hover", "active", "focus", "disabled"]
+      },
+      "input": {
+        "types": ["text", "password", "email", "tel", "url", "search", "number", "date"],
+        "variants": ["standard", "label-hidden", "label-stacked"],
+        "states": ["default", "focus", "error", "disabled", "readonly"]
+      },
+      "card": {
+        "variants": ["base", "narrow", "einstein"],
+        "sections": ["header", "body", "footer"]
+      },
+      "modal": {
+        "sizes": ["small", "medium", "large"],
+        "types": ["base", "directional"]
+      },
+      "data_table": {
+        "variants": ["basic", "advanced", "inline-edit"],
+        "features": ["sorting", "filtering", "pagination", "selection"]
+      }
+    }
+  },
+  "accessibility": {
+    "description": "Accessibility standards and requirements",
+    "type": "object", 
+    "properties": {
+      "color_contrast": {
+        "AA_normal_text": 4.5,
+        "AA_large_text": 3.0,
+        "AAA_normal_text": 7.0,
+        "AAA_large_text": 4.5
+      },
+      "touch_targets": {
+        "minimum_size": "44px",
+        "preferred_size": "48px"
+      },
+      "focus_indicators": {
+        "required": true,
+        "thickness": "2px",
+        "color": "#1589EE"
+      }
+    }
+  }
+}

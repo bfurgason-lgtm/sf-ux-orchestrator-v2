@@ -1,0 +1,139 @@
+{
+  "schema_version": "0.5",
+  "initiative_metadata": {
+    "name": "Acme Corp Customer Service Bot",
+    "version": "1.0", 
+    "timestamp": "2026-04-21T10:35:00Z",
+    "brand_context": {
+      "primary_brand": "Acme Corporation",
+      "sub_brands": ["Acme Pro", "Acme Enterprise"],
+      "brand_guidelines_url": null
+    },
+    "handoff_metadata": {
+      "last_updated_by": "demo-user@acme.com",
+      "last_updated_at": "2026-04-21T10:35:00Z",
+      "status": "active", 
+      "handoff_notes": "Demonstration project showing basic SLDS integration with minimal complexity",
+      "design_review_status": "pending"
+    }
+  },
+  "data_tier": "1",
+  "design_system": {
+    "framework": "slds_v2",
+    "theme": "light",
+    "brand_tokens": {
+      "primary_color": "slds_brand_primary",
+      "secondary_color": "slds_text_weak", 
+      "accent_color": "slds_palette_green",
+      "font_family": "Salesforce Sans"
+    },
+    "accessibility": {
+      "wcag_level": "AA",
+      "color_contrast_verified": false,
+      "screen_reader_optimized": false
+    },
+    "responsive_breakpoints": {
+      "mobile": "390px",
+      "tablet": "768px",
+      "desktop": "1200px"
+    }
+  },
+  "flows": [
+    {
+      "topic": "General_Support",
+      "channels": ["web"],
+      "flow_metadata": {
+        "primary_persona": "New Customer",
+        "complexity_score": 1,
+        "estimated_completion_time": "1m"
+      },
+      "steps": [
+        {
+          "step_number": 1,
+          "step_name": "Welcome",
+          "is_edge_case": false,
+          "design_notes": "Simple welcome screen with clear navigation options",
+          "utterances": {
+            "agent": "Welcome to Acme Corp! How can I help you today?",
+            "user": "I need help with my account"
+          },
+          "channels": {
+            "web": {
+              "agent": "Hi! I'm the Acme assistant. What can I help you with?",
+              "user": "I have a question",
+              "ui_components": ["button", "card"],
+              "slds_patterns": ["welcome-mat", "button-group"]
+            }
+          },
+          "proto_bot": {
+            "sf_object": "not_provided",
+            "action_type": "not_provided", 
+            "auth_context": "not_provided"
+          }
+        },
+        {
+          "step_number": 2,
+          "step_name": "Topic_Selection",
+          "is_edge_case": false,
+          "design_notes": "Clear topic selection with SLDS button components",
+          "utterances": {
+            "agent": "What type of help do you need? Account, billing, or technical support?",
+            "user": "Account help please"
+          },
+          "channels": {
+            "web": {
+              "agent": "Please select your topic:",
+              "user": "Account Support",
+              "ui_components": ["button", "card"],
+              "slds_patterns": ["button-group", "selection-card"]
+            }
+          },
+          "proto_bot": {
+            "sf_object": "not_provided",
+            "action_type": "not_provided",
+            "auth_context": "not_provided"
+          }
+        },
+        {
+          "step_number": 3,
+          "step_name": "Resolution",
+          "is_edge_case": false,
+          "design_notes": "Simple completion with next steps",
+          "utterances": {
+            "agent": "I've connected you with our account team. They'll be in touch within 24 hours.",
+            "user": "Perfect, thank you!"
+          },
+          "channels": {
+            "web": {
+              "agent": "Great! Someone from our team will contact you soon.",
+              "user": "Thanks for your help",
+              "ui_components": ["card", "button"],
+              "slds_patterns": ["success-card", "completion-actions"]
+            }
+          },
+          "proto_bot": {
+            "sf_object": "not_provided",
+            "action_type": "not_provided",
+            "auth_context": "not_provided"
+          }
+        }
+      ]
+    }
+  ],
+  "terminology_map": {},
+  "drive": {
+    "project_folder": "/Users/bfurgason/Documents/GitHub/sf-ux-orchestrator-v2/samples/acme-corp",
+    "exports_folder": "/Users/bfurgason/Documents/GitHub/sf-ux-orchestrator-v2/exports/acme-corp",
+    "auto_sync": false
+  },
+  "figma": {
+    "target_file_url": null,
+    "design_system_library": "https://www.figma.com/design/SLDS-v2-Library/Lightning-Design-System",
+    "brand_kit_library": null
+  },
+  "deployment": {
+    "target_org": "not_provided",
+    "release_date": null,
+    "stakeholder_reviews": []
+  }
+}

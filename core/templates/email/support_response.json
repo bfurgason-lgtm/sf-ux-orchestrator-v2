@@ -1,0 +1,225 @@
+{
+  "template": {
+    "name": "Authentic Email Thread - Support Response",
+    "version": "1.0", 
+    "description": "Customer service email thread format with professional support styling and clear action items",
+    "framework": "responsive_email",
+    "thread_context": true,
+    "support_optimized": true,
+    "layout": {
+      "email_container": {
+        "type": "support_thread",
+        "width": 600,
+        "background": "#FFFFFF", 
+        "elements": [
+          {
+            "type": "support_header",
+            "background": "#0176D3",
+            "color": "#FFFFFF",
+            "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
+            "elements": [
+              {
+                "type": "support_branding",
+                "layout": "horizontal",
+                "alignment": "space_between",
+                "elements": [
+                  {
+                    "type": "company_logo_text",
+                    "content": "{company_name} Support",
+                    "font_size": 18,
+                    "font_weight": "Bold",
+                    "placeholder": "Wolverine Support"
+                  },
+                  {
+                    "type": "ticket_number",
+                    "content": "Ticket #{ticket_id}",
+                    "font_size": 12,
+                    "opacity": 0.9,
+                    "placeholder": "Ticket #CS-2024-1547"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "agent_message",
+            "padding": {"top": 24, "right": 20, "bottom": 24, "left": 20},
+            "elements": [
+              {
+                "type": "agent_info",
+                "layout": "horizontal", 
+                "margin_bottom": 16,
+                "elements": [
+                  {
+                    "type": "agent_avatar",
+                    "size": 40,
+                    "background": "#0176D3",
+                    "border_radius": 20,
+                    "initials": "{agent_initials}",
+                    "font_size": 16,
+                    "color": "#FFFFFF",
+                    "default": "CS"
+                  },
+                  {
+                    "type": "agent_details",
+                    "margin_left": 12,
+                    "elements": [
+                      {
+                        "type": "agent_name",
+                        "content": "{agent_name}",
+                        "font_size": 16,
+                        "font_weight": "600",
+                        "color": "#1D1D1F",
+                        "placeholder": "Customer Success Team"
+                      },
+                      {
+                        "type": "response_time", 
+                        "content": "Responded {response_time}",
+                        "font_size": 12,
+                        "color": "#8E8E93",
+                        "placeholder": "Responded 2 hours ago"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "support_message",
+                "elements": [
+                  {
+                    "type": "greeting",
+                    "content": "{support_greeting}",
+                    "font_size": 14,
+                    "line_height": 1.6,
+                    "color": "#1D1D1F",
+                    "margin_bottom": 16,
+                    "placeholder": "Hi {customer_name},\\n\\nThank you for contacting Wolverine Support. I've reviewed your case and I'm here to help resolve your boot quality issue."
+                  },
+                  {
+                    "type": "case_summary",
+                    "background": "#F8F9FA",
+                    "border_left": {"color": "#0176D3", "width": 4},
+                    "padding": {"top": 16, "right": 16, "bottom": 16, "left": 16},
+                    "margin": {"top": 16, "bottom": 16},
+                    "elements": [
+                      {
+                        "type": "summary_title",
+                        "content": "Case Summary",
+                        "font_size": 14,
+                        "font_weight": "600",
+                        "color": "#1D1D1F",
+                        "margin_bottom": 8
+                      },
+                      {
+                        "type": "case_details",
+                        "content": "{case_summary}",
+                        "font_size": 13,
+                        "line_height": 1.5,
+                        "color": "#5A5A5A",
+                        "placeholder": "Product: Wolverine Work Boots - Steel Toe\\nIssue: Sole separation after 2 weeks of use\\nPurchase Date: March 15, 2024\\nWarranty Status: Active"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "next_steps",
+                    "elements": [
+                      {
+                        "type": "steps_header", 
+                        "content": "Next Steps:",
+                        "font_size": 14,
+                        "font_weight": "600",
+                        "color": "#1D1D1F",
+                        "margin_bottom": 12
+                      },
+                      {
+                        "type": "action_list",
+                        "layout": "numbered_list",
+                        "items": [
+                          {
+                            "number": 1,
+                            "content": "{step_1}",
+                            "placeholder": "We'll send you a prepaid return label within 24 hours"
+                          },
+                          {
+                            "number": 2, 
+                            "content": "{step_2}",
+                            "placeholder": "Package your boots and include this email confirmation"
+                          },
+                          {
+                            "number": 3,
+                            "content": "{step_3}",
+                            "placeholder": "Replacement boots will ship within 3-5 business days"
+                          }
+                        ],
+                        "item_styling": {
+                          "font_size": 14,
+                          "line_height": 1.5,
+                          "color": "#1D1D1F",
+                          "margin_bottom": 8
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "cta_section",
+                    "margin_top": 24,
+                    "padding_top": 20,
+                    "border_top": {"color": "#E1E5E9", "width": 1},
+                    "elements": [
+                      {
+                        "type": "primary_button",
+                        "content": "{primary_cta}",
+                        "background": "#0176D3",
+                        "color": "#FFFFFF",
+                        "padding": {"top": 12, "right": 24, "bottom": 12, "left": 24},
+                        "border_radius": 6,
+                        "font_size": 14,
+                        "font_weight": "600",
+                        "text_align": "center",
+                        "placeholder": "Track Your Replacement"
+                      },
+                      {
+                        "type": "support_contact",
+                        "margin_top": 16,
+                        "font_size": 12,
+                        "color": "#8E8E93",
+                        "text_align": "center",
+                        "content": "Need help? Reply to this email or call {support_phone}",
+                        "placeholder": "Need help? Reply to this email or call 1-800-WOLVERINE"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "color_tokens": {
+      "brand_primary": "#0176D3",
+      "text_primary": "#1D1D1F", 
+      "text_secondary": "#5A5A5A",
+      "text_muted": "#8E8E93",
+      "background_primary": "#FFFFFF",
+      "background_secondary": "#F8F9FA", 
+      "border_light": "#E1E5E9",
+      "border_accent": "#0176D3"
+    },
+    "typography": {
+      "font_family": "system-ui, -apple-system, sans-serif",
+      "header": {"size": 18, "weight": "Bold"},
+      "agent_name": {"size": 16, "weight": "600"},
+      "body": {"size": 14, "weight": "400", "line_height": 1.6},
+      "summary": {"size": 13, "weight": "400", "line_height": 1.5},
+      "button": {"size": 14, "weight": "600"},
+      "small": {"size": 12, "weight": "400"}
+    },
+    "accessibility": {
+      "high_contrast": true,
+      "semantic_structure": true,
+      "button_focus_states": true,
+      "screen_reader_optimized": true
+    }
+  }
+}
