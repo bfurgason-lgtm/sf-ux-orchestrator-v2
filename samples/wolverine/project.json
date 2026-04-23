@@ -1,15 +1,124 @@
 {
   "schema_version": "1.0",
   "created_at": "2026-04-22T00:00:00Z",
-  "updated_at": "2026-04-23T17:22:34.236883+00:00",
+  "updated_at": "2026-04-23T17:57:01.811761+00:00",
   "figma": {
     "file_key": "9b2q4bF48755NQlVOPqflS",
     "file_name": "Wolverine WISMO \u2014 Agentforce Flows",
     "file_url": "https://www.figma.com/design/9b2q4bF48755NQlVOPqflS/Untitled",
     "last_frame_y": 0,
     "frame_gap": 80,
-    "generated_frames": [],
-    "last_frame_x": 0
+    "generated_frames": [
+      {
+        "flow_topic": "WISMO",
+        "step_number": 1,
+        "channel": "web",
+        "frame_id": "16:2350",
+        "frame_name": "WISMO/step-1/web",
+        "x_position": 100,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 1,
+        "channel": "sms",
+        "frame_id": "16:2324",
+        "frame_name": "WISMO/step-1/sms",
+        "x_position": 100,
+        "y_position": 789
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 1,
+        "channel": "email",
+        "frame_id": "16:2311",
+        "frame_name": "WISMO/step-1/email",
+        "x_position": 100,
+        "y_position": 1693
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 1,
+        "channel": "web",
+        "frame_id": "16:2282",
+        "frame_name": "Defective_Returns/step-1/web",
+        "x_position": 890,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 1,
+        "channel": "sms",
+        "frame_id": "16:2256",
+        "frame_name": "Defective_Returns/step-1/sms",
+        "x_position": 890,
+        "y_position": 789
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 1,
+        "channel": "email",
+        "frame_id": "16:2243",
+        "frame_name": "Defective_Returns/step-1/email",
+        "x_position": 890,
+        "y_position": 1693
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 2,
+        "channel": "web",
+        "frame_id": "17:2499",
+        "frame_name": "WISMO/step-2/web",
+        "x_position": 1680,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 2,
+        "channel": "email",
+        "frame_id": "17:2460",
+        "frame_name": "WISMO/step-2/email",
+        "x_position": 1680,
+        "y_position": 1693
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 2,
+        "channel": "web",
+        "frame_id": "17:2418",
+        "frame_name": "Defective_Returns/step-2/web",
+        "x_position": 2470,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 2,
+        "channel": "email",
+        "frame_id": "17:2379",
+        "frame_name": "Defective_Returns/step-2/email",
+        "x_position": 2470,
+        "y_position": 1693
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 2,
+        "channel": "sms",
+        "frame_id": "17:2577",
+        "frame_name": "WISMO/step-2/sms",
+        "x_position": 3260,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 2,
+        "channel": "sms",
+        "frame_id": "17:2541",
+        "frame_name": "Defective_Returns/step-2/sms",
+        "x_position": 3730,
+        "y_position": 100
+      }
+    ],
+    "last_frame_x": 4120
   },
   "channels": [
     "web",

@@ -774,75 +774,76 @@ async function createSmsScreen(payload) {
   rowAgentLabel.layoutSizingHorizontal = "FILL";
   rowAgentLabel.layoutSizingVertical   = "HUG";
 
-  // Row: agent bubble (avatar + bubble)
-  // Inner width of messagesArea = W - 16 - 16 = 358
-  // Bubble text width = 358 - avatar(32) - gap(8) - bubble padding L+R(24) = 294
+  // Rows: one per message (agent left with avatar, user right blue bubble)
   var bubbleTxtW = Math.round(W * 0.72) - 32 - 8 - 24;
-
-  const rowAgentBubble = figma.createFrame();
-  rowAgentBubble.name = "row_agentBubble";
-  rowAgentBubble.fills = [];
-  rowAgentBubble.layoutMode = "HORIZONTAL";
-  rowAgentBubble.itemSpacing = 8;
-  rowAgentBubble.paddingTop    = 0;
-  rowAgentBubble.paddingBottom = 0;
-  rowAgentBubble.paddingLeft   = 0;
-  rowAgentBubble.paddingRight  = 0;
-  rowAgentBubble.primaryAxisSizingMode = "FIXED";
-  rowAgentBubble.counterAxisSizingMode = "AUTO";
-  rowAgentBubble.primaryAxisAlignItems = "MIN";
-  rowAgentBubble.counterAxisAlignItems = "MIN";
-  rowAgentBubble.resize(W - 32, 10);
-
-  const smsAvatar = figma.createEllipse();
-  smsAvatar.name = "avatar";
-  smsAvatar.resize(32, 32);
-  smsAvatar.fills = [{ type: "SOLID", color: { r: 0.227, g: 0.227, b: 0.235 } }];
-
-  const smsBubble = figma.createFrame();
-  smsBubble.name = "bubble";
-  smsBubble.cornerRadius = 18;
-  smsBubble.fills = [{ type: "SOLID", color: { r: 0.11, g: 0.11, b: 0.118 } }];
-  smsBubble.layoutMode = "VERTICAL";
-  smsBubble.itemSpacing = 0;
-  smsBubble.paddingTop    = 12;
-  smsBubble.paddingBottom = 12;
-  smsBubble.paddingLeft   = 12;
-  smsBubble.paddingRight  = 12;
-  smsBubble.primaryAxisSizingMode = "AUTO";
-  smsBubble.counterAxisSizingMode = "AUTO";
-
+  var userBubbleTxtW = Math.round(W * 0.72) - 24;
   var smsMessages = payload.messages || [];
-  var firstAgentMsg = null;
+
   for (var mi = 0; mi < smsMessages.length; mi++) {
-    if (smsMessages[mi].role === "agent") { firstAgentMsg = smsMessages[mi]; break; }
+    var msg = smsMessages[mi];
+    var isAgent = msg.role === "agent";
+
+    var msgRow = figma.createFrame();
+    msgRow.name = isAgent ? "row_agentBubble" : "row_userBubble";
+    msgRow.fills = [];
+    msgRow.layoutMode = "HORIZONTAL";
+    msgRow.itemSpacing = 8;
+    msgRow.paddingTop    = 0;
+    msgRow.paddingBottom = 0;
+    msgRow.paddingLeft   = 0;
+    msgRow.paddingRight  = 0;
+    msgRow.primaryAxisSizingMode = "FIXED";
+    msgRow.counterAxisSizingMode = "AUTO";
+    msgRow.primaryAxisAlignItems = isAgent ? "MIN" : "MAX";
+    msgRow.counterAxisAlignItems = "MIN";
+    msgRow.resize(W - 32, 10);
+
+    var msgBubble = figma.createFrame();
+    msgBubble.name = "bubble";
+    msgBubble.cornerRadius = 18;
+    msgBubble.fills = isAgent
+      ? [{ type: "SOLID", color: { r: 0.11, g: 0.11, b: 0.118 } }]
+      : [{ type: "SOLID", color: { r: 0, g: 0.478, b: 1 } }];
+    msgBubble.layoutMode = "VERTICAL";
+    msgBubble.itemSpacing = 0;
+    msgBubble.paddingTop    = 12;
+    msgBubble.paddingBottom = 12;
+    msgBubble.paddingLeft   = 12;
+    msgBubble.paddingRight  = 12;
+    msgBubble.primaryAxisSizingMode = "AUTO";
+    msgBubble.counterAxisSizingMode = "AUTO";
+
+    var msgTxt = figma.createText();
+    msgTxt.name = "bubble-text";
+    msgTxt.fontName = { family: "Inter", style: "Regular" };
+    msgTxt.fontSize = 17;
+    msgTxt.textAutoResize = "HEIGHT";
+    msgTxt.resize(isAgent ? bubbleTxtW : userBubbleTxtW, 20);
+    msgTxt.characters = msg.text;
+    msgTxt.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
+    msgBubble.appendChild(msgTxt);
+    msgTxt.layoutSizingVertical = "HUG";
+
+    if (isAgent) {
+      var av = figma.createEllipse();
+      av.name = "avatar";
+      av.resize(32, 32);
+      av.fills = [{ type: "SOLID", color: { r: 0.227, g: 0.227, b: 0.235 } }];
+      msgRow.appendChild(av);
+      av.layoutSizingHorizontal = "FIXED";
+      av.layoutSizingVertical   = "FIXED";
+    }
+
+    msgRow.appendChild(msgBubble);
+    msgBubble.layoutSizingHorizontal = "HUG";
+    msgBubble.layoutSizingVertical   = "HUG";
+
+    messagesArea.appendChild(msgRow);
+    msgRow.layoutSizingHorizontal = "FILL";
+    msgRow.layoutSizingVertical   = "HUG";
   }
-  var bubbleContent = firstAgentMsg ? firstAgentMsg.text : "How can I help you today?";
 
-  const smsBubbleTxt = figma.createText();
-  smsBubbleTxt.name = "bubble-text";
-  smsBubbleTxt.fontName = { family: "Inter", style: "Regular" };
-  smsBubbleTxt.fontSize = 17;
-  smsBubbleTxt.textAutoResize = "HEIGHT";
-  smsBubbleTxt.resize(bubbleTxtW, 20);
-  smsBubbleTxt.characters = bubbleContent;
-  smsBubbleTxt.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
-  smsBubble.appendChild(smsBubbleTxt);
-  smsBubbleTxt.layoutSizingVertical = "HUG";
-
-  rowAgentBubble.appendChild(smsAvatar);
-  smsAvatar.layoutSizingHorizontal = "FIXED";
-  smsAvatar.layoutSizingVertical   = "FIXED";
-
-  rowAgentBubble.appendChild(smsBubble);
-  smsBubble.layoutSizingHorizontal = "HUG";
-  smsBubble.layoutSizingVertical   = "HUG";
-
-  messagesArea.appendChild(rowAgentBubble);
-  rowAgentBubble.layoutSizingHorizontal = "FILL";
-  rowAgentBubble.layoutSizingVertical   = "HUG";
-
-  // Row: timestamp
+  // Row: timestamp — always last, tight under final bubble
   const rowTimestamp = figma.createFrame();
   rowTimestamp.name = "row_timestamp";
   rowTimestamp.fills = [];

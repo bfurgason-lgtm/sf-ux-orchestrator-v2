@@ -124,9 +124,10 @@ def generate_screens(manifest_path: str, project_dir: str,
                 else:
                     sms_ch       = step.get("channels", {}).get("sms", {})
                     quick_replies = sms_ch.get("quick_replies") if channel == "sms" else None
+                    display_name = "Agent" if channel == "sms" else agent_name
                     payload = build_chat_payload(topic, step_num, channel,
                                                  steps_so_far, x_col, y,
-                                                 agent_name=agent_name,
+                                                 agent_name=display_name,
                                                  quick_replies=quick_replies)
 
                 result = _write_frame(project["figma"]["file_key"], payload)

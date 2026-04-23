@@ -66,7 +66,7 @@
               "slds_patterns": ["welcome-mat", "form-element", "button-group"]
             },
             "sms": {
-              "agent": "Hi! I'm your Wolverine assistant. Reply with your order number to track your package.",
+              "agent": "Hi! Reply with your order number to track your package.",
               "user": "Track order"
             },
             "email": {
@@ -110,6 +110,10 @@
             "email": {
               "subject": "Re: Order Tracking Request",
               "body": "Please reply with your order number (format: WW-YYYY-######) or the email address used for purchase.",
+              "sender_name": "Jane Smith",
+              "sender_email": "jsmith@acme.com",
+              "to_address": "orders@wolverine.com",
+              "timestamp": "April 7, 2026 at 9:00 AM",
               "template_type": "transactional"
             }
           },
@@ -296,7 +300,7 @@
     },
     {
       "topic": "Defective_Returns",
-      "channels": ["web", "email"],
+      "channels": ["web", "sms", "email"],
       "flow_metadata": {
         "primary_persona": "Disappointed Customer",
         "complexity_score": 4,
@@ -330,7 +334,7 @@
               "template_type": "support"
             },
             "sms": {
-              "agent": "Sorry to hear about your Wolverine product. Reply to describe the issue and we'll make it right.",
+              "agent": "Sorry to hear about your product issue. Reply to describe what happened and we'll make it right.",
               "user": "My boots are falling apart after two weeks"
             }
           },
