@@ -72,14 +72,18 @@ def build_email_payload(flow_topic: str, step_number: int,
     h = CHANNEL_HEIGHTS["email"]
     ch = step.get("channels", {}).get("email", {})
     return {
-        "frame_name":   f"{flow_topic}/step-{step_number}/email",
-        "channel":      "email",
-        "frame_width":  w,
-        "frame_height": h,
+        "frame_name":    f"{flow_topic}/step-{step_number}/email",
+        "channel":       "email",
+        "frame_width":   w,
+        "frame_height":  h,
         "x": x,
         "y": y,
-        "subject": ch.get("subject", f"Step {step_number}"),
-        "body":    ch.get("body", step.get("utterances", {}).get("agent", "")),
+        "subject":       ch.get("subject", f"Step {step_number}"),
+        "body":          ch.get("body", step.get("utterances", {}).get("user", "")),
+        "sender_name":   ch.get("sender_name", "User"),
+        "sender_email":  ch.get("sender_email", ""),
+        "to_address":    ch.get("to_address", ""),
+        "timestamp":     ch.get("timestamp", ""),
     }
 
 

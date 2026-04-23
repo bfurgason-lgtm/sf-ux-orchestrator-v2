@@ -71,7 +71,11 @@
             },
             "email": {
               "subject": "Your Wolverine Order Tracking Assistant",
-              "body": "We're here to help you track your recent Wolverine order. Reply with your order details and we'll provide immediate status updates.",
+              "body": "Hi, I placed an order a few days ago and haven't seen an update. Can you tell me where it is?\n\nThanks,\nJane Smith",
+              "sender_name": "Jane Smith",
+              "sender_email": "jsmith@acme.com",
+              "to_address": "orders@wolverine.com",
+              "timestamp": "April 7, 2026 at 8:55 AM",
               "template_type": "support"
             }
           },

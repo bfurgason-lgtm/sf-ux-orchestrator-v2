@@ -23,7 +23,7 @@ CHANNEL_WIDTHS = {
 CHANNEL_HEIGHTS = {
     "web":   629,
     "sms":   844,
-    "email": 420,
+    "email": 280,
 }
 CHANNEL_GAP = 60   # vertical gap between channel rows
 FRAME_COL_GAP = 60 # horizontal gap between step columns
