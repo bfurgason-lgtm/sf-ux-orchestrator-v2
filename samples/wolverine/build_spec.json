@@ -85,7 +85,7 @@
                 ]
               },
               "sms": {
-                "agent": "Hi! I'm your Wolverine assistant. Reply with your order number to track your package.",
+                "agent": "Hi! Reply with your order number to track your package.",
                 "user": "Track order"
               },
               "email": {
@@ -187,6 +187,10 @@
               "email": {
                 "subject": "Order Confirmation - WW-2024-789456",
                 "body": "We've located your order details. Your Wolverine Work Boots order for $149.99 is confirmed in our system.",
+                "sender_name": "Jane Smith",
+                "sender_email": "jsmith@acme.com",
+                "to_address": "orders@wolverine.com",
+                "timestamp": "April 7, 2026 at 9:05 AM",
                 "template_type": "transactional"
               }
             },
@@ -231,6 +235,10 @@
               "email": {
                 "subject": "Order Status Update - WW-2024-789456",
                 "body": "Your Wolverine order is in transit! Expected delivery: March 25th. Track with: 1Z999AA1234567890",
+                "sender_name": "Jane Smith",
+                "sender_email": "jsmith@acme.com",
+                "to_address": "orders@wolverine.com",
+                "timestamp": "April 7, 2026 at 9:10 AM",
                 "template_type": "transactional"
               }
             },
@@ -274,6 +282,10 @@
               "email": {
                 "subject": "Order Tracking Complete",
                 "body": "Thanks for using Wolverine Order Tracking! Your order is on its way. Contact us if you need further assistance.",
+                "sender_name": "Jane Smith",
+                "sender_email": "jsmith@acme.com",
+                "to_address": "orders@wolverine.com",
+                "timestamp": "April 7, 2026 at 9:15 AM",
                 "template_type": "support"
               }
             },
@@ -319,6 +331,10 @@
               "email": {
                 "subject": "Order Not Found - Let's Try Another Way",
                 "body": "We couldn't locate an order with that information. Please reply with the email address used for purchase, or contact our support team.",
+                "sender_name": "Jane Smith",
+                "sender_email": "jsmith@acme.com",
+                "to_address": "orders@wolverine.com",
+                "timestamp": "April 7, 2026 at 9:20 AM",
                 "template_type": "support"
               }
             },
@@ -364,6 +380,10 @@
               "email": {
                 "subject": "Multiple Shipment Update - WW-2024-789456",
                 "body": "Your order is shipping in multiple packages. Package 1 is in transit, Package 2 ships tomorrow. All items will arrive by March 27th.",
+                "sender_name": "Jane Smith",
+                "sender_email": "jsmith@acme.com",
+                "to_address": "orders@wolverine.com",
+                "timestamp": "April 7, 2026 at 9:25 AM",
                 "template_type": "transactional"
               }
             },
@@ -425,7 +445,7 @@
                 "template_type": "support"
               },
               "sms": {
-                "agent": "Sorry to hear about your Wolverine product. Reply to describe the issue and we'll make it right.",
+                "agent": "Sorry to hear about your product issue. Reply to describe what happened and we'll make it right.",
                 "user": "My boots are falling apart after two weeks"
               }
             },
@@ -519,43 +539,30 @@
   },
   "frame_payloads": [
     {
-      "frame_name": "Defective_Returns/step-2/sms",
-      "channel": "sms",
-      "frame_width": 390,
-      "frame_height": 844,
-      "x": 3730,
-      "y": 100,
-      "messages": [
-        {
-          "role": "agent",
-          "text": "Sorry to hear about your Wolverine product. Reply to describe the issue and we'll make it right."
-        },
-        {
-          "role": "user",
-          "text": "My boots are falling apart after two weeks"
-        },
-        {
-          "role": "agent",
-          "text": "What's happening with the boots? Describe the problem and we'll get a return started."
-        },
-        {
-          "role": "user",
-          "text": "Sole is separating from the upper after minimal wear"
-        }
-      ],
-      "agent_name": "Wolverine Worldwide"
+      "frame_name": "WISMO/step-3/email",
+      "channel": "email",
+      "frame_width": 710,
+      "frame_height": 280,
+      "x": 4200,
+      "y": 1693,
+      "subject": "Order Confirmation - WW-2024-789456",
+      "body": "We've located your order details. Your Wolverine Work Boots order for $149.99 is confirmed in our system.",
+      "sender_name": "Jane Smith",
+      "sender_email": "jsmith@acme.com",
+      "to_address": "orders@wolverine.com",
+      "timestamp": "April 7, 2026 at 9:05 AM"
     },
     {
-      "frame_name": "WISMO/step-2/sms",
+      "frame_name": "WISMO/step-3/sms",
       "channel": "sms",
       "frame_width": 390,
       "frame_height": 844,
-      "x": 3260,
-      "y": 100,
+      "x": 4200,
+      "y": 789,
       "messages": [
         {
           "role": "agent",
-          "text": "Hi! I'm your Wolverine assistant. Reply with your order number to track your package."
+          "text": "Hi! Reply with your order number to track your package."
         },
         {
           "role": "user",
@@ -568,6 +575,545 @@
         {
           "role": "user",
           "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Order WW-2024-789456 found: Wolverine Work Boots, $149.99. Continue for tracking?"
+        },
+        {
+          "role": "user",
+          "text": "Yes"
+        }
+      ],
+      "agent_name": "Agent"
+    },
+    {
+      "frame_name": "WISMO/step-3/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 4200,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        }
+      ],
+      "agent_name": "Wolverine Worldwide"
+    },
+    {
+      "frame_name": "WISMO/step-4/email",
+      "channel": "email",
+      "frame_width": 710,
+      "frame_height": 280,
+      "x": 4990,
+      "y": 1693,
+      "subject": "Order Status Update - WW-2024-789456",
+      "body": "Your Wolverine order is in transit! Expected delivery: March 25th. Track with: 1Z999AA1234567890",
+      "sender_name": "Jane Smith",
+      "sender_email": "jsmith@acme.com",
+      "to_address": "orders@wolverine.com",
+      "timestamp": "April 7, 2026 at 9:10 AM"
+    },
+    {
+      "frame_name": "WISMO/step-4/sms",
+      "channel": "sms",
+      "frame_width": 390,
+      "frame_height": 844,
+      "x": 4990,
+      "y": 789,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Hi! Reply with your order number to track your package."
+        },
+        {
+          "role": "user",
+          "text": "Track order"
+        },
+        {
+          "role": "agent",
+          "text": "Please send your order number (format: WW-YYYY-######) or email address."
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Order WW-2024-789456 found: Wolverine Work Boots, $149.99. Continue for tracking?"
+        },
+        {
+          "role": "user",
+          "text": "Yes"
+        },
+        {
+          "role": "agent",
+          "text": "Status: In Transit. Delivery: Mar 25. Track: 1Z999AA1234567890. Need anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, thanks!"
+        }
+      ],
+      "agent_name": "Agent"
+    },
+    {
+      "frame_name": "WISMO/step-4/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 4990,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        }
+      ],
+      "agent_name": "Wolverine Worldwide"
+    },
+    {
+      "frame_name": "WISMO/step-5/email",
+      "channel": "email",
+      "frame_width": 710,
+      "frame_height": 280,
+      "x": 5780,
+      "y": 1693,
+      "subject": "Order Tracking Complete",
+      "body": "Thanks for using Wolverine Order Tracking! Your order is on its way. Contact us if you need further assistance.",
+      "sender_name": "Jane Smith",
+      "sender_email": "jsmith@acme.com",
+      "to_address": "orders@wolverine.com",
+      "timestamp": "April 7, 2026 at 9:15 AM"
+    },
+    {
+      "frame_name": "WISMO/step-5/sms",
+      "channel": "sms",
+      "frame_width": 390,
+      "frame_height": 844,
+      "x": 5780,
+      "y": 789,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Hi! Reply with your order number to track your package."
+        },
+        {
+          "role": "user",
+          "text": "Track order"
+        },
+        {
+          "role": "agent",
+          "text": "Please send your order number (format: WW-YYYY-######) or email address."
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Order WW-2024-789456 found: Wolverine Work Boots, $149.99. Continue for tracking?"
+        },
+        {
+          "role": "user",
+          "text": "Yes"
+        },
+        {
+          "role": "agent",
+          "text": "Status: In Transit. Delivery: Mar 25. Track: 1Z999AA1234567890. Need anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, thanks!"
+        },
+        {
+          "role": "agent",
+          "text": "You're all set! Reply HELP for support or STOP to unsubscribe."
+        },
+        {
+          "role": "user",
+          "text": "Thanks!"
+        }
+      ],
+      "agent_name": "Agent"
+    },
+    {
+      "frame_name": "WISMO/step-5/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 5780,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        },
+        {
+          "role": "agent",
+          "text": "Perfect! Your order is on its way. Can I help with anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, that's all I needed"
+        }
+      ],
+      "agent_name": "Wolverine Worldwide"
+    },
+    {
+      "frame_name": "WISMO/step-6/email",
+      "channel": "email",
+      "frame_width": 710,
+      "frame_height": 280,
+      "x": 6570,
+      "y": 1693,
+      "subject": "Order Not Found - Let's Try Another Way",
+      "body": "We couldn't locate an order with that information. Please reply with the email address used for purchase, or contact our support team.",
+      "sender_name": "Jane Smith",
+      "sender_email": "jsmith@acme.com",
+      "to_address": "orders@wolverine.com",
+      "timestamp": "April 7, 2026 at 9:20 AM"
+    },
+    {
+      "frame_name": "WISMO/step-6/sms",
+      "channel": "sms",
+      "frame_width": 390,
+      "frame_height": 844,
+      "x": 6570,
+      "y": 789,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Hi! Reply with your order number to track your package."
+        },
+        {
+          "role": "user",
+          "text": "Track order"
+        },
+        {
+          "role": "agent",
+          "text": "Please send your order number (format: WW-YYYY-######) or email address."
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Order WW-2024-789456 found: Wolverine Work Boots, $149.99. Continue for tracking?"
+        },
+        {
+          "role": "user",
+          "text": "Yes"
+        },
+        {
+          "role": "agent",
+          "text": "Status: In Transit. Delivery: Mar 25. Track: 1Z999AA1234567890. Need anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, thanks!"
+        },
+        {
+          "role": "agent",
+          "text": "You're all set! Reply HELP for support or STOP to unsubscribe."
+        },
+        {
+          "role": "user",
+          "text": "Thanks!"
+        },
+        {
+          "role": "agent",
+          "text": "Order not found. Try email address or call 1-800-WOLVERINE for help."
+        },
+        {
+          "role": "user",
+          "text": "I'll try email"
+        }
+      ],
+      "agent_name": "Agent"
+    },
+    {
+      "frame_name": "WISMO/step-6/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 6570,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        },
+        {
+          "role": "agent",
+          "text": "Perfect! Your order is on its way. Can I help with anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, that's all I needed"
+        },
+        {
+          "role": "agent",
+          "text": "We couldn't locate that order. Would you like to try with your email address?"
+        },
+        {
+          "role": "user",
+          "text": "Yes, let me try my email"
+        }
+      ],
+      "agent_name": "Wolverine Worldwide"
+    },
+    {
+      "frame_name": "WISMO/step-7/email",
+      "channel": "email",
+      "frame_width": 710,
+      "frame_height": 280,
+      "x": 7360,
+      "y": 1693,
+      "subject": "Multiple Shipment Update - WW-2024-789456",
+      "body": "Your order is shipping in multiple packages. Package 1 is in transit, Package 2 ships tomorrow. All items will arrive by March 27th.",
+      "sender_name": "Jane Smith",
+      "sender_email": "jsmith@acme.com",
+      "to_address": "orders@wolverine.com",
+      "timestamp": "April 7, 2026 at 9:25 AM"
+    },
+    {
+      "frame_name": "WISMO/step-7/sms",
+      "channel": "sms",
+      "frame_width": 390,
+      "frame_height": 844,
+      "x": 7360,
+      "y": 789,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Hi! Reply with your order number to track your package."
+        },
+        {
+          "role": "user",
+          "text": "Track order"
+        },
+        {
+          "role": "agent",
+          "text": "Please send your order number (format: WW-YYYY-######) or email address."
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Order WW-2024-789456 found: Wolverine Work Boots, $149.99. Continue for tracking?"
+        },
+        {
+          "role": "user",
+          "text": "Yes"
+        },
+        {
+          "role": "agent",
+          "text": "Status: In Transit. Delivery: Mar 25. Track: 1Z999AA1234567890. Need anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, thanks!"
+        },
+        {
+          "role": "agent",
+          "text": "You're all set! Reply HELP for support or STOP to unsubscribe."
+        },
+        {
+          "role": "user",
+          "text": "Thanks!"
+        },
+        {
+          "role": "agent",
+          "text": "Order not found. Try email address or call 1-800-WOLVERINE for help."
+        },
+        {
+          "role": "user",
+          "text": "I'll try email"
+        },
+        {
+          "role": "agent",
+          "text": "Multiple packages: Package 1 in transit, Package 2 ships tomorrow. Both arrive by Mar 27."
+        },
+        {
+          "role": "user",
+          "text": "Sounds good"
+        }
+      ],
+      "agent_name": "Agent"
+    },
+    {
+      "frame_name": "WISMO/step-7/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 7360,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        },
+        {
+          "role": "agent",
+          "text": "Perfect! Your order is on its way. Can I help with anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, that's all I needed"
+        },
+        {
+          "role": "agent",
+          "text": "We couldn't locate that order. Would you like to try with your email address?"
+        },
+        {
+          "role": "user",
+          "text": "Yes, let me try my email"
+        },
+        {
+          "role": "agent",
+          "text": "This order has multiple shipments. Here's the breakdown:"
+        },
+        {
+          "role": "user",
+          "text": "When will I get the remaining items?"
         }
       ],
       "agent_name": "Wolverine Worldwide"
