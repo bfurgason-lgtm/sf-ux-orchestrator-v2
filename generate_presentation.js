@@ -40,11 +40,11 @@ const T = {
   MARGIN_X: 0.35,
   MARGIN_TOP: 0.25,
   TITLE_H: 0.55,
-  PILL_AREA_TOP: 0.88,
+  PILL_AREA_TOP: 1.08,  // breathing room below accent rule
   PILL_H: 0.30,
-  PILL_ROW_H: 0.38, // pill + a little breathing room
+  PILL_ROW_H: 0.38,
   ARROW_W: 0.22,
-  FRAME_TOP: 1.40,   // top of screenshot row
+  FRAME_TOP: 1.58,      // pills bottom (1.08+0.30) + 0.20 gap
   FRAME_BOTTOM_MARGIN: 0.18,
   PILL_RADIUS: 0.05,
 };
@@ -145,7 +145,7 @@ function addTitleBar(slide, title, subtitle) {
   });
   if (subtitle) {
     slide.addText(subtitle, {
-      x: T.MARGIN_X, y: T.MARGIN_TOP + 0.38,
+      x: T.MARGIN_X, y: T.MARGIN_TOP + 0.40,
       w: T.W - T.MARGIN_X * 2, h: 0.22,
       fontSize: T.FONT_SUBTITLE_SIZE,
       fontFace: T.FONT,
@@ -153,9 +153,9 @@ function addTitleBar(slide, title, subtitle) {
       valign: "top",
     });
   }
-  // Accent rule
+  // Accent rule — sits between subtitle and pill row with clear breathing room
   slide.addShape("rect", {
-    x: T.MARGIN_X, y: 0.80,
+    x: T.MARGIN_X, y: 0.90,
     w: T.W - T.MARGIN_X * 2, h: 0.025,
     fill: { color: T.ACCENT },
     line: { color: T.ACCENT },
@@ -235,10 +235,7 @@ function addPillRow(slide, steps, startX, rowY) {
 }
 
 /**
- * Main flow slide: title + pill row + N frame images.
- * steps: subset of WISMO_STEPS for this slide (max 6).
- * channel: "web" | "sms" | "email"
- * isOverflow: true if this is slide 2+ for this channel
+ * Main flow slide: title + pill row + N frame images (web & sms).
  */
 function buildMainFlowSlide(pptx, steps, channel, channelLabel, isOverflow) {
   const slide = pptx.addSlide();
@@ -250,14 +247,12 @@ function buildMainFlowSlide(pptx, steps, channel, channelLabel, isOverflow) {
   const subtitle = `WISMO Flow — ${steps.length} Step${steps.length > 1 ? "s" : ""}`;
   addTitleBar(slide, slideTitle, subtitle);
 
-  // Pill row — all steps shown, current batch active
   const allSteps = WISMO_STEPS.slice(0, 5).map(s => ({
     ...s,
     active: steps.some(st => st.num === s.num),
   }));
   addPillRow(slide, allSteps, T.MARGIN_X, T.PILL_AREA_TOP);
 
-  // Frame images
   const frameAreaTop = T.FRAME_TOP;
   const frameAreaH = T.H - frameAreaTop - T.FRAME_BOTTOM_MARGIN;
   const n = steps.length;
@@ -268,22 +263,12 @@ function buildMainFlowSlide(pptx, steps, channel, channelLabel, isOverflow) {
   steps.forEach((step, i) => {
     const cellX = T.MARGIN_X + i * cellW;
     const boxW = cellW - imgPad * 2;
-    const boxH = frameAreaH - 0.28; // leave room for step label below
+    const boxH = frameAreaH - 0.28;
     const cx = cellX + cellW / 2;
     const cy = frameAreaTop + boxH / 2;
 
     const dims = FRAME_DIMS[channel];
-    let fit;
-    if (channel === "email") {
-      // Email frames are landscape strips — top-align them rather than centering
-      // vertically in the (tall) cell, which would leave huge empty space.
-      const scale = Math.min(boxW / dims.w, boxH / dims.h);
-      const w = dims.w * scale;
-      const h = dims.h * scale;
-      fit = { w, h, x: cx - w / 2, y: frameAreaTop + 0.30 };
-    } else {
-      fit = aspectFit(dims.w, dims.h, boxW, boxH, cx, cy);
-    }
+    const fit = aspectFit(dims.w, dims.h, boxW, boxH, cx, cy);
 
     if (imgExists("WISMO", step.num, channel)) {
       slide.addImage({
@@ -293,7 +278,6 @@ function buildMainFlowSlide(pptx, steps, channel, channelLabel, isOverflow) {
       });
     }
 
-    // Step label — pinned just inside slide bottom
     slide.addText(`Step ${step.num}`, {
       x: cellX, y: T.H - 0.32,
       w: cellW, h: 0.22,
@@ -304,6 +288,86 @@ function buildMainFlowSlide(pptx, steps, channel, channelLabel, isOverflow) {
       valign: "middle",
     });
   });
+}
+
+/**
+ * Email flow slide — two-column stacked layout.
+ * Left column: steps 1–3 stacked top-to-bottom.
+ * Right column: steps 4–5 stacked top-to-bottom.
+ * Each email frame is rendered full column width with a step label above it.
+ */
+function buildEmailFlowSlide(pptx, steps, channelLabel) {
+  const slide = pptx.addSlide();
+  addBackground(slide);
+
+  addTitleBar(slide, `${channelLabel} Channel`, `WISMO Flow — ${steps.length} Steps`);
+
+  const allSteps = WISMO_STEPS.slice(0, 5).map(s => ({
+    ...s,
+    active: steps.some(st => st.num === s.num),
+  }));
+  addPillRow(slide, allSteps, T.MARGIN_X, T.PILL_AREA_TOP);
+
+  const contentTop = T.FRAME_TOP;
+  const contentH = T.H - contentTop - T.FRAME_BOTTOM_MARGIN;
+  const usableW = T.W - T.MARGIN_X * 2;
+  const colGap = 0.35;
+  const colW = (usableW - colGap) / 2;
+
+  // Email frame renders at full column width
+  const dims = FRAME_DIMS["email"];
+  const imgH = colW / (dims.w / dims.h); // maintain aspect ratio
+  const labelH = 0.20;
+  const labelSize = 8;
+  const itemGap = 0.16; // vertical gap between stacked items
+
+  // Split steps: left col = first 3, right col = remainder
+  const leftSteps  = steps.slice(0, 3);
+  const rightSteps = steps.slice(3);
+
+  function renderColumn(colSteps, colX) {
+    let y = contentTop;
+    colSteps.forEach((step, i) => {
+      // Step label
+      slide.addText(`Step ${step.num} — ${step.name}`, {
+        x: colX, y,
+        w: colW, h: labelH,
+        fontSize: labelSize,
+        fontFace: T.FONT,
+        bold: true,
+        color: T.GRAY_LIGHT,
+        valign: "middle",
+      });
+      y += labelH;
+
+      // Email screenshot — full col width
+      if (imgExists("WISMO", step.num, "email")) {
+        slide.addImage({
+          path: imgPath("WISMO", step.num, "email"),
+          x: colX, y,
+          w: colW, h: imgH,
+        });
+      }
+      y += imgH;
+
+      // Gap between items (not after last)
+      if (i < colSteps.length - 1) y += itemGap;
+    });
+  }
+
+  // Left column
+  renderColumn(leftSteps, T.MARGIN_X);
+
+  // Thin divider
+  slide.addShape("line", {
+    x: T.MARGIN_X + colW + colGap / 2,
+    y: contentTop,
+    w: 0, h: contentH,
+    line: { color: T.ARROW, w: 0.75 },
+  });
+
+  // Right column
+  renderColumn(rightSteps, T.MARGIN_X + colW + colGap);
 }
 
 /**
@@ -534,7 +598,11 @@ async function main() {
       chunks.push(mainSteps.slice(i, i + 6));
     }
     chunks.forEach((chunk, ci) => {
-      buildMainFlowSlide(pptx, chunk, key, label, ci > 0);
+      if (key === "email") {
+        buildEmailFlowSlide(pptx, chunk, label);
+      } else {
+        buildMainFlowSlide(pptx, chunk, key, label, ci > 0);
+      }
     });
   }
 
