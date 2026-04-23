@@ -6,8 +6,12 @@ POST /complete → receives [{name, id}] from plugin, updates project.json, shut
 """
 import http.server
 import json
+import sys
 import threading
 from pathlib import Path
+
+_REPO_ROOT = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(_REPO_ROOT))
 
 from integrations.figma.file_manager import load_project, save_project
 
@@ -131,3 +135,12 @@ class PluginServer:
             src = self.pending_dir / f"{safe}.json"
             if src.exists():
                 src.rename(ack_dir / f"{safe}.json")
+
+        # Record figma_pngs artifact version
+        try:
+            from agents.utils.artifact_versions import record, decisions_version
+            version = decisions_version(self.project_dir)
+            export_path = project.get("export", {}).get("export_path", "exports/screens")
+            record(self.project_dir, "figma_pngs", version, export_path)
+        except Exception:
+            pass

@@ -1,0 +1,50 @@
+## SF UX Orchestrator v2 — Cursor Agent Rules
+
+### Drop-zone triggers
+
+When a file is opened or created inside `projects/*/transcripts/` with extension
+`.txt`, `.md`, `.pdf`, or `.docx`, automatically run ingestion:
+
+```
+python3 agents/ingestion.py --project projects/<client>
+```
+
+Replace `<client>` with the parent folder of the `transcripts/` directory.
+
+When `setup.md` or `onboard.json` appears in the project root, run onboarding:
+
+```
+python3 agents/onboarding.py
+```
+
+### Pipeline commands (run from repo root)
+
+```bash
+# Full pipeline for a client project
+python3 agents/onboarding.py                              # Agent 1 (first time)
+python3 agents/ingestion.py --project projects/<client>   # Agent 2
+python3 orchestrate.py generate --project projects/<client> --channels web sms email
+python3 orchestrate.py push    --project projects/<client>
+python3 orchestrate.py export  --project projects/<client>
+node generate_presentation.js  --project projects/<client>
+python3 agents/change_propagation.py --project projects/<client>  # Agent 6
+```
+
+### Config merge rule
+
+All agents load config via `agents/utils/config.py:_load_config(project_dir)`.
+User values in `config.user.json` always win; `core/config.defaults.json` fills gaps.
+Never edit `core/config.defaults.json` to store per-client values.
+
+### decisions.json
+
+Only decisions with `superseded_by: null` are active.
+Agents 3–5 must reject stale artifacts if `source_of_truth_version` has changed.
+Agent 6 detects this automatically — do not regenerate without human approval.
+
+### File ownership
+
+- `integrations/figma/plugin_builder.py` — only place to edit Figma plugin JS
+- `exports/plugin/code.js` — auto-generated, never edit directly
+- `projects/*/config.user.json` — written by Agent 1, updated manually by user
+- `core/config.defaults.json` — base defaults, never overwritten at runtime

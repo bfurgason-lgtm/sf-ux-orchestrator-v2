@@ -1,0 +1,13 @@
+{
+  "client_name": "Wolverine Worldwide",
+  "channels": ["web", "sms", "email"],
+  "order_lookup_field": "Order_Number__c",
+  "status_values": ["In Transit", "Delivered", "Pending", "Processing"],
+  "unmatched_order_state": "Show empathetic error message with alternative lookup options",
+  "edge_cases": ["Unmatched Order", "Partial Shipment"],
+  "exports_base": "exports",
+  "figma_file_key": "9b2q4bF48755NQlVOPqflS",
+  "figma_file_name": "Wolverine WISMO — Agentforce Flows",
+  "presentation_filename": "WISMO_presentation.pptx",
+  "exports_slug": "wolverine"
+}

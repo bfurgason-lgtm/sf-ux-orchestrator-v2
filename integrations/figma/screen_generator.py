@@ -13,10 +13,14 @@ Experiences components — no raw shape drawing.
 """
 
 import json
+import sys
 from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
+
+_REPO_ROOT = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(_REPO_ROOT))
 
 from integrations.figma.file_manager import (
     ensure_file, record_frame, already_generated,
@@ -25,6 +29,34 @@ from integrations.figma.file_manager import (
 )
 
 load_dotenv()
+
+
+def _load_config(project_dir: str) -> dict:
+    try:
+        from agents.utils.config import load_config
+        return load_config(project_dir)
+    except Exception:
+        return {}
+
+
+def _load_active_decisions(project_dir: str) -> tuple[list, int]:
+    """Returns (active_decisions, source_of_truth_version). Warns if file absent."""
+    d_path = Path(project_dir) / "decisions.json"
+    if not d_path.exists():
+        return [], 0
+    with open(d_path) as f:
+        data = json.load(f)
+    version = data.get("source_of_truth_version", 0)
+    active = [d for d in data.get("decisions", []) if d.get("superseded_by") is None]
+    return active, version
+
+
+def _record_build_spec_version(project_dir: str, version: int, spec_path: str) -> None:
+    try:
+        from agents.utils.artifact_versions import record
+        record(project_dir, "build_spec", version, spec_path)
+    except Exception:
+        pass
 
 
 def _messages_for_steps(steps: list, channel: str) -> list:
@@ -93,13 +125,32 @@ def generate_screens(manifest_path: str, project_dir: str,
     with open(manifest_path) as f:
         manifest = json.load(f)
 
+    config   = _load_config(project_dir)
     project  = ensure_file(project_dir)
-    channels = only_channels or project["channels"]
+    channels = only_channels or config.get("channels") or project["channels"]
     branding = project["branding"]
+
+    # Version staleness check
+    _active_decisions, current_version = _load_active_decisions(project_dir)
+    if current_version > 0:
+        try:
+            from agents.utils.artifact_versions import load as _av_load
+            av = _av_load(project_dir)
+            last_build_version = av.get("build_spec", {}).get("source_of_truth_version", 0)
+            if current_version != last_build_version:
+                print(
+                    f"  WARNING: decisions.json is at v{current_version}, "
+                    f"build_spec last generated at v{last_build_version}. "
+                    f"Run Agent 6 after generation to check for drift."
+                )
+        except Exception:
+            pass
 
     meta       = manifest.get("initiative_metadata", {})
     brand      = meta.get("brand_context", {})
-    agent_name = brand.get("primary_brand") or meta.get("name") or "Agent"
+    agent_name = (
+        config.get("client_name") not in (None, "Unnamed Client") and config.get("client_name")
+    ) or brand.get("primary_brand") or meta.get("name") or "Agent"
 
     for flow in manifest.get("flows", []):
         topic      = flow["topic"]
@@ -172,11 +223,11 @@ def _save_pending(payload: dict):
 
 
 def _save_build_spec(project_dir: str, manifest: dict):
-    """Writes a snapshot of the pending payloads + manifest to exports/build_spec.json."""
+    """Writes a snapshot of the pending payloads + manifest to {project_dir}/build_spec.json."""
     pending_dir = Path("exports/pending")
     payloads = []
-    for path in sorted(pending_dir.glob("*.json")):
-        with open(path) as f:
+    for p in sorted(pending_dir.glob("*.json")):
+        with open(p) as f:
             payloads.append(json.load(f))
     spec = {
         "manifest": manifest,
@@ -186,6 +237,10 @@ def _save_build_spec(project_dir: str, manifest: dict):
     with open(out, "w") as f:
         json.dump(spec, f, indent=2)
     print(f"  Build spec saved: {out}")
+
+    # Record artifact version — Risk 6: path is always project_dir/build_spec.json
+    _, current_version = _load_active_decisions(project_dir)
+    _record_build_spec_version(project_dir, current_version, str(out))
 
 
 def _reload_project(project_dir: str) -> dict:

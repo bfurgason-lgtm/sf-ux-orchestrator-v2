@@ -1,0 +1,12 @@
+{
+  "client_name": "Unnamed Client",
+  "channels": ["web"],
+  "order_lookup_field": "OrderNumber",
+  "status_values": ["In Transit", "Delivered", "Pending"],
+  "unmatched_order_state": "Show empathetic error message with alternative lookup options",
+  "edge_cases": [],
+  "exports_base": "exports",
+  "figma_file_key": "",
+  "figma_file_name": "Agentforce UX — New Project",
+  "presentation_filename": "presentation.pptx"
+}
