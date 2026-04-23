@@ -17,10 +17,16 @@ __pycache__/
 *.pyo
 venv/
 .env
+!.env.example
 
 # Exports & generated files
 exports/
 /tmp/
+
+# Projects — track config, manifest, decisions, and artifact_versions
+# artifact_versions.json must be tracked (Agent 6 reads it for drift detection)
+# Exclude only generated screen exports nested inside a project folder
+projects/*/exports/
 
 # macOS
 .DS_Store
