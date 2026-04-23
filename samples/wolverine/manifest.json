@@ -110,9 +110,9 @@
             "email": {
               "subject": "Re: Order Tracking Request",
               "body": "Please reply with your order number (format: WW-YYYY-######) or the email address used for purchase.",
-              "sender_name": "Jane Smith",
-              "sender_email": "jsmith@acme.com",
-              "to_address": "orders@wolverine.com",
+              "sender_name": "Wolverine Support",
+              "sender_email": "orders@wolverine.com",
+              "to_address": "jsmith@acme.com",
               "timestamp": "April 7, 2026 at 9:00 AM",
               "template_type": "transactional"
             }
@@ -148,9 +148,9 @@
             "email": {
               "subject": "Order Confirmation - WW-2024-789456",
               "body": "We've located your order details. Your Wolverine Work Boots order for $149.99 is confirmed in our system.",
-              "sender_name": "Jane Smith",
-              "sender_email": "jsmith@acme.com",
-              "to_address": "orders@wolverine.com",
+              "sender_name": "Wolverine Support",
+              "sender_email": "orders@wolverine.com",
+              "to_address": "jsmith@acme.com",
               "timestamp": "April 7, 2026 at 9:05 AM",
               "template_type": "transactional"
             }
@@ -186,9 +186,9 @@
             "email": {
               "subject": "Order Status Update - WW-2024-789456",
               "body": "Your Wolverine order is in transit! Expected delivery: March 25th. Track with: 1Z999AA1234567890",
-              "sender_name": "Jane Smith",
-              "sender_email": "jsmith@acme.com",
-              "to_address": "orders@wolverine.com",
+              "sender_name": "Wolverine Support",
+              "sender_email": "orders@wolverine.com",
+              "to_address": "jsmith@acme.com",
               "timestamp": "April 7, 2026 at 9:10 AM",
               "template_type": "transactional"
             }
@@ -224,9 +224,9 @@
             "email": {
               "subject": "Order Tracking Complete",
               "body": "Thanks for using Wolverine Order Tracking! Your order is on its way. Contact us if you need further assistance.",
-              "sender_name": "Jane Smith",
-              "sender_email": "jsmith@acme.com",
-              "to_address": "orders@wolverine.com",
+              "sender_name": "Wolverine Support",
+              "sender_email": "orders@wolverine.com",
+              "to_address": "jsmith@acme.com",
               "timestamp": "April 7, 2026 at 9:15 AM",
               "template_type": "support"
             }
