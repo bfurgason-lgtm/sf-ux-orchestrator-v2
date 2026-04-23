@@ -55,7 +55,7 @@ def export_screens(project_dir: str, flow_topic: str = None,
     resp = requests.get(
         f"{FIGMA_API}/images/{file_key}",
         headers=_headers(),
-        params={"ids": node_ids, "scale": scale, "format": fmt}
+        params={"ids": node_ids, "scale": scale, "format": fmt.lower()}
     )
 
     if resp.status_code != 200:

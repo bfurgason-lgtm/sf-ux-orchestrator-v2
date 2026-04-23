@@ -1,0 +1,27 @@
+{
+  "name": "sf-ux-orchestrator-v2",
+  "version": "1.0.0",
+  "description": "**Salesforce Lightning Design System (SLDS) Integrated Figma Pipeline**",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfurgason-lgtm/sf-ux-orchestrator-v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bfurgason-lgtm/sf-ux-orchestrator-v2/issues"
+  },
+  "homepage": "https://github.com/bfurgason-lgtm/sf-ux-orchestrator-v2#readme",
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}
