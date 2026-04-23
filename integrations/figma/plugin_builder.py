@@ -592,6 +592,125 @@ async function createEmailScreen(payload) {
   card.layoutSizingHorizontal = "FILL";
   card.layoutSizingVertical   = "HUG";
 
+  // ── Thread reply (quoted prior message) ──────────────────────────────────────
+  if (payload.thread_reply) {
+    var tr = payload.thread_reply;
+
+    // Divider line
+    var divider = figma.createRectangle();
+    divider.name = "thread-divider";
+    divider.resize(W, 1);
+    divider.fills = [{ type: "SOLID", color: { r: 0.878, g: 0.878, b: 0.878 } }];
+    outer.appendChild(divider);
+    divider.layoutSizingHorizontal = "FILL";
+    divider.layoutSizingVertical   = "FIXED";
+
+    // Reply row (horizontal: avatar | sender block | spacer | timestamp)
+    var replyHeader = figma.createFrame();
+    replyHeader.name = "thread-reply-header";
+    replyHeader.fills = [{ type: "SOLID", color: { r: 0.973, g: 0.973, b: 0.973 } }];
+    replyHeader.layoutMode = "HORIZONTAL";
+    replyHeader.itemSpacing = 10;
+    replyHeader.paddingTop    = 12;
+    replyHeader.paddingBottom = 10;
+    replyHeader.paddingLeft   = 16;
+    replyHeader.paddingRight  = 16;
+    replyHeader.primaryAxisSizingMode = "FIXED";
+    replyHeader.counterAxisSizingMode = "AUTO";
+    replyHeader.primaryAxisAlignItems = "MIN";
+    replyHeader.counterAxisAlignItems = "MIN";
+    replyHeader.resize(W, 10);
+
+    // Customer avatar (green circle with initials)
+    var custAvatar = figma.createEllipse();
+    custAvatar.name = "customer-avatar";
+    custAvatar.resize(28, 28);
+    custAvatar.fills = [{ type: "SOLID", color: { r: 0.204, g: 0.780, b: 0.349 } }];
+    replyHeader.appendChild(custAvatar);
+    custAvatar.layoutSizingHorizontal = "FIXED";
+    custAvatar.layoutSizingVertical   = "FIXED";
+
+    // Sender block
+    var rSenderBlock = figma.createFrame();
+    rSenderBlock.name = "reply-sender-block";
+    rSenderBlock.fills = [];
+    rSenderBlock.layoutMode = "VERTICAL";
+    rSenderBlock.itemSpacing = 2;
+    rSenderBlock.paddingTop = 0; rSenderBlock.paddingBottom = 0;
+    rSenderBlock.paddingLeft = 0; rSenderBlock.paddingRight = 0;
+    rSenderBlock.primaryAxisSizingMode = "AUTO";
+    rSenderBlock.counterAxisSizingMode = "AUTO";
+
+    var rSenderName = figma.createText();
+    rSenderName.name = "reply-sender-name";
+    rSenderName.fontName = { family: emailFont, style: boldStyle };
+    rSenderName.fontSize = 12;
+    rSenderName.characters = (tr.sender_name || "") + " <" + (tr.sender_email || "") + ">";
+    rSenderName.fills = [{ type: "SOLID", color: { r: 0.067, g: 0.067, b: 0.067 } }];
+    rSenderName.textAutoResize = "WIDTH_AND_HEIGHT";
+
+    rSenderBlock.appendChild(rSenderName);
+    replyHeader.appendChild(rSenderBlock);
+    rSenderBlock.layoutSizingHorizontal = "HUG";
+    rSenderBlock.layoutSizingVertical   = "HUG";
+
+    // Spacer
+    var rSpacer = figma.createFrame();
+    rSpacer.name = "spacer";
+    rSpacer.fills = [];
+    rSpacer.resize(1, 1);
+    rSpacer.layoutGrow = 1;
+    replyHeader.appendChild(rSpacer);
+
+    // Timestamp
+    var rTs = figma.createText();
+    rTs.name = "reply-timestamp";
+    rTs.fontName = { family: emailFont, style: plainStyle };
+    rTs.fontSize = 11;
+    rTs.characters = tr.timestamp || "";
+    rTs.fills = [{ type: "SOLID", color: { r: 0.557, g: 0.557, b: 0.557 } }];
+    rTs.textAutoResize = "WIDTH_AND_HEIGHT";
+    replyHeader.appendChild(rTs);
+    rTs.layoutSizingHorizontal = "HUG";
+    rTs.layoutSizingVertical   = "HUG";
+
+    outer.appendChild(replyHeader);
+    replyHeader.layoutSizingHorizontal = "FILL";
+    replyHeader.layoutSizingVertical   = "HUG";
+
+    // Reply body
+    var replyBody = figma.createFrame();
+    replyBody.name = "thread-reply-body";
+    replyBody.fills = [{ type: "SOLID", color: { r: 0.973, g: 0.973, b: 0.973 } }];
+    replyBody.layoutMode = "VERTICAL";
+    replyBody.itemSpacing = 0;
+    replyBody.paddingTop    = 0;
+    replyBody.paddingBottom = 16;
+    replyBody.paddingLeft   = 54;
+    replyBody.paddingRight  = 16;
+    replyBody.primaryAxisSizingMode = "AUTO";
+    replyBody.counterAxisSizingMode = "FIXED";
+    replyBody.resize(W, 10);
+
+    var replyTxt = figma.createText();
+    replyTxt.name = "reply-body-text";
+    replyTxt.fontName = { family: emailFont, style: plainStyle };
+    replyTxt.fontSize = 12;
+    replyTxt.lineHeight = { unit: "PIXELS", value: 18 };
+    replyTxt.textAutoResize = "HEIGHT";
+    replyTxt.resize(W - 54 - 16, 18);
+    replyTxt.characters = tr.body || "";
+    replyTxt.fills = [{ type: "SOLID", color: { r: 0.333, g: 0.333, b: 0.333 } }];
+
+    replyBody.appendChild(replyTxt);
+    replyTxt.layoutSizingHorizontal = "FILL";
+    replyTxt.layoutSizingVertical   = "HUG";
+
+    outer.appendChild(replyBody);
+    replyBody.layoutSizingHorizontal = "FILL";
+    replyBody.layoutSizingVertical   = "HUG";
+  }
+
   return outer;
 }
 

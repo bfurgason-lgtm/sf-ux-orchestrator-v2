@@ -109,109 +109,13 @@
           },
           {
             "step_number": 2,
-            "step_name": "ID_Collection",
+            "step_name": "Resolution",
             "is_edge_case": false,
-            "design_notes": "Clear form layout with input validation and helpful placeholder text",
-            "accessibility_notes": "Proper form labels, error states, and input descriptions",
+            "design_notes": "Agent reply \u2014 sender email confirms identity, no verification step needed. Single reply resolves order lookup, status, and tracking in one message.",
+            "accessibility_notes": "Clear status communication with tracking number prominent",
             "utterances": {
-              "agent": "I'll need either your order number or the email address you used for your purchase.",
-              "user": "My order number is WW-2024-789456"
-            },
-            "channels": {
-              "web": {
-                "agent": "Please enter your order number (starts with 'WW-') or your email address:",
-                "user": "WW-2024-789456",
-                "ui_components": [
-                  "input",
-                  "button",
-                  "toast"
-                ],
-                "slds_patterns": [
-                  "form-element",
-                  "input-group",
-                  "validation"
-                ]
-              },
-              "sms": {
-                "agent": "Please send your order number (format: WW-YYYY-######) or email address.",
-                "user": "WW-2024-789456"
-              },
-              "email": {
-                "subject": "Re: Order Tracking Request",
-                "body": "Please reply with your order number (format: WW-YYYY-######) or the email address used for purchase.",
-                "sender_name": "Wolverine Support",
-                "sender_email": "orders@wolverine.com",
-                "to_address": "jsmith@acme.com",
-                "timestamp": "April 7, 2026 at 9:00 AM",
-                "template_type": "transactional"
-              }
-            },
-            "proto_bot": {
-              "sf_object": "Order",
-              "action_type": "query",
-              "auth_context": "validation_required",
-              "apex_methods": [
-                "OrderTrackingService.validateOrderIdentifier"
-              ]
-            }
-          },
-          {
-            "step_number": 3,
-            "step_name": "Order_Confirmation",
-            "is_edge_case": false,
-            "design_notes": "Clean order summary card with key details and status indicator",
-            "accessibility_notes": "Screen reader friendly order details with clear status communication",
-            "utterances": {
-              "agent": "Found your order! Here are the details for order WW-2024-789456:",
-              "user": "That looks right"
-            },
-            "channels": {
-              "web": {
-                "agent": "Great! I found your order. Here's a summary:",
-                "user": "Yes, that's my order",
-                "ui_components": [
-                  "card",
-                  "button",
-                  "table"
-                ],
-                "slds_patterns": [
-                  "record-detail",
-                  "summary-card",
-                  "data-table"
-                ]
-              },
-              "sms": {
-                "agent": "Order WW-2024-789456 found: Wolverine Work Boots, $149.99. Continue for tracking?",
-                "user": "Yes"
-              },
-              "email": {
-                "subject": "Order Confirmation - WW-2024-789456",
-                "body": "We've located your order details. Your Wolverine Work Boots order for $149.99 is confirmed in our system.",
-                "sender_name": "Wolverine Support",
-                "sender_email": "orders@wolverine.com",
-                "to_address": "jsmith@acme.com",
-                "timestamp": "April 7, 2026 at 9:05 AM",
-                "template_type": "transactional"
-              }
-            },
-            "proto_bot": {
-              "sf_object": "Order",
-              "action_type": "query",
-              "auth_context": "validated_access",
-              "apex_methods": [
-                "OrderTrackingService.getOrderDetails"
-              ]
-            }
-          },
-          {
-            "step_number": 4,
-            "step_name": "Status_Retrieval",
-            "is_edge_case": false,
-            "design_notes": "Progressive status indicator with estimated delivery and tracking number",
-            "accessibility_notes": "Clear progress indicators and timeline accessible to screen readers",
-            "utterances": {
-              "agent": "Your order is currently in transit and should arrive by March 25th. Tracking: 1Z999AA1234567890",
-              "user": "Perfect, thank you!"
+              "agent": "Hi Jane! I found your order WW-2024-789456 for Wolverine Work Boots. It's in transit and arriving March 25th. Track it here: 1Z999AA1234567890. Let me know if you need anything else!",
+              "user": ""
             },
             "channels": {
               "web": {
@@ -229,73 +133,32 @@
                 ]
               },
               "sms": {
-                "agent": "Status: In Transit. Delivery: Mar 25. Track: 1Z999AA1234567890. Need anything else?",
+                "agent": "Hi Jane! Order WW-2024-789456: In Transit, arriving Mar 25. Track: 1Z999AA1234567890. Need anything else?",
                 "user": "No, thanks!"
               },
               "email": {
-                "subject": "Order Status Update - WW-2024-789456",
-                "body": "Your Wolverine order is in transit! Expected delivery: March 25th. Track with: 1Z999AA1234567890",
+                "subject": "Re: Your Wolverine Order Tracking Assistant",
+                "body": "Hi Jane,\n\nWe found your order WW-2024-789456 for Wolverine Work Boots ($149.99). It's currently in transit and expected to arrive by March 25th.\n\nTracking number: 1Z999AA1234567890\n\nReply to this email if you have any other questions \u2014 happy to help!\n\nWolverine Support",
                 "sender_name": "Wolverine Support",
                 "sender_email": "orders@wolverine.com",
                 "to_address": "jsmith@acme.com",
-                "timestamp": "April 7, 2026 at 9:10 AM",
+                "timestamp": "April 7, 2026 at 9:02 AM",
+                "thread_reply": {
+                  "sender_name": "Jane Smith",
+                  "sender_email": "jsmith@acme.com",
+                  "timestamp": "April 7, 2026 at 8:55 AM",
+                  "body": "Hi, I placed an order a few days ago and haven't seen an update. Can you tell me where it is?\n\nThanks,\nJane Smith"
+                },
                 "template_type": "transactional"
               }
             },
             "proto_bot": {
-              "sf_object": "Shipment",
+              "sf_object": "Order",
               "action_type": "query",
-              "auth_context": "validated_access",
+              "auth_context": "sender_email_as_identity",
               "apex_methods": [
-                "ShipmentService.getCurrentStatus",
-                "TrackingService.getCarrierInfo"
-              ]
-            }
-          },
-          {
-            "step_number": 5,
-            "step_name": "Resolution",
-            "is_edge_case": false,
-            "design_notes": "Satisfying conclusion with additional help options and feedback request",
-            "accessibility_notes": "Clear completion message with accessible follow-up actions",
-            "utterances": {
-              "agent": "Glad I could help! Is there anything else you need assistance with today?",
-              "user": "No, that's everything. Thanks!"
-            },
-            "channels": {
-              "web": {
-                "agent": "Perfect! Your order is on its way. Can I help with anything else?",
-                "user": "No, that's all I needed",
-                "ui_components": [
-                  "button",
-                  "card"
-                ],
-                "slds_patterns": [
-                  "completion-card",
-                  "action-group"
-                ]
-              },
-              "sms": {
-                "agent": "You're all set! Reply HELP for support or STOP to unsubscribe.",
-                "user": "Thanks!"
-              },
-              "email": {
-                "subject": "Order Tracking Complete",
-                "body": "Thanks for using Wolverine Order Tracking! Your order is on its way. Contact us if you need further assistance.",
-                "sender_name": "Wolverine Support",
-                "sender_email": "orders@wolverine.com",
-                "to_address": "jsmith@acme.com",
-                "timestamp": "April 7, 2026 at 9:15 AM",
-                "template_type": "support"
-              }
-            },
-            "proto_bot": {
-              "sf_object": "Case",
-              "action_type": "create",
-              "auth_context": "session_context",
-              "apex_methods": [
-                "SatisfactionService.logInteraction",
-                "SupportService.offerAdditionalHelp"
+                "OrderTrackingService.lookupBySenderEmail",
+                "ShipmentService.getCurrentStatus"
               ]
             }
           },
@@ -329,12 +192,18 @@
                 "user": "I'll try email"
               },
               "email": {
-                "subject": "Order Not Found - Let's Try Another Way",
-                "body": "We couldn't locate an order with that information. Please reply with the email address used for purchase, or contact our support team.",
-                "sender_name": "Jane Smith",
-                "sender_email": "jsmith@acme.com",
-                "to_address": "orders@wolverine.com",
-                "timestamp": "April 7, 2026 at 9:20 AM",
+                "subject": "Re: Your Wolverine Order Tracking Assistant",
+                "body": "Hi Jane,\n\nWe weren't able to locate an order tied to this email address. Could you reply with your order number (format: WW-YYYY-######)? You can find it in your original confirmation email.\n\nIf you need immediate help, our team is also available at 1-800-WOLVERINE.\n\nWolverine Support",
+                "sender_name": "Wolverine Support",
+                "sender_email": "orders@wolverine.com",
+                "to_address": "jsmith@acme.com",
+                "timestamp": "April 7, 2026 at 9:02 AM",
+                "thread_reply": {
+                  "sender_name": "Jane Smith",
+                  "sender_email": "jsmith@acme.com",
+                  "timestamp": "April 7, 2026 at 8:55 AM",
+                  "body": "Hi, I placed an order a few days ago and haven't seen an update. Can you tell me where it is?\n\nThanks,\nJane Smith"
+                },
                 "template_type": "support"
               }
             },
@@ -378,12 +247,18 @@
                 "user": "Sounds good"
               },
               "email": {
-                "subject": "Multiple Shipment Update - WW-2024-789456",
-                "body": "Your order is shipping in multiple packages. Package 1 is in transit, Package 2 ships tomorrow. All items will arrive by March 27th.",
-                "sender_name": "Jane Smith",
-                "sender_email": "jsmith@acme.com",
-                "to_address": "orders@wolverine.com",
-                "timestamp": "April 7, 2026 at 9:25 AM",
+                "subject": "Re: Your Wolverine Order Tracking Assistant",
+                "body": "Hi Jane,\n\nYour order WW-2024-789456 is shipping in multiple packages:\n\n\u2022 Package 1 of 2 \u2014 In Transit, arriving March 25th (tracking: 1Z999AA1234567890)\n\u2022 Package 2 of 2 \u2014 Ships tomorrow, arriving March 27th (tracking: 1Z999AA9876543210)\n\nBoth packages will arrive by March 27th. Reply if you have any questions!\n\nWolverine Support",
+                "sender_name": "Wolverine Support",
+                "sender_email": "orders@wolverine.com",
+                "to_address": "jsmith@acme.com",
+                "timestamp": "April 7, 2026 at 9:02 AM",
+                "thread_reply": {
+                  "sender_name": "Jane Smith",
+                  "sender_email": "jsmith@acme.com",
+                  "timestamp": "April 7, 2026 at 8:55 AM",
+                  "body": "Hi, I placed an order a few days ago and haven't seen an update. Can you tell me where it is?\n\nThanks,\nJane Smith"
+                },
                 "template_type": "transactional"
               }
             },
@@ -543,56 +418,60 @@
       "channel": "email",
       "frame_width": 710,
       "frame_height": 280,
-      "x": 8150,
+      "x": 11310,
       "y": 100,
-      "subject": "Re: Order Tracking Request",
-      "body": "Please reply with your order number (format: WW-YYYY-######) or the email address used for purchase.",
+      "subject": "Re: Your Wolverine Order Tracking Assistant",
+      "body": "Hi Jane,\n\nWe found your order WW-2024-789456 for Wolverine Work Boots ($149.99). It's currently in transit and expected to arrive by March 25th.\n\nTracking number: 1Z999AA1234567890\n\nReply to this email if you have any other questions \u2014 happy to help!\n\nWolverine Support",
       "sender_name": "Wolverine Support",
       "sender_email": "orders@wolverine.com",
       "to_address": "jsmith@acme.com",
-      "timestamp": "April 7, 2026 at 9:00 AM"
+      "timestamp": "April 7, 2026 at 9:02 AM",
+      "thread_reply": {
+        "sender_name": "Jane Smith",
+        "sender_email": "jsmith@acme.com",
+        "timestamp": "April 7, 2026 at 8:55 AM",
+        "body": "Hi, I placed an order a few days ago and haven't seen an update. Can you tell me where it is?\n\nThanks,\nJane Smith"
+      }
     },
     {
-      "frame_name": "WISMO/step-3/email",
+      "frame_name": "WISMO/step-6/email",
       "channel": "email",
       "frame_width": 710,
       "frame_height": 280,
-      "x": 8940,
+      "x": 12100,
       "y": 100,
-      "subject": "Order Confirmation - WW-2024-789456",
-      "body": "We've located your order details. Your Wolverine Work Boots order for $149.99 is confirmed in our system.",
+      "subject": "Re: Your Wolverine Order Tracking Assistant",
+      "body": "Hi Jane,\n\nWe weren't able to locate an order tied to this email address. Could you reply with your order number (format: WW-YYYY-######)? You can find it in your original confirmation email.\n\nIf you need immediate help, our team is also available at 1-800-WOLVERINE.\n\nWolverine Support",
       "sender_name": "Wolverine Support",
       "sender_email": "orders@wolverine.com",
       "to_address": "jsmith@acme.com",
-      "timestamp": "April 7, 2026 at 9:05 AM"
+      "timestamp": "April 7, 2026 at 9:02 AM",
+      "thread_reply": {
+        "sender_name": "Jane Smith",
+        "sender_email": "jsmith@acme.com",
+        "timestamp": "April 7, 2026 at 8:55 AM",
+        "body": "Hi, I placed an order a few days ago and haven't seen an update. Can you tell me where it is?\n\nThanks,\nJane Smith"
+      }
     },
     {
-      "frame_name": "WISMO/step-4/email",
+      "frame_name": "WISMO/step-7/email",
       "channel": "email",
       "frame_width": 710,
       "frame_height": 280,
-      "x": 9730,
+      "x": 12890,
       "y": 100,
-      "subject": "Order Status Update - WW-2024-789456",
-      "body": "Your Wolverine order is in transit! Expected delivery: March 25th. Track with: 1Z999AA1234567890",
+      "subject": "Re: Your Wolverine Order Tracking Assistant",
+      "body": "Hi Jane,\n\nYour order WW-2024-789456 is shipping in multiple packages:\n\n\u2022 Package 1 of 2 \u2014 In Transit, arriving March 25th (tracking: 1Z999AA1234567890)\n\u2022 Package 2 of 2 \u2014 Ships tomorrow, arriving March 27th (tracking: 1Z999AA9876543210)\n\nBoth packages will arrive by March 27th. Reply if you have any questions!\n\nWolverine Support",
       "sender_name": "Wolverine Support",
       "sender_email": "orders@wolverine.com",
       "to_address": "jsmith@acme.com",
-      "timestamp": "April 7, 2026 at 9:10 AM"
-    },
-    {
-      "frame_name": "WISMO/step-5/email",
-      "channel": "email",
-      "frame_width": 710,
-      "frame_height": 280,
-      "x": 10520,
-      "y": 100,
-      "subject": "Order Tracking Complete",
-      "body": "Thanks for using Wolverine Order Tracking! Your order is on its way. Contact us if you need further assistance.",
-      "sender_name": "Wolverine Support",
-      "sender_email": "orders@wolverine.com",
-      "to_address": "jsmith@acme.com",
-      "timestamp": "April 7, 2026 at 9:15 AM"
+      "timestamp": "April 7, 2026 at 9:02 AM",
+      "thread_reply": {
+        "sender_name": "Jane Smith",
+        "sender_email": "jsmith@acme.com",
+        "timestamp": "April 7, 2026 at 8:55 AM",
+        "body": "Hi, I placed an order a few days ago and haven't seen an update. Can you tell me where it is?\n\nThanks,\nJane Smith"
+      }
     }
   ]
 }

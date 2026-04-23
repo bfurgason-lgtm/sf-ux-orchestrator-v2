@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "created_at": "2026-04-22T00:00:00Z",
-  "updated_at": "2026-04-23T19:36:35.869417+00:00",
+  "updated_at": "2026-04-23T20:08:03.290796+00:00",
   "figma": {
     "file_key": "9b2q4bF48755NQlVOPqflS",
     "file_name": "Wolverine WISMO \u2014 Agentforce Flows",
@@ -182,15 +182,6 @@
       },
       {
         "flow_topic": "WISMO",
-        "step_number": 6,
-        "channel": "email",
-        "frame_id": "17:3006",
-        "frame_name": "WISMO/step-6/email",
-        "x_position": 6570,
-        "y_position": 1693
-      },
-      {
-        "flow_topic": "WISMO",
         "step_number": 7,
         "channel": "web",
         "frame_id": "17:3261",
@@ -209,51 +200,33 @@
       },
       {
         "flow_topic": "WISMO",
-        "step_number": 7,
-        "channel": "email",
-        "frame_id": "17:3177",
-        "frame_name": "WISMO/step-7/email",
-        "x_position": 7360,
-        "y_position": 1693
-      },
-      {
-        "flow_topic": "WISMO",
         "step_number": 2,
         "channel": "email",
-        "frame_id": "18:3368",
+        "frame_id": "20:101",
         "frame_name": "WISMO/step-2/email",
-        "x_position": 8150,
+        "x_position": 11310,
         "y_position": 100
       },
       {
         "flow_topic": "WISMO",
-        "step_number": 3,
+        "step_number": 6,
         "channel": "email",
-        "frame_id": "18:3381",
-        "frame_name": "WISMO/step-3/email",
-        "x_position": 8940,
+        "frame_id": "20:123",
+        "frame_name": "WISMO/step-6/email",
+        "x_position": 12100,
         "y_position": 100
       },
       {
         "flow_topic": "WISMO",
-        "step_number": 4,
+        "step_number": 7,
         "channel": "email",
-        "frame_id": "18:3394",
-        "frame_name": "WISMO/step-4/email",
-        "x_position": 9730,
-        "y_position": 100
-      },
-      {
-        "flow_topic": "WISMO",
-        "step_number": 5,
-        "channel": "email",
-        "frame_id": "18:3407",
-        "frame_name": "WISMO/step-5/email",
-        "x_position": 10520,
+        "frame_id": "20:145",
+        "frame_name": "WISMO/step-7/email",
+        "x_position": 12890,
         "y_position": 100
       }
     ],
-    "last_frame_x": 11230
+    "last_frame_x": 13600
   },
   "channels": [
     "web",
@@ -276,7 +249,7 @@
   "export": {
     "scale": 2,
     "format": "PNG",
-    "last_export_at": "2026-04-23T19:36:35.869368+00:00",
+    "last_export_at": "2026-04-23T20:08:03.290745+00:00",
     "export_path": "exports/wolverine/screens"
   }
 }

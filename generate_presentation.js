@@ -53,6 +53,7 @@ const SCREENS_DIR = path.join(__dirname, "exports/wolverine/screens");
 const OUT_PATH    = path.join(__dirname, "exports/wolverine/WISMO_presentation.pptx");
 
 // WISMO step metadata from manifest
+// Web/SMS: 5-step happy path + edge cases
 const WISMO_STEPS = [
   { num: 1, name: "Greeting",           edge: false },
   { num: 2, name: "ID Collection",      edge: false },
@@ -61,6 +62,12 @@ const WISMO_STEPS = [
   { num: 5, name: "Resolution",         edge: false },
   { num: 6, name: "Unmatched Order",    edge: true  },
   { num: 7, name: "Partial Shipment",   edge: true  },
+];
+
+// Email: 2-turn thread (customer inquiry → agent resolves)
+const WISMO_EMAIL_STEPS = [
+  { num: 1, name: "Customer Inquiry",   edge: false },
+  { num: 2, name: "Resolution",         edge: false },
 ];
 
 const EDGE_STEPS = [
@@ -122,7 +129,8 @@ const FRAME_DIMS = {
 };
 
 // Real per-step pixel heights for email (measured from @2x exports)
-const EMAIL_STEP_HEIGHTS = { 1: 328, 2: 248, 3: 248, 4: 208, 5: 248, 6: 248, 7: 248 };
+// Step 2 is taller now — agent reply + quoted thread below it
+const EMAIL_STEP_HEIGHTS = { 1: 328, 2: 480, 6: 480, 7: 480 };
 
 // ─── Slide builders ─────────────────────────────────────────────────────────
 
@@ -250,11 +258,11 @@ function buildMainFlowSlide(pptx, steps, channel, channelLabel, isOverflow) {
   const subtitle = `WISMO Flow — ${steps.length} Step${steps.length > 1 ? "s" : ""}`;
   addTitleBar(slide, slideTitle, subtitle);
 
-  const allSteps = WISMO_STEPS.slice(0, 5).map(s => ({
+  const mainStepsForPill = WISMO_STEPS.filter(s => !s.edge).map(s => ({
     ...s,
     active: steps.some(st => st.num === s.num),
   }));
-  addPillRow(slide, allSteps, T.MARGIN_X, T.PILL_AREA_TOP);
+  addPillRow(slide, mainStepsForPill, T.MARGIN_X, T.PILL_AREA_TOP);
 
   const frameAreaTop = T.FRAME_TOP;
   const frameAreaH = T.H - frameAreaTop - T.FRAME_BOTTOM_MARGIN;
@@ -306,11 +314,11 @@ function buildEmailFlowSlide(pptx, steps, channelLabel) {
 
   addTitleBar(slide, `${channelLabel} Channel`, `WISMO Flow — ${steps.length} Steps`);
 
-  const allSteps = WISMO_STEPS.slice(0, 5).map(s => ({
+  const emailPillSteps = WISMO_EMAIL_STEPS.filter(s => !s.edge).map(s => ({
     ...s,
     active: steps.some(st => st.num === s.num),
   }));
-  addPillRow(slide, allSteps, T.MARGIN_X, T.PILL_AREA_TOP);
+  addPillRow(slide, emailPillSteps, T.MARGIN_X, T.PILL_AREA_TOP);
 
   const contentTop = T.FRAME_TOP;
   const contentH   = T.H - contentTop - T.FRAME_BOTTOM_MARGIN;
@@ -319,8 +327,9 @@ function buildEmailFlowSlide(pptx, steps, channelLabel) {
   const colW       = (usableW - colGap) / 2;
   const imgNativeW = FRAME_DIMS["email"].w; // all email frames are 1420px wide
 
-  const leftSteps  = steps.slice(0, 3);
-  const rightSteps = steps.slice(3);
+  // 2 steps: step 1 left, step 2 right
+  const leftSteps  = steps.slice(0, 1);
+  const rightSteps = steps.slice(1);
 
   function renderColumn(colSteps, colX) {
     let y = contentTop;
@@ -565,19 +574,20 @@ async function main() {
     { key: "email", label: "Email" },
   ];
 
-  const mainSteps = WISMO_STEPS.filter(s => !s.edge); // steps 1–5
+  const mainStepsChat  = WISMO_STEPS.filter(s => !s.edge);      // 5 steps for web/sms
+  const mainStepsEmail = WISMO_EMAIL_STEPS.filter(s => !s.edge); // 2 turns for email
 
   for (const { key, label } of CHANNELS) {
-    buildSectionDivider(
-      pptx,
-      `${label} Channel`,
-      `WISMO Main Flow — Steps 1–${mainSteps.length}`
-    );
+    const stepsForChannel = key === "email" ? mainStepsEmail : mainStepsChat;
+    const turnLabel = key === "email"
+      ? `WISMO Main Flow — ${stepsForChannel.length} Turns`
+      : `WISMO Main Flow — Steps 1–${stepsForChannel.length}`;
 
-    // Max 6 per slide — here mainSteps is 5, so always one slide
+    buildSectionDivider(pptx, `${label} Channel`, turnLabel);
+
     const chunks = [];
-    for (let i = 0; i < mainSteps.length; i += 6) {
-      chunks.push(mainSteps.slice(i, i + 6));
+    for (let i = 0; i < stepsForChannel.length; i += 6) {
+      chunks.push(stepsForChannel.slice(i, i + 6));
     }
     chunks.forEach((chunk, ci) => {
       if (key === "email") {

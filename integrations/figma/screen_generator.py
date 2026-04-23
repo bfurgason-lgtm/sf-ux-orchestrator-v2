@@ -84,6 +84,7 @@ def build_email_payload(flow_topic: str, step_number: int,
         "sender_email":  ch.get("sender_email", ""),
         "to_address":    ch.get("to_address", ""),
         "timestamp":     ch.get("timestamp", ""),
+        **( {"thread_reply": ch["thread_reply"]} if ch.get("thread_reply") else {} ),
     }
 
 
