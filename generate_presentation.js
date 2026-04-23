@@ -118,8 +118,11 @@ function aspectFit(imgW, imgH, boxW, boxH, cx, cy) {
 const FRAME_DIMS = {
   web:   { w: 680,  h: 1258 },
   sms:   { w: 780,  h: 1688 },
-  email: { w: 1420, h: 328  },
+  email: { w: 1420, h: 328  }, // height varies per step — see EMAIL_STEP_HEIGHTS
 };
+
+// Real per-step pixel heights for email (measured from @2x exports)
+const EMAIL_STEP_HEIGHTS = { 1: 328, 2: 248, 3: 248, 4: 208, 5: 248, 6: 248, 7: 248 };
 
 // ─── Slide builders ─────────────────────────────────────────────────────────
 
@@ -291,10 +294,11 @@ function buildMainFlowSlide(pptx, steps, channel, channelLabel, isOverflow) {
 }
 
 /**
- * Email flow slide — two-column stacked layout.
- * Left column: steps 1–3 stacked top-to-bottom.
- * Right column: steps 4–5 stacked top-to-bottom.
- * Each email frame is rendered full column width with a step label above it.
+ * Email flow slide — two-column thread layout.
+ * Frames stack flush (zero gap, no labels) like a continuous email thread.
+ * Left col: steps 1–3. Right col: steps 4–5.
+ * Each frame is placed at its real aspect ratio — colW wide, height derived
+ * from the actual pixel dimensions of that specific screenshot.
  */
 function buildEmailFlowSlide(pptx, steps, channelLabel) {
   const slide = pptx.addSlide();
@@ -309,38 +313,21 @@ function buildEmailFlowSlide(pptx, steps, channelLabel) {
   addPillRow(slide, allSteps, T.MARGIN_X, T.PILL_AREA_TOP);
 
   const contentTop = T.FRAME_TOP;
-  const contentH = T.H - contentTop - T.FRAME_BOTTOM_MARGIN;
-  const usableW = T.W - T.MARGIN_X * 2;
-  const colGap = 0.35;
-  const colW = (usableW - colGap) / 2;
+  const contentH   = T.H - contentTop - T.FRAME_BOTTOM_MARGIN;
+  const usableW    = T.W - T.MARGIN_X * 2;
+  const colGap     = 0.35;
+  const colW       = (usableW - colGap) / 2;
+  const imgNativeW = FRAME_DIMS["email"].w; // all email frames are 1420px wide
 
-  // Email frame renders at full column width
-  const dims = FRAME_DIMS["email"];
-  const imgH = colW / (dims.w / dims.h); // maintain aspect ratio
-  const labelH = 0.20;
-  const labelSize = 8;
-  const itemGap = 0.16; // vertical gap between stacked items
-
-  // Split steps: left col = first 3, right col = remainder
   const leftSteps  = steps.slice(0, 3);
   const rightSteps = steps.slice(3);
 
   function renderColumn(colSteps, colX) {
     let y = contentTop;
-    colSteps.forEach((step, i) => {
-      // Step label
-      slide.addText(`Step ${step.num} — ${step.name}`, {
-        x: colX, y,
-        w: colW, h: labelH,
-        fontSize: labelSize,
-        fontFace: T.FONT,
-        bold: true,
-        color: T.GRAY_LIGHT,
-        valign: "middle",
-      });
-      y += labelH;
+    colSteps.forEach(step => {
+      const nativeH = EMAIL_STEP_HEIGHTS[step.num] || FRAME_DIMS["email"].h;
+      const imgH    = colW * (nativeH / imgNativeW); // preserve aspect ratio
 
-      // Email screenshot — full col width
       if (imgExists("WISMO", step.num, "email")) {
         slide.addImage({
           path: imgPath("WISMO", step.num, "email"),
@@ -348,17 +335,13 @@ function buildEmailFlowSlide(pptx, steps, channelLabel) {
           w: colW, h: imgH,
         });
       }
-      y += imgH;
-
-      // Gap between items (not after last)
-      if (i < colSteps.length - 1) y += itemGap;
+      y += imgH; // flush — no gap between frames
     });
   }
 
-  // Left column
-  renderColumn(leftSteps, T.MARGIN_X);
+  renderColumn(leftSteps,  T.MARGIN_X);
 
-  // Thin divider
+  // Thin column divider
   slide.addShape("line", {
     x: T.MARGIN_X + colW + colGap / 2,
     y: contentTop,
@@ -366,7 +349,6 @@ function buildEmailFlowSlide(pptx, steps, channelLabel) {
     line: { color: T.ARROW, w: 0.75 },
   });
 
-  // Right column
   renderColumn(rightSteps, T.MARGIN_X + colW + colGap);
 }
 
