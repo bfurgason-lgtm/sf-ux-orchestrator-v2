@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "created_at": "2026-04-22T00:00:00Z",
-  "updated_at": "2026-04-23T17:16:16.373309+00:00",
+  "updated_at": "2026-04-23T17:22:34.236883+00:00",
   "figma": {
     "file_key": "9b2q4bF48755NQlVOPqflS",
     "file_name": "Wolverine WISMO \u2014 Agentforce Flows",
@@ -103,22 +103,22 @@
         "flow_topic": "WISMO",
         "step_number": 1,
         "channel": "email",
-        "frame_id": "13:2204",
+        "frame_id": "16:2230",
         "frame_name": "WISMO/step-1/email",
-        "x_position": 4350,
+        "x_position": 5930,
         "y_position": 100
       },
       {
         "flow_topic": "Defective_Returns",
         "step_number": 1,
         "channel": "email",
-        "frame_id": "13:2191",
+        "frame_id": "16:2217",
         "frame_name": "Defective_Returns/step-1/email",
-        "x_position": 5140,
+        "x_position": 6720,
         "y_position": 100
       }
     ],
-    "last_frame_x": 5850
+    "last_frame_x": 7430
   },
   "channels": [
     "web",

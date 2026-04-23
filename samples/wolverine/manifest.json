@@ -323,6 +323,10 @@
             "email": {
               "subject": "Product Return Assistance - We're Here to Help",
               "body": "Thank you for contacting Wolverine support. We sincerely apologize for any product quality issues and want to make this right immediately.",
+              "sender_name": "Jane Smith",
+              "sender_email": "jsmith@acme.com",
+              "to_address": "support@wolverine.com",
+              "timestamp": "April 7, 2026 at 9:05 AM",
               "template_type": "support"
             }
           },
@@ -353,6 +357,10 @@
             "email": {
               "subject": "Re: Product Issue Details Needed",
               "body": "Please describe the specific problem you're experiencing and attach any photos of the defect. This will help us process your return quickly.",
+              "sender_name": "Jane Smith",
+              "sender_email": "jsmith@acme.com",
+              "to_address": "support@wolverine.com",
+              "timestamp": "April 7, 2026 at 9:12 AM",
               "template_type": "support"
             }
           },

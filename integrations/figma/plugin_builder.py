@@ -537,7 +537,9 @@ async function createEmailScreen(payload) {
   chevron.name = "chevron";
   chevron.resize(16, 16);
   chevron.cornerRadius = 3;
-  chevron.fills = [{ type: "SOLID", color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  chevron.fills = [];
+  chevron.strokes = [{ type: "SOLID", color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  chevron.strokeWeight = 1.5;
 
   tsBlock.appendChild(tsLabel);
   tsBlock.appendChild(chevron);
