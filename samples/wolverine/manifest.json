@@ -328,6 +328,10 @@
               "to_address": "support@wolverine.com",
               "timestamp": "April 7, 2026 at 9:05 AM",
               "template_type": "support"
+            },
+            "sms": {
+              "agent": "Sorry to hear about your Wolverine product. Reply to describe the issue and we'll make it right.",
+              "user": "My boots are falling apart after two weeks"
             }
           },
           "proto_bot": {
@@ -362,6 +366,10 @@
               "to_address": "support@wolverine.com",
               "timestamp": "April 7, 2026 at 9:12 AM",
               "template_type": "support"
+            },
+            "sms": {
+              "agent": "What's happening with the boots? Describe the problem and we'll get a return started.",
+              "user": "Sole is separating from the upper after minimal wear"
             }
           },
           "proto_bot": {
