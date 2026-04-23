@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-04-22T00:00:00Z",
+  "updated_at": "2026-04-23T14:03:12.182787+00:00",
+  "figma": {
+    "file_key": "9b2q4bF48755NQlVOPqflS",
+    "file_name": "Wolverine WISMO \u2014 Agentforce Flows",
+    "file_url": "https://www.figma.com/design/9b2q4bF48755NQlVOPqflS/Untitled",
+    "last_frame_y": 0,
+    "frame_gap": 80,
+    "generated_frames": [
+      {
+        "flow_topic": "WISMO",
+        "step_number": 1,
+        "channel": "web",
+        "frame_id": "11:7600",
+        "frame_name": "WISMO/step-1/web",
+        "x_position": 100,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 2,
+        "channel": "web",
+        "frame_id": "11:7629",
+        "frame_name": "WISMO/step-2/web",
+        "x_position": 520,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 3,
+        "channel": "web",
+        "frame_id": "11:7671",
+        "frame_name": "WISMO/step-3/web",
+        "x_position": 940,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 4,
+        "channel": "web",
+        "frame_id": "11:7726",
+        "frame_name": "WISMO/step-4/web",
+        "x_position": 1360,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 5,
+        "channel": "web",
+        "frame_id": "11:7794",
+        "frame_name": "WISMO/step-5/web",
+        "x_position": 1780,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 6,
+        "channel": "web",
+        "frame_id": "11:7875",
+        "frame_name": "WISMO/step-6/web",
+        "x_position": 2200,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "WISMO",
+        "step_number": 7,
+        "channel": "web",
+        "frame_id": "11:7969",
+        "frame_name": "WISMO/step-7/web",
+        "x_position": 2620,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 1,
+        "channel": "web",
+        "frame_id": "11:7529",
+        "frame_name": "Defective_Returns/step-1/web",
+        "x_position": 3040,
+        "y_position": 100
+      },
+      {
+        "flow_topic": "Defective_Returns",
+        "step_number": 2,
+        "channel": "web",
+        "frame_id": "11:7558",
+        "frame_name": "Defective_Returns/step-2/web",
+        "x_position": 3460,
+        "y_position": 100
+      }
+    ],
+    "last_frame_x": 3800
+  },
+  "channels": [
+    "web",
+    "sms",
+    "email"
+  ],
+  "branding": {
+    "enabled": false,
+    "persona_name": null,
+    "persona_avatar_url": null,
+    "primary_color": null,
+    "secondary_color": null,
+    "font_family": null
+  },
+  "slds": {
+    "components_file_key": "RiY2reCmbX0Jyq7QAFL8SE",
+    "agentic_file_key": "ggbYUUT1b480AGhqAJGQUV",
+    "validation_enabled": false
+  },
+  "export": {
+    "scale": 2,
+    "format": "PNG",
+    "last_export_at": null,
+    "export_path": "exports/wolverine/screens"
+  }
+}

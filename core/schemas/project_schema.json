@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UX Orchestrator Project State",
+  "description": "Runtime state for a generated project. Lives alongside manifest.json. Never edit manually — written by the orchestrator.",
+  "type": "object",
+  "required": ["schema_version", "created_at", "figma", "channels", "branding", "slds"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "figma": {
+      "type": "object",
+      "required": ["file_key", "file_name", "last_frame_y"],
+      "properties": {
+        "file_key":   { "type": "string", "description": "Figma file key for the generated output file" },
+        "file_name":  { "type": "string" },
+        "file_url":   { "type": "string" },
+        "last_frame_y": {
+          "type": "number",
+          "description": "Y position of the bottom of the last generated frame. Next batch appends below this."
+        },
+        "frame_gap":  { "type": "number", "default": 80, "description": "Vertical gap between frame rows in px" },
+        "generated_frames": {
+          "type": "array",
+          "description": "Log of every frame written — used to avoid duplication and support re-runs",
+          "items": {
+            "type": "object",
+            "properties": {
+              "flow_topic":  { "type": "string" },
+              "step_number": { "type": "integer" },
+              "channel":     { "type": "string", "enum": ["web", "sms", "email"] },
+              "frame_id":    { "type": "string" },
+              "frame_name":  { "type": "string" },
+              "y_position":  { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "channels": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["web", "sms", "email", "voice"] },
+      "description": "Channels to generate screens for"
+    },
+    "branding": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean", "default": false },
+        "persona_name": {
+          "type": ["string", "null"],
+          "description": "Named brand persona (e.g. 'Rocky') or null for generic Agentforce agent"
+        },
+        "persona_avatar_url": { "type": ["string", "null"] },
+        "primary_color":   { "type": ["string", "null"], "description": "Brand hex override, only used when branding=true" },
+        "secondary_color": { "type": ["string", "null"] },
+        "font_family":     { "type": ["string", "null"] }
+      }
+    },
+    "slds": {
+      "type": "object",
+      "description": "References to Salesforce SLDS 2 Figma libraries. Used for token names, not hardcoded values.",
+      "properties": {
+        "components_file_key":  { "type": "string", "default": "RiY2reCmbX0Jyq7QAFL8SE" },
+        "agentic_file_key":     { "type": "string", "default": "ggbYUUT1b480AGhqAJGQUV" },
+        "validation_enabled":   { "type": "boolean", "default": false,
+          "description": "Set to true in dev handoff phase to gate on SLDS compliance" }
+      }
+    },
+    "export": {
+      "type": "object",
+      "properties": {
+        "scale": { "type": "number", "default": 2, "description": "Export scale multiplier (2 = @2x)" },
+        "format": { "type": "string", "enum": ["PNG", "JPG", "SVG", "PDF"], "default": "PNG" },
+        "last_export_at": { "type": ["string", "null"], "format": "date-time" },
+        "export_path": { "type": "string" }
+      }
+    }
+  }
+}

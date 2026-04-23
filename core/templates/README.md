@@ -4,15 +4,15 @@ This library contains production-ready channel templates based on authentic user
 
 ## Template Philosophy
 
-**Visual Fidelity Over Pure Compliance**: While SLDS 2.0 standards are important, the primary goal is creating authentic, engaging interfaces that users trust and find visually appealing. Templates are designed to look and feel like real production applications.
+**Exact Visual Fidelity**: The primary goal is creating designs that exactly match the provided user examples. Visual authenticity and stakeholder recognition take absolute priority. SLDS compliance is reserved for the development phase - presentation phase focuses purely on matching the intended user experience.
 
 ## Channel Templates
 
 ### Web Templates (`web/`)
-- **Framework**: SLDS 2.0 Agentforce Chatbot
-- **Base Design**: Professional chat interface with status messaging
-- **Key Features**: Success banners, structured data cards, prominent CTAs
-- **Accessibility**: WCAG AA compliant with proper contrast ratios
+- **Framework**: Authentic Chatbot Interface (matching provided examples)
+- **Base Design**: Real-time chat conversation with message bubbles
+- **Key Features**: Natural conversation flow, authentic UI chrome, user-friendly interactions
+- **Visual Priority**: Exact match to provided chatbot design examples
 
 ### Email Templates (`email/`)
 - **Framework**: Responsive Email Thread
@@ -55,12 +55,14 @@ Templates are referenced in manifests through the `template` field in channel de
 
 ## Quality Standards
 
-All templates meet these production requirements:
+All templates meet these presentation requirements:
+- ✅ Exact visual match to provided examples (>90% fidelity)
 - ✅ Authentic, engaging user experience
-- ✅ Brand token customization support
-- ✅ Accessibility compliance (WCAG AA)
-- ✅ Production-ready visual design
-- ✅ No further refinement needed
+- ✅ Stakeholder-ready appearance
+- ✅ Channel-appropriate interaction patterns
+- ✅ No further refinement needed for presentations
+
+Note: SLDS compliance and accessibility requirements are handled in the development phase.
 
 ## Template Structure
 

@@ -1,0 +1,835 @@
+{
+  "manifest": {
+    "schema_version": "0.5",
+    "initiative_metadata": {
+      "name": "Wolverine Worldwide Agentforce Enhanced",
+      "version": "2.0",
+      "timestamp": "2026-04-21T10:30:00Z",
+      "brand_context": {
+        "primary_brand": "Wolverine Worldwide",
+        "sub_brands": [
+          "Merrell",
+          "Sperry",
+          "Wolverine",
+          "Cat Footwear",
+          "Hush Puppies"
+        ],
+        "brand_guidelines_url": "https://drive.google.com/wolverine/brand-guidelines"
+      },
+      "handoff_metadata": {
+        "last_updated_by": "cursor-agent@enhanced-orchestrator.com",
+        "last_updated_at": "2026-04-21T10:30:00Z",
+        "status": "active",
+        "handoff_notes": "Enhanced v2.0 build with full SLDS compliance and responsive design patterns",
+        "design_review_status": "approved"
+      }
+    },
+    "data_tier": "2",
+    "design_system": {
+      "framework": "slds_v2",
+      "theme": "light",
+      "brand_tokens": {
+        "primary_color": "#1589EE",
+        "secondary_color": "#5C6B73",
+        "accent_color": "#45C65A",
+        "font_family": "Salesforce Sans"
+      },
+      "accessibility": {
+        "wcag_level": "AA",
+        "color_contrast_verified": true,
+        "screen_reader_optimized": true
+      },
+      "responsive_breakpoints": {
+        "mobile": "390px",
+        "tablet": "768px",
+        "desktop": "1200px"
+      }
+    },
+    "flows": [
+      {
+        "topic": "WISMO",
+        "channels": [
+          "web",
+          "sms",
+          "email"
+        ],
+        "flow_metadata": {
+          "primary_persona": "Returning Customer",
+          "complexity_score": 3,
+          "estimated_completion_time": "2m"
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "Greeting",
+            "is_edge_case": false,
+            "design_notes": "Warm, brand-aligned greeting with clear order tracking CTA",
+            "accessibility_notes": "High contrast welcome message with clear focus states",
+            "utterances": {
+              "agent": "Hi there! I'm here to help you track your Wolverine order. What can I help you find today?",
+              "user": "I need to check my order status"
+            },
+            "channels": {
+              "web": {
+                "agent": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order.",
+                "user": "I want to track my order",
+                "ui_components": [
+                  "button",
+                  "input",
+                  "card"
+                ],
+                "slds_patterns": [
+                  "welcome-mat",
+                  "form-element",
+                  "button-group"
+                ]
+              },
+              "sms": {
+                "agent": "Hi! I'm your Wolverine assistant. Reply with your order number to track your package.",
+                "user": "Track order"
+              },
+              "email": {
+                "subject": "Your Wolverine Order Tracking Assistant",
+                "body": "We're here to help you track your recent Wolverine order. Reply with your order details and we'll provide immediate status updates.",
+                "template_type": "support"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Order",
+              "action_type": "query",
+              "auth_context": "guest_or_authenticated",
+              "apex_methods": [
+                "OrderTrackingService.initializeSession"
+              ]
+            }
+          },
+          {
+            "step_number": 2,
+            "step_name": "ID_Collection",
+            "is_edge_case": false,
+            "design_notes": "Clear form layout with input validation and helpful placeholder text",
+            "accessibility_notes": "Proper form labels, error states, and input descriptions",
+            "utterances": {
+              "agent": "I'll need either your order number or the email address you used for your purchase.",
+              "user": "My order number is WW-2024-789456"
+            },
+            "channels": {
+              "web": {
+                "agent": "Please enter your order number (starts with 'WW-') or your email address:",
+                "user": "WW-2024-789456",
+                "ui_components": [
+                  "input",
+                  "button",
+                  "toast"
+                ],
+                "slds_patterns": [
+                  "form-element",
+                  "input-group",
+                  "validation"
+                ]
+              },
+              "sms": {
+                "agent": "Please send your order number (format: WW-YYYY-######) or email address.",
+                "user": "WW-2024-789456"
+              },
+              "email": {
+                "subject": "Re: Order Tracking Request",
+                "body": "Please reply with your order number (format: WW-YYYY-######) or the email address used for purchase.",
+                "template_type": "transactional"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Order",
+              "action_type": "query",
+              "auth_context": "validation_required",
+              "apex_methods": [
+                "OrderTrackingService.validateOrderIdentifier"
+              ]
+            }
+          },
+          {
+            "step_number": 3,
+            "step_name": "Order_Confirmation",
+            "is_edge_case": false,
+            "design_notes": "Clean order summary card with key details and status indicator",
+            "accessibility_notes": "Screen reader friendly order details with clear status communication",
+            "utterances": {
+              "agent": "Found your order! Here are the details for order WW-2024-789456:",
+              "user": "That looks right"
+            },
+            "channels": {
+              "web": {
+                "agent": "Great! I found your order. Here's a summary:",
+                "user": "Yes, that's my order",
+                "ui_components": [
+                  "card",
+                  "button",
+                  "table"
+                ],
+                "slds_patterns": [
+                  "record-detail",
+                  "summary-card",
+                  "data-table"
+                ]
+              },
+              "sms": {
+                "agent": "Order WW-2024-789456 found: Wolverine Work Boots, $149.99. Continue for tracking?",
+                "user": "Yes"
+              },
+              "email": {
+                "subject": "Order Confirmation - WW-2024-789456",
+                "body": "We've located your order details. Your Wolverine Work Boots order for $149.99 is confirmed in our system.",
+                "template_type": "transactional"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Order",
+              "action_type": "query",
+              "auth_context": "validated_access",
+              "apex_methods": [
+                "OrderTrackingService.getOrderDetails"
+              ]
+            }
+          },
+          {
+            "step_number": 4,
+            "step_name": "Status_Retrieval",
+            "is_edge_case": false,
+            "design_notes": "Progressive status indicator with estimated delivery and tracking number",
+            "accessibility_notes": "Clear progress indicators and timeline accessible to screen readers",
+            "utterances": {
+              "agent": "Your order is currently in transit and should arrive by March 25th. Tracking: 1Z999AA1234567890",
+              "user": "Perfect, thank you!"
+            },
+            "channels": {
+              "web": {
+                "agent": "Here's your current order status and tracking information:",
+                "user": "Thanks for the update!",
+                "ui_components": [
+                  "card",
+                  "progress",
+                  "button"
+                ],
+                "slds_patterns": [
+                  "progress-indicator",
+                  "timeline",
+                  "status-card"
+                ]
+              },
+              "sms": {
+                "agent": "Status: In Transit. Delivery: Mar 25. Track: 1Z999AA1234567890. Need anything else?",
+                "user": "No, thanks!"
+              },
+              "email": {
+                "subject": "Order Status Update - WW-2024-789456",
+                "body": "Your Wolverine order is in transit! Expected delivery: March 25th. Track with: 1Z999AA1234567890",
+                "template_type": "transactional"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Shipment",
+              "action_type": "query",
+              "auth_context": "validated_access",
+              "apex_methods": [
+                "ShipmentService.getCurrentStatus",
+                "TrackingService.getCarrierInfo"
+              ]
+            }
+          },
+          {
+            "step_number": 5,
+            "step_name": "Resolution",
+            "is_edge_case": false,
+            "design_notes": "Satisfying conclusion with additional help options and feedback request",
+            "accessibility_notes": "Clear completion message with accessible follow-up actions",
+            "utterances": {
+              "agent": "Glad I could help! Is there anything else you need assistance with today?",
+              "user": "No, that's everything. Thanks!"
+            },
+            "channels": {
+              "web": {
+                "agent": "Perfect! Your order is on its way. Can I help with anything else?",
+                "user": "No, that's all I needed",
+                "ui_components": [
+                  "button",
+                  "card"
+                ],
+                "slds_patterns": [
+                  "completion-card",
+                  "action-group"
+                ]
+              },
+              "sms": {
+                "agent": "You're all set! Reply HELP for support or STOP to unsubscribe.",
+                "user": "Thanks!"
+              },
+              "email": {
+                "subject": "Order Tracking Complete",
+                "body": "Thanks for using Wolverine Order Tracking! Your order is on its way. Contact us if you need further assistance.",
+                "template_type": "support"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Case",
+              "action_type": "create",
+              "auth_context": "session_context",
+              "apex_methods": [
+                "SatisfactionService.logInteraction",
+                "SupportService.offerAdditionalHelp"
+              ]
+            }
+          },
+          {
+            "step_number": 6,
+            "step_name": "Unmatched_Order",
+            "is_edge_case": true,
+            "edge_case_priority": 1,
+            "design_notes": "Helpful error state with alternative search options",
+            "accessibility_notes": "Clear error messaging with alternative action paths",
+            "utterances": {
+              "agent": "I couldn't find an order with that information. Let me help you try a different way.",
+              "user": "Let me try my email address instead"
+            },
+            "channels": {
+              "web": {
+                "agent": "We couldn't locate that order. Would you like to try with your email address?",
+                "user": "Yes, let me try my email",
+                "ui_components": [
+                  "alert",
+                  "input",
+                  "button"
+                ],
+                "slds_patterns": [
+                  "error-state",
+                  "alternative-actions"
+                ]
+              },
+              "sms": {
+                "agent": "Order not found. Try email address or call 1-800-WOLVERINE for help.",
+                "user": "I'll try email"
+              },
+              "email": {
+                "subject": "Order Not Found - Let's Try Another Way",
+                "body": "We couldn't locate an order with that information. Please reply with the email address used for purchase, or contact our support team.",
+                "template_type": "support"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Case",
+              "action_type": "create",
+              "auth_context": "anonymous",
+              "apex_methods": [
+                "SupportService.logFailedSearch",
+                "OrderTrackingService.suggestAlternatives"
+              ]
+            }
+          },
+          {
+            "step_number": 7,
+            "step_name": "Partial_Shipment",
+            "is_edge_case": true,
+            "edge_case_priority": 2,
+            "design_notes": "Clear explanation of partial fulfillment with remaining item timeline",
+            "accessibility_notes": "Detailed shipment breakdown accessible to all users",
+            "utterances": {
+              "agent": "Your order shipped in multiple packages. Package 1 of 2 is in transit, package 2 will ship tomorrow.",
+              "user": "Got it, when will the second package arrive?"
+            },
+            "channels": {
+              "web": {
+                "agent": "This order has multiple shipments. Here's the breakdown:",
+                "user": "When will I get the remaining items?",
+                "ui_components": [
+                  "card",
+                  "table",
+                  "timeline"
+                ],
+                "slds_patterns": [
+                  "multi-item-display",
+                  "shipment-timeline"
+                ]
+              },
+              "sms": {
+                "agent": "Multiple packages: Package 1 in transit, Package 2 ships tomorrow. Both arrive by Mar 27.",
+                "user": "Sounds good"
+              },
+              "email": {
+                "subject": "Multiple Shipment Update - WW-2024-789456",
+                "body": "Your order is shipping in multiple packages. Package 1 is in transit, Package 2 ships tomorrow. All items will arrive by March 27th.",
+                "template_type": "transactional"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Shipment",
+              "action_type": "query",
+              "auth_context": "validated_access",
+              "apex_methods": [
+                "ShipmentService.getMultipleShipments",
+                "DeliveryService.calculateArrivalWindows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "topic": "Defective_Returns",
+        "channels": [
+          "web",
+          "email"
+        ],
+        "flow_metadata": {
+          "primary_persona": "Disappointed Customer",
+          "complexity_score": 4,
+          "estimated_completion_time": "5m"
+        },
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "Greeting",
+            "is_edge_case": false,
+            "design_notes": "Empathetic greeting acknowledging the product issue",
+            "accessibility_notes": "Supportive tone accessible across all interaction methods",
+            "utterances": {
+              "agent": "I'm sorry to hear you're having an issue with your Wolverine product. I'm here to help make this right.",
+              "user": "My boots are falling apart after just two weeks"
+            },
+            "channels": {
+              "web": {
+                "agent": "We're sorry you're experiencing issues with your Wolverine product. Let's get this resolved quickly.",
+                "user": "I need to return these defective boots",
+                "ui_components": [
+                  "card",
+                  "button"
+                ],
+                "slds_patterns": [
+                  "support-greeting",
+                  "empathy-card"
+                ]
+              },
+              "email": {
+                "subject": "Product Return Assistance - We're Here to Help",
+                "body": "Thank you for contacting Wolverine support. We sincerely apologize for any product quality issues and want to make this right immediately.",
+                "template_type": "support"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Case",
+              "action_type": "create",
+              "auth_context": "support_context",
+              "apex_methods": [
+                "SupportService.initializeReturnCase",
+                "CustomerService.expressEmpathy"
+              ]
+            }
+          },
+          {
+            "step_number": 2,
+            "step_name": "Issue_Description",
+            "is_edge_case": false,
+            "design_notes": "Structured form to capture issue details with photo upload capability",
+            "accessibility_notes": "Form fields with clear labels and optional image upload with alt text",
+            "utterances": {
+              "agent": "Can you describe what's happening with the boots? Photos would be helpful if you have them.",
+              "user": "The sole is separating from the upper after minimal wear"
+            },
+            "channels": {
+              "web": {
+                "agent": "Please describe the issue and upload photos if possible:",
+                "user": "The sole is coming apart and there's stitching failure",
+                "ui_components": [
+                  "textarea",
+                  "file-upload",
+                  "button"
+                ],
+                "slds_patterns": [
+                  "form-layout",
+                  "file-upload",
+                  "issue-capture"
+                ]
+              },
+              "email": {
+                "subject": "Re: Product Issue Details Needed",
+                "body": "Please describe the specific problem you're experiencing and attach any photos of the defect. This will help us process your return quickly.",
+                "template_type": "support"
+              }
+            },
+            "proto_bot": {
+              "sf_object": "Case",
+              "action_type": "update",
+              "auth_context": "case_context",
+              "apex_methods": [
+                "CaseService.captureIssueDescription",
+                "AttachmentService.handleProductPhotos"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "terminology_map": {
+      "WW": "Wolverine Worldwide",
+      "order_num": "order number",
+      "pkg": "package",
+      "est": "estimated"
+    },
+    "drive": {
+      "project_folder": "/Users/bfurgason/Documents/GitHub/sf-ux-orchestrator-v2/samples/wolverine",
+      "exports_folder": "/Users/bfurgason/Documents/GitHub/sf-ux-orchestrator-v2/exports/wolverine",
+      "auto_sync": true
+    },
+    "figma": {
+      "target_file_url": "https://www.figma.com/design/v39SESS3rUlW3FFoxTyXbX/Wolverine-Enhanced-v2",
+      "design_system_library": "https://www.figma.com/design/SLDS-v2-Library/Lightning-Design-System",
+      "brand_kit_library": "https://www.figma.com/design/wolverine-brand-kit/Wolverine-Brand-Assets"
+    },
+    "deployment": {
+      "target_org": "wolverine-prod.my.salesforce.com",
+      "release_date": "2026-05-15",
+      "stakeholder_reviews": [
+        "product-manager@wolverine.com",
+        "ux-director@wolverine.com",
+        "brand-manager@wolverine.com"
+      ]
+    }
+  },
+  "frame_payloads": [
+    {
+      "frame_name": "Defective_Returns/step-1/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 3040,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "We're sorry you're experiencing issues with your Wolverine product. Let's get this resolved quickly."
+        },
+        {
+          "role": "user",
+          "text": "I need to return these defective boots"
+        }
+      ]
+    },
+    {
+      "frame_name": "Defective_Returns/step-2/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 3460,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "We're sorry you're experiencing issues with your Wolverine product. Let's get this resolved quickly."
+        },
+        {
+          "role": "user",
+          "text": "I need to return these defective boots"
+        },
+        {
+          "role": "agent",
+          "text": "Please describe the issue and upload photos if possible:"
+        },
+        {
+          "role": "user",
+          "text": "The sole is coming apart and there's stitching failure"
+        }
+      ]
+    },
+    {
+      "frame_name": "WISMO/step-1/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 100,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        }
+      ]
+    },
+    {
+      "frame_name": "WISMO/step-2/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 520,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        }
+      ]
+    },
+    {
+      "frame_name": "WISMO/step-3/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 940,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        }
+      ]
+    },
+    {
+      "frame_name": "WISMO/step-4/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 1360,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        }
+      ]
+    },
+    {
+      "frame_name": "WISMO/step-5/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 1780,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        },
+        {
+          "role": "agent",
+          "text": "Perfect! Your order is on its way. Can I help with anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, that's all I needed"
+        }
+      ]
+    },
+    {
+      "frame_name": "WISMO/step-6/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 2200,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        },
+        {
+          "role": "agent",
+          "text": "Perfect! Your order is on its way. Can I help with anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, that's all I needed"
+        },
+        {
+          "role": "agent",
+          "text": "We couldn't locate that order. Would you like to try with your email address?"
+        },
+        {
+          "role": "user",
+          "text": "Yes, let me try my email"
+        }
+      ]
+    },
+    {
+      "frame_name": "WISMO/step-7/web",
+      "channel": "web",
+      "frame_width": 340,
+      "frame_height": 629,
+      "x": 2620,
+      "y": 100,
+      "messages": [
+        {
+          "role": "agent",
+          "text": "Welcome to Wolverine Order Tracking! I can help you find information about your recent order."
+        },
+        {
+          "role": "user",
+          "text": "I want to track my order"
+        },
+        {
+          "role": "agent",
+          "text": "Please enter your order number (starts with 'WW-') or your email address:"
+        },
+        {
+          "role": "user",
+          "text": "WW-2024-789456"
+        },
+        {
+          "role": "agent",
+          "text": "Great! I found your order. Here's a summary:"
+        },
+        {
+          "role": "user",
+          "text": "Yes, that's my order"
+        },
+        {
+          "role": "agent",
+          "text": "Here's your current order status and tracking information:"
+        },
+        {
+          "role": "user",
+          "text": "Thanks for the update!"
+        },
+        {
+          "role": "agent",
+          "text": "Perfect! Your order is on its way. Can I help with anything else?"
+        },
+        {
+          "role": "user",
+          "text": "No, that's all I needed"
+        },
+        {
+          "role": "agent",
+          "text": "We couldn't locate that order. Would you like to try with your email address?"
+        },
+        {
+          "role": "user",
+          "text": "Yes, let me try my email"
+        },
+        {
+          "role": "agent",
+          "text": "This order has multiple shipments. Here's the breakdown:"
+        },
+        {
+          "role": "user",
+          "text": "When will I get the remaining items?"
+        }
+      ]
+    }
+  ]
+}

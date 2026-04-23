@@ -1,0 +1,211 @@
+{
+  "template_version": "2.0",
+  "template_name": "web_chatbot_reference_matched",
+  "description": "Exact specifications matching user-provided reference screenshot for high-fidelity replication",
+  "created": "2026-04-21T15:45:00Z",
+  "reference_source": "User provided screenshot analysis",
+  
+  "mobile_frame_specifications": {
+    "device_style": "iPhone mockup",
+    "frame_width": 375,
+    "frame_height": 812,
+    "corner_radius": 30,
+    "bezel_color": {"r": 0.0, "g": 0.0, "b": 0.0},
+    "bezel_thickness": 2,
+    "screen_background": {"r": 1.0, "g": 1.0, "b": 1.0},
+    "drop_shadow": true
+  },
+  
+  "agent_avatar_specifications": {
+    "required": true,
+    "shape": "circular",
+    "diameter": 32,
+    "background_color": {
+      "color_hex": "#2D2D2D",
+      "color_rgb": {"r": 0.176, "g": 0.176, "b": 0.176}
+    },
+    "position_offset": {
+      "left": 16,
+      "top_align_with_bubble": true
+    },
+    "margin_to_bubble": 8
+  },
+  
+  "visual_specifications": {
+    "screen_background": {
+      "color_hex": "#FFFFFF",
+      "color_rgb": {"r": 1.0, "g": 1.0, "b": 1.0},
+      "description": "Pure white background for screen content"
+    },
+    
+    "agent_bubble": {
+      "color_hex": "#F0F0F0",
+      "color_rgb": {"r": 0.941, "g": 0.941, "b": 0.941},
+      "alignment": "left",
+      "corner_radius": 18,
+      "padding": {
+        "horizontal": 16,
+        "vertical": 12
+      },
+      "max_width": 280,
+      "margin_left": 48,
+      "text_color": {
+        "color_hex": "#1A1A1A",
+        "color_rgb": {"r": 0.1, "g": 0.1, "b": 0.1}
+      },
+      "description": "Light gray bubbles with avatar system"
+    },
+    
+    "user_bubble": {
+      "color_hex": "#007AFF",
+      "color_rgb": {"r": 0.0, "g": 0.478, "b": 1.0},
+      "alignment": "right",
+      "corner_radius": 18,
+      "padding": {
+        "horizontal": 16,
+        "vertical": 12
+      },
+      "max_width": 280,
+      "margin_right": 16,
+      "text_color": {
+        "color_hex": "#FFFFFF",
+        "color_rgb": {"r": 1.0, "g": 1.0, "b": 1.0}
+      },
+      "description": "Blue bubbles for user messages, right-aligned"
+    }
+  },
+  
+  "typography": {
+    "font_family": "Inter",
+    "font_loading_required": ["Regular", "Medium", "Bold"],
+    
+    "message_text": {
+      "font_size": 15,
+      "font_style": "Regular",
+      "line_height": 20,
+      "agent_color": "#1A1A1A",
+      "user_color": "#FFFFFF"
+    },
+    
+    "screen_titles": {
+      "font_size": 14,
+      "font_style": "Medium", 
+      "line_height": 18,
+      "color": "#666666"
+    },
+    
+    "header_text": {
+      "font_size": 16,
+      "font_style": "Medium",
+      "line_height": 20,
+      "color": "#1A1A1A"
+    }
+  },
+  
+  "layout_specifications": {
+    "frame_dimensions": {
+      "width": 375,
+      "height": 812,
+      "description": "iPhone mockup dimensions matching reference"
+    },
+    
+    "spacing": {
+      "screen_padding": 16,
+      "bubble_vertical_spacing": 12,
+      "avatar_margin": 8,
+      "between_screens": 20
+    },
+    
+    "component_specifications": {
+      "header": {
+        "height": 50,
+        "background": "#FFFFFF",
+        "border_bottom": "#E5E5E5",
+        "title_alignment": "center"
+      },
+      "conversation_area": {
+        "top_offset": 60,
+        "bottom_offset": 80,
+        "available_height": 672
+      },
+      "input_area": {
+        "height": 60,
+        "background": "#FFFFFF",
+        "input_field": {
+          "background": "#F8F8F8",
+          "corner_radius": 20,
+          "height": 40
+        },
+        "send_button": {
+          "shape": "circular",
+          "size": 36,
+          "color": "#007AFF"
+        }
+      }
+    }
+  },
+  
+  "conversation_flow": {
+    "screens_per_topic": "4-7",
+    "interaction_pattern": "one_exchange_per_screen",
+    "screen_structure": [
+      {
+        "screen_name": "WEB-01: Initial Greeting",
+        "purpose": "Agent introduction and user intent capture",
+        "agent_message": "Hi! I can help you track your order. What can I help you with today?",
+        "user_message": "I want to track my order"
+      },
+      {
+        "screen_name": "WEB-02: Information Collection", 
+        "purpose": "Collect order details from user",
+        "agent_message": "Great! Please provide your order number or email address used for the purchase.",
+        "user_message": "WW-2024-789456"
+      },
+      {
+        "screen_name": "WEB-03: Order Processing",
+        "purpose": "Display order lookup results",
+        "agent_message": "Found your order! It's currently in transit and will be delivered tomorrow by 5 PM via FedEx. Tracking: 7751234567890",
+        "user_message": "Perfect, thank you!"
+      },
+      {
+        "screen_name": "WEB-04: Follow-up Services",
+        "purpose": "Offer additional services and completion",
+        "agent_message": "You're welcome! I can also set up delivery notifications or help with any other questions.",
+        "user_message": "That would be great"
+      }
+    ]
+  },
+  
+  "quality_requirements": {
+    "template_fidelity": ">95% visual match to provided examples",
+    "color_accuracy": "Exact hex code matching",
+    "font_consistency": "Inter font family throughout",
+    "spacing_precision": "Pixel-perfect alignment and spacing",
+    "responsive_behavior": "Works on mobile viewport dimensions"
+  },
+  
+  "figma_generation": {
+    "font_preloading": {
+      "required": true,
+      "fonts": [
+        {"family": "Inter", "style": "Regular"},
+        {"family": "Inter", "style": "Medium"}, 
+        {"family": "Inter", "style": "Bold"}
+      ]
+    },
+    
+    "error_handling": {
+      "font_loading_failures": "Retry with fallback fonts",
+      "positioning_errors": "Use absolute positioning as backup",
+      "color_application_issues": "Validate RGB values before application"
+    },
+    
+    "validation_checks": [
+      "All screens created successfully",
+      "Font loading completed without errors",
+      "Color values match specifications exactly",
+      "Text alignment and positioning correct",
+      "Screen dimensions match template"
+    ]
+  }
+}

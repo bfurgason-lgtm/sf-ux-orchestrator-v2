@@ -1,0 +1,128 @@
+{
+  "reference_analysis": {
+    "image_source": "User provided screenshot - Web conversation interface reference",
+    "analysis_date": "2026-04-21T15:45:00Z",
+    "overall_layout": {
+      "screen_count": 5,
+      "layout_direction": "horizontal",
+      "screen_titles": [
+        "1. Web - Welcome & Inquiry",
+        "2. Web - Identity Request + Reply", 
+        "3. Web - Product Verification",
+        "4. Web - Choice Return Policy",
+        "5. Web - Return Jnk & Closing"
+      ],
+      "spacing_between_screens": "consistent, approximately 20px"
+    },
+    "mobile_frame_specifications": {
+      "device_style": "iPhone mockup",
+      "frame_width": "approximately 375px",
+      "frame_height": "approximately 812px", 
+      "corner_radius": "30px for device frame",
+      "bezel_styling": "thin black border",
+      "screen_area": "white background with subtle shadow"
+    },
+    "agent_avatar_specifications": {
+      "shape": "circular",
+      "size": "32px diameter",
+      "color": "dark gray/black (#2D2D2D)",
+      "position": "left side of agent messages",
+      "margin_from_bubble": "8px"
+    },
+    "message_bubble_specifications": {
+      "agent_bubbles": {
+        "background_color": "light gray (#F0F0F0)",
+        "text_color": "dark text (#1A1A1A)",
+        "alignment": "left",
+        "corner_radius": "18px",
+        "padding": {
+          "horizontal": "16px",
+          "vertical": "12px"
+        },
+        "max_width": "280px",
+        "margin_left": "48px (to accommodate avatar)"
+      },
+      "user_bubbles": {
+        "background_color": "blue (#007AFF)",
+        "text_color": "white (#FFFFFF)",
+        "alignment": "right",
+        "corner_radius": "18px", 
+        "padding": {
+          "horizontal": "16px",
+          "vertical": "12px"
+        },
+        "max_width": "280px",
+        "margin_right": "16px"
+      }
+    },
+    "typography_specifications": {
+      "font_family": "System font (likely SF Pro or Inter)",
+      "message_text": {
+        "font_size": "15px",
+        "line_height": "20px",
+        "font_weight": "400 (regular)"
+      },
+      "screen_titles": {
+        "font_size": "14px",
+        "line_height": "18px",
+        "font_weight": "500 (medium)",
+        "color": "dark gray (#666666)"
+      }
+    },
+    "layout_measurements": {
+      "screen_padding": "16px all sides",
+      "bubble_vertical_spacing": "12px between messages",
+      "conversation_area_top": "60px from top (for header)",
+      "conversation_area_bottom": "80px from bottom (for input area)",
+      "input_area_height": "60px"
+    },
+    "header_specifications": {
+      "height": "50px",
+      "background": "white (#FFFFFF)",
+      "title_text": "Agent",
+      "title_alignment": "center",
+      "border_bottom": "subtle gray line (#E5E5E5)"
+    },
+    "input_area_specifications": {
+      "background": "white (#FFFFFF)",
+      "height": "60px",
+      "input_field": {
+        "background": "light gray (#F8F8F8)",
+        "corner_radius": "20px",
+        "placeholder": "Type a message...",
+        "height": "40px"
+      },
+      "send_button": {
+        "shape": "circular",
+        "size": "36px",
+        "color": "blue (#007AFF)",
+        "icon": "arrow or send symbol"
+      }
+    },
+    "color_palette": {
+      "primary_blue": "#007AFF",
+      "light_gray_background": "#F0F0F0", 
+      "dark_text": "#1A1A1A",
+      "medium_gray": "#666666",
+      "light_border": "#E5E5E5",
+      "white": "#FFFFFF",
+      "avatar_dark": "#2D2D2D",
+      "input_background": "#F8F8F8"
+    },
+    "key_visual_elements": {
+      "professional_mobile_mockup": "Clean iPhone-style device frame",
+      "consistent_avatar_system": "Dark circular avatars for all agent messages",
+      "authentic_bubble_styling": "iOS-style message bubbles with proper spacing",
+      "clear_conversation_flow": "Logical progression through 5 screens",
+      "clean_typography": "Readable, well-spaced text throughout"
+    }
+  },
+  "accuracy_requirements": {
+    "avatar_presence": "Must include dark circular avatar for every agent message",
+    "mobile_frame_styling": "Professional device mockup, not basic rectangles",
+    "bubble_proportions": "Exact corner radius and padding matching reference",
+    "color_precision": "Exact hex colors extracted from visual analysis",
+    "spacing_consistency": "Precise margins and padding throughout",
+    "typography_matching": "Font sizes and line heights must match reference"
+  }
+}

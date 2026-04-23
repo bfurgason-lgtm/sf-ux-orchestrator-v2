@@ -59,9 +59,10 @@ class FlowDiagramGenerator:
     VERTICAL_SPACING = 100
     HORIZONTAL_SPACING = 180
     
-    def __init__(self, slides_client: GoogleSlidesClient):
-        """Initialize with Google Slides client."""
+    def __init__(self, slides_client: GoogleSlidesClient, visual_fidelity_mode: bool = True):
+        """Initialize with Google Slides client and visual fidelity option."""
         self.client = slides_client
+        self.visual_fidelity_mode = visual_fidelity_mode
     
     def generate_flow_diagram(self, presentation_id: str, slide_id: str,
                             flow_data: Dict[str, Any], diagram_type: str = "main") -> Dict[str, Any]:

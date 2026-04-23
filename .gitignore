@@ -1,0 +1,26 @@
+# Credentials & secrets — never commit these
+.vscode/settings.json
+.claude/
+.mcp.json
+
+# Session artifact docs
+ACCURATE_WEB_TEMPLATE_REPLICATION_COMPLETE.md
+AUTHENTIC_FIDELITY_IMPLEMENTATION_COMPLETE.md
+FIGMA_DRIFT_FIX_COMPLETE.md
+V1_AUTHENTIC_TEMPLATE_IMPLEMENTATION_COMPLETE.md
+WOLVERINE_FIGMA_TEST_COMPLETE.md
+WOLVERINE_TEST_ASSESSMENT.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# Exports & generated files
+exports/
+/tmp/
+
+# macOS
+.DS_Store
