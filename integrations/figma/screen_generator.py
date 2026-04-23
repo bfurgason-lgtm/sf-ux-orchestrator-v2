@@ -46,10 +46,12 @@ def _messages_for_steps(steps: list, channel: str) -> list:
 
 def build_chat_payload(flow_topic: str, step_number: int,
                        channel: str, all_steps_so_far: list,
-                       x: float, y: float) -> dict:
+                       x: float, y: float,
+                       agent_name: str = "Agent",
+                       quick_replies: list = None) -> dict:
     w = CHANNEL_WIDTHS[channel]
     h = CHANNEL_HEIGHTS[channel]
-    return {
+    payload = {
         "frame_name":   f"{flow_topic}/step-{step_number}/{channel}",
         "channel":      channel,
         "frame_width":  w,
@@ -57,7 +59,11 @@ def build_chat_payload(flow_topic: str, step_number: int,
         "x": x,
         "y": y,
         "messages": _messages_for_steps(all_steps_so_far, channel),
+        "agent_name": agent_name,
     }
+    if quick_replies:
+        payload["quick_replies"] = quick_replies
+    return payload
 
 
 def build_email_payload(flow_topic: str, step_number: int,
@@ -78,7 +84,7 @@ def build_email_payload(flow_topic: str, step_number: int,
 
 
 def generate_screens(manifest_path: str, project_dir: str,
-                     only_channels: list = None):
+                     only_channels: list = None, max_screens: int = None):
     with open(manifest_path) as f:
         manifest = json.load(f)
 
@@ -86,12 +92,16 @@ def generate_screens(manifest_path: str, project_dir: str,
     channels = only_channels or project["channels"]
     branding = project["branding"]
 
+    meta       = manifest.get("initiative_metadata", {})
+    brand      = meta.get("brand_context", {})
+    agent_name = brand.get("primary_brand") or meta.get("name") or "Agent"
+
     for flow in manifest.get("flows", []):
         topic      = flow["topic"]
         steps      = flow["steps"]
         f_channels = flow.get("channels", channels)
 
-        for i, step in enumerate(steps):
+        for i, step in enumerate(steps[:max_screens] if max_screens else steps):
             step_num     = step["step_number"]
             steps_so_far = steps[:i + 1]
             x_col        = next_col_x(project)
@@ -103,13 +113,17 @@ def generate_screens(manifest_path: str, project_dir: str,
                     print(f"  Skip (exists): {topic}/step-{step_num}/{channel}")
                     continue
 
-                y = channel_y_offset(channels, channel)
+                y = channel_y_offset(channels, channel, active_channels=only_channels)
 
                 if channel == "email":
                     payload = build_email_payload(topic, step_num, step, x_col, y)
                 else:
+                    sms_ch       = step.get("channels", {}).get("sms", {})
+                    quick_replies = sms_ch.get("quick_replies") if channel == "sms" else None
                     payload = build_chat_payload(topic, step_num, channel,
-                                                 steps_so_far, x_col, y)
+                                                 steps_so_far, x_col, y,
+                                                 agent_name=agent_name,
+                                                 quick_replies=quick_replies)
 
                 result = _write_frame(project["figma"]["file_key"], payload)
                 if result:

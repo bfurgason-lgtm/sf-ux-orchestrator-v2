@@ -14,10 +14,10 @@ from integrations.figma.screen_generator import generate_screens
 from integrations.figma.exporter import export_screens
 
 
-def cmd_generate(project_dir: str, channels: list = None):
+def cmd_generate(project_dir: str, channels: list = None, screens: int = 1):
     manifest_path = str(Path(project_dir) / "manifest.json")
     print(f"Generating screens from {manifest_path}...")
-    generate_screens(manifest_path, project_dir, only_channels=channels)
+    generate_screens(manifest_path, project_dir, only_channels=channels, max_screens=screens)
 
 
 def cmd_push(project_dir: str, port: int = 7070, timeout: int = 300):
@@ -75,6 +75,8 @@ def main():
                         help="Path to project directory (contains manifest.json + project.json)")
     parser.add_argument("--channels", nargs="+", choices=["web", "sms", "email"],
                         help="Restrict output to specific channels (e.g. --channels web)")
+    parser.add_argument("--screens", type=int, default=1,
+                        help="Number of screens (steps) to generate per flow (default: 1)")
     parser.add_argument("--port", type=int, default=7070,
                         help="Local server port for plugin handoff (default: 7070)")
     parser.add_argument("--timeout", type=int, default=300,
@@ -82,13 +84,13 @@ def main():
     args = parser.parse_args()
 
     if args.command == "generate":
-        cmd_generate(args.project, channels=args.channels)
+        cmd_generate(args.project, channels=args.channels, screens=args.screens)
     elif args.command == "push":
         cmd_push(args.project, port=args.port, timeout=args.timeout)
     elif args.command == "export":
         cmd_export(args.project)
     elif args.command == "run":
-        cmd_generate(args.project, channels=args.channels)
+        cmd_generate(args.project, channels=args.channels, screens=args.screens)
         cmd_push(args.project, port=args.port, timeout=args.timeout)
         cmd_export(args.project)
 

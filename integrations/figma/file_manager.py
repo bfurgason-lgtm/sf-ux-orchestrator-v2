@@ -17,12 +17,12 @@ FIGMA_API = "https://api.figma.com/v1"
 
 CHANNEL_WIDTHS = {
     "web":   340,
-    "sms":   393,
+    "sms":   390,
     "email": 710,
 }
 CHANNEL_HEIGHTS = {
     "web":   629,
-    "sms":   657,
+    "sms":   844,
     "email": 420,
 }
 CHANNEL_GAP = 60   # vertical gap between channel rows
@@ -133,10 +133,11 @@ def next_col_x(project: dict) -> float:
     return last_x + gap if last_x > 0 else 100
 
 
-def channel_y_offset(channels: list, channel: str) -> float:
-    """Vertical Y position for a channel row."""
+def channel_y_offset(channels: list, channel: str, active_channels: list = None) -> float:
+    """Vertical Y position for a channel row, stacking only active channels."""
+    ordered = [ch for ch in channels if active_channels is None or ch in active_channels]
     y = 100
-    for ch in channels:
+    for ch in ordered:
         if ch == channel:
             return y
         y += CHANNEL_HEIGHTS.get(ch, 629) + CHANNEL_GAP
