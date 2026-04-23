@@ -92,7 +92,7 @@ def _create_figma_file(name: str) -> str:
     raise RuntimeError(
         f"Could not create Figma file (status {resp.status_code}): {resp.text}\n"
         "You may need to create the file manually in Figma and paste the file key "
-        "into samples/<project>/project.json → figma.file_key"
+        "into projects/<project>/project.json → figma.file_key"
     )
 
 

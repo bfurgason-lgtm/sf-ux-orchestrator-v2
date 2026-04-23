@@ -2,10 +2,10 @@
 SF UX Orchestrator — main entry point.
 
 Usage:
-  python orchestrate.py generate --project samples/wolverine [--channels web]
-  python orchestrate.py push     --project samples/wolverine [--port 7070] [--timeout 300]
-  python orchestrate.py export   --project samples/wolverine
-  python orchestrate.py run      --project samples/wolverine   # generate + push + export
+  python orchestrate.py generate --project projects/<client> [--channels web]
+  python orchestrate.py push     --project projects/<client> [--port 7070] [--timeout 300]
+  python orchestrate.py export   --project projects/<client>
+  python orchestrate.py run      --project projects/<client>   # generate + push + export
 """
 import argparse
 from pathlib import Path

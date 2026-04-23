@@ -2,7 +2,7 @@
   "template": {
     "name": "Authentic Email Thread - Transactional",
     "version": "1.0",
-    "description": "Realistic email client appearance with sender details, thread structure, and order information based on Wolverine email design",
+    "description": "Realistic email client appearance with sender details, thread structure, and order information for transactional agent flows",
     "framework": "responsive_email",
     "thread_context": true,
     "mobile_optimized": true,
@@ -48,14 +48,14 @@
                             "font_size": 14,
                             "font_weight": "600",
                             "color": "#1D1D1F",
-                            "placeholder": "Sarah at Wolverine"
+                            "placeholder": "Agent at Your Company"
                           },
                           {
                             "type": "sender_email", 
                             "content": "{sender_email}",
                             "font_size": 12,
                             "color": "#8E8E93",
-                            "placeholder": "<sarah@wolverine.com>"
+                            "placeholder": "<agent@yourcompany.com>"
                           }
                         ]
                       }
@@ -83,7 +83,7 @@
                 "line_height": 1.5,
                 "color": "#1D1D1F",
                 "margin_bottom": 16,
-                "placeholder": "Hi Sarah,\\n\\nI'm the Agent for Wolverine. I'm very sorry to hear that your boots are falling apart! How can I help you today?"
+                "placeholder": "Hi {customer_name},\\n\\nI'm the Agent for {brand_name}. I'm sorry to hear about your issue! How can I help you today?"
               },
               {
                 "type": "order_summary_card",
@@ -107,7 +107,7 @@
                     "details": [
                       {"key": "Order Number:", "value": "{order_number}", "placeholder": "10954"},
                       {"key": "Order Date:", "value": "{order_date}", "placeholder": "March 4th, 2024"}, 
-                      {"key": "Order Summary:", "value": "{order_summary}", "placeholder": "Wolverine Work Boots, Size 9"},
+                      {"key": "Order Summary:", "value": "{order_summary}", "placeholder": "Item Name, Size/Variant"},
                       {"key": "Performance Cross Socks:", "value": "{accessory_item}", "placeholder": "White, 7-12"}
                     ],
                     "key_styling": {
@@ -164,7 +164,7 @@
                         "font_size": 13,
                         "font_weight": "600",
                         "color": "#1D1D1F",
-                        "placeholder": "customer@wolverine.com"
+                        "placeholder": "customer@example.com"
                       },
                       {
                         "type": "reply_timestamp",

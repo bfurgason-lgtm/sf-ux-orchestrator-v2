@@ -2,7 +2,7 @@
   "template": {
     "name": "Authentic SMS Conversation Thread",
     "version": "1.0",
-    "description": "Native mobile messaging interface with authentic message bubbles, status indicators, and mobile UI chrome based on Wolverine SMS design",
+    "description": "Native mobile messaging interface with authentic message bubbles, status indicators, and mobile UI chrome for Agentforce SMS flows",
     "framework": "native_mobile",
     "platform": "ios_android_compatible",
     "interface_style": "native_messaging",

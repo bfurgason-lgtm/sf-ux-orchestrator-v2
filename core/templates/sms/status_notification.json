@@ -52,22 +52,22 @@
       "order_confirmation": {
         "format": "✅ Order Confirmed\\n{order_details}\\nExpected: {delivery_date}\\nTrack: {tracking_link}",
         "character_count": "~140",
-        "example": "✅ Order Confirmed\\nWW-2024-789456 - Wolverine Boots\\nExpected: March 25\\nTrack: wlv.co/t/abc123"
+        "example": "✅ Order Confirmed\\nORD-2024-789456 - Your Item\\nExpected: March 25\\nTrack: yourco.co/t/abc123"
       },
       "shipping_notification": {
         "format": "📦 Shipped!\\n{product} via {carrier}\\nTracking: {tracking_number}\\nETA: {delivery_date}",
         "character_count": "~130",
-        "example": "📦 Shipped!\\nWolverine Boots via UPS\\nTracking: 1Z999AA1234567890\\nETA: March 25"
+        "example": "📦 Shipped!\\n{product_name} via UPS\\nTracking: 1Z999AA1234567890\\nETA: March 25"
       },
       "delivery_update": {
         "format": "🚚 Out for delivery\\n{product}\\nExpected by {time}\\nReply HELP if needed",
         "character_count": "~100",
-        "example": "🚚 Out for delivery\\nWolverine Boots\\nExpected by 6 PM\\nReply HELP if needed"
+        "example": "🚚 Out for delivery\\n{product_name}\\nExpected by 6 PM\\nReply HELP if needed"
       },
       "delivered_confirmation": {
         "format": "✨ Delivered!\\n{product} - {location}\\n{timestamp}\\nEnjoy! Rate: {rating_link}",
         "character_count": "~120", 
-        "example": "✨ Delivered!\\nWolverine Boots - Front door\\n2:34 PM\\nEnjoy! Rate: wlv.co/r/abc"
+        "example": "✨ Delivered!\\n{product_name} - Front door\\n2:34 PM\\nEnjoy! Rate: yourco.co/r/abc"
       },
       "issue_resolution": {
         "format": "🔧 Issue Resolved\\n{resolution_summary}\\nRef: {case_number}\\nQuestions? Reply HELP",
@@ -106,9 +106,9 @@
       "tracking_keywords": ["TRACK", "STATUS", "WHERE"], 
       "stop_keywords": ["STOP", "UNSUBSCRIBE", "END"],
       "auto_responses": {
-        "HELP": "Wolverine Support: Call 1-800-WOLVERINE or visit wolverine.com/help. Reply STOP to end.",
-        "TRACK": "Track your order: wolverine.com/track or reply with order number for instant status.",
-        "STOP": "You've unsubscribed from Wolverine SMS. You can opt back in at wolverine.com/sms"
+        "HELP": "{brand_name} Support: Call {support_phone} or visit {support_url}/help. Reply STOP to end.",
+        "TRACK": "Track your order: {support_url}/track or reply with order number for instant status.",
+        "STOP": "You've unsubscribed from {brand_name} SMS. You can opt back in at {support_url}/sms"
       }
     },
     "delivery_timing": {
@@ -121,7 +121,7 @@
       "opt_out_required": true,
       "sender_identification": true,
       "frequency_disclosure": true,
-      "terms_reference": "wolverine.com/sms-terms"
+      "terms_reference": "{support_url}/sms-terms"
     },
     "analytics": {
       "delivery_tracking": true,

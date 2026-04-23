@@ -28,7 +28,7 @@
                     "content": "{company_name} Support",
                     "font_size": 18,
                     "font_weight": "Bold",
-                    "placeholder": "Wolverine Support"
+                    "placeholder": "Your Company Support"
                   },
                   {
                     "type": "ticket_number",
@@ -93,7 +93,7 @@
                     "line_height": 1.6,
                     "color": "#1D1D1F",
                     "margin_bottom": 16,
-                    "placeholder": "Hi {customer_name},\\n\\nThank you for contacting Wolverine Support. I've reviewed your case and I'm here to help resolve your boot quality issue."
+                    "placeholder": "Hi {customer_name},\\n\\nThank you for contacting {brand_name} Support. I've reviewed your case and I'm here to help resolve your issue."
                   },
                   {
                     "type": "case_summary",
@@ -116,7 +116,7 @@
                         "font_size": 13,
                         "line_height": 1.5,
                         "color": "#5A5A5A",
-                        "placeholder": "Product: Wolverine Work Boots - Steel Toe\\nIssue: Sole separation after 2 weeks of use\\nPurchase Date: March 15, 2024\\nWarranty Status: Active"
+                        "placeholder": "Product: {product_name}\\nIssue: {issue_description}\\nPurchase Date: {purchase_date}\\nWarranty Status: {warranty_status}"
                       }
                     ]
                   },
@@ -185,7 +185,7 @@
                         "color": "#8E8E93",
                         "text_align": "center",
                         "content": "Need help? Reply to this email or call {support_phone}",
-                        "placeholder": "Need help? Reply to this email or call 1-800-WOLVERINE"
+                        "placeholder": "Need help? Reply to this email or call {support_phone}"
                       }
                     ]
                   }

@@ -2,7 +2,7 @@
   "template": {
     "name": "SLDS Agentforce Success Confirmation",
     "version": "1.0",
-    "description": "Clean success messaging with status banner and structured data display, based on Wolverine Order Found design",
+    "description": "Clean success messaging with status banner and structured data display for Agentforce lookup confirmation flows",
     "framework": "slds_v2",
     "responsive": true,
     "accessibility": "WCAG_AA",
@@ -69,7 +69,7 @@
             "layout": "label_value_pairs",
             "spacing": 12,
             "rows": [
-              {"label": "Product:", "value": "{product_name}", "placeholder": "Wolverine Work Boots - Steel Toe"},
+              {"label": "Product:", "value": "{product_name}", "placeholder": "Item Name — e.g. Product Model, Size"},
               {"label": "Size:", "value": "{product_size}", "placeholder": "Men's 10.5"},
               {"label": "Color:", "value": "{product_color}", "placeholder": "Brown Leather"},
               {"label": "Price:", "value": "{product_price}", "placeholder": "$149.99"},
