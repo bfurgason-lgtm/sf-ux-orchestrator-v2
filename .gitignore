@@ -1,7 +1,13 @@
 # Credentials & secrets — never commit these
 .vscode/settings.json
-.claude/
 .mcp.json
+.claude/settings.json
+.claude/settings.local.json
+.claude/certs/
+
+# Claude Code session data — tracked
+!.claude/session_log_*.md
+!.claude/memory/
 
 # Session artifact docs
 ACCURATE_WEB_TEMPLATE_REPLICATION_COMPLETE.md
